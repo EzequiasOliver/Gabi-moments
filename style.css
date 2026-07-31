@@ -6,83 +6,46 @@
 
 body{
     overflow:hidden;
+    font-family:'Trebuchet MS',sans-serif;
+    height:100vh;
+
+    background:linear-gradient(
+        to bottom,
+        #7ec8ff 0%,
+        #b9e9ff 45%,
+        #ffe38a 100%
+    );
+}
+
+.ceu{
+    width:100%;
     height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-family:Georgia, serif;
-
-    background:linear-gradient(
-        to bottom,
-        #87CEEB 0%,
-        #FFD27D 45%,
-        #FFB347 75%,
-        #FF914D 100%
-    );
-}
-
-.container{
     position:relative;
-    z-index:10;
-    width:90%;
-    max-width:700px;
-    text-align:center;
-    color:white;
 }
 
-h1{
-    font-size:3rem;
-    margin-bottom:25px;
-    text-shadow:0 0 20px rgba(255,255,255,.8);
-}
+/* Sol */
 
-.texto{
-    font-size:1.4rem;
-    line-height:1.8;
-    text-shadow:0 0 15px rgba(0,0,0,.3);
-}
-
-button{
-    margin-top:45px;
-    padding:15px 45px;
-    border:none;
-    border-radius:40px;
-    cursor:pointer;
-    font-size:20px;
-    color:white;
-
-    background:linear-gradient(45deg,#ffb347,#ff7b54);
-
-    box-shadow:0 0 20px rgba(255,170,0,.5);
-
-    transition:.3s;
-}
-
-button:hover{
-    transform:scale(1.08);
-}
-
-.sun{
+.sol{
     position:absolute;
-    width:220px;
-    height:220px;
-
+    width:180px;
+    height:180px;
     border-radius:50%;
-
-    background:#FFD93D;
-
-    top:70px;
-    right:120px;
+    background:#FFD84D;
+    top:60px;
+    right:90px;
 
     box-shadow:
-        0 0 40px #FFD93D,
-        0 0 80px #FFD93D,
-        0 0 140px #FFD93D;
+    0 0 40px #FFD84D,
+    0 0 90px #FFD84D,
+    0 0 150px #FFD84D;
 
-    animation:pulse 3s infinite alternate;
+    animation:brilho 3s infinite alternate;
 }
 
-@keyframes pulse{
+@keyframes brilho{
 
     from{
         transform:scale(1);
@@ -90,4 +53,43 @@ button:hover{
 
     to{
         transform:scale(1.08);
-   
+    }
+
+}
+
+/* Conteúdo */
+
+.conteudo{
+    text-align:center;
+    z-index:2;
+}
+
+h1{
+    color:white;
+    font-size:55px;
+    text-shadow:0 0 15px rgba(0,0,0,.25);
+}
+
+p{
+    margin-top:20px;
+    color:white;
+    font-size:22px;
+    line-height:35px;
+}
+
+/* Girassol */
+
+.girassol{
+
+    font-size:170px;
+
+    margin-top:40px;
+
+    cursor:pointer;
+
+    transition:.4s;
+}
+
+.girassol:hover{
+
+    transform:scale(1.1)
