@@ -6,46 +6,53 @@
 
 body{
     overflow:hidden;
-    font-family:'Trebuchet MS',sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
     height:100vh;
-
-    background:linear-gradient(
-        to bottom,
-        #7ec8ff 0%,
-        #b9e9ff 45%,
-        #ffe38a 100%
-    );
 }
 
 .ceu{
     width:100%;
     height:100vh;
+    position:relative;
+
     display:flex;
     justify-content:center;
     align-items:center;
-    position:relative;
+
+    background:linear-gradient(
+        to bottom,
+        #7fd3ff 0%,
+        #bcecff 55%,
+        #fff1a8 100%
+    );
 }
 
 /* Sol */
 
 .sol{
+
     position:absolute;
-    width:180px;
-    height:180px;
+
+    width:170px;
+    height:170px;
+
     border-radius:50%;
+
     background:#FFD84D;
-    top:60px;
+
+    top:50px;
     right:90px;
 
     box-shadow:
     0 0 40px #FFD84D,
-    0 0 90px #FFD84D,
+    0 0 80px #FFD84D,
     0 0 150px #FFD84D;
 
-    animation:brilho 3s infinite alternate;
+    animation:sol 3s infinite alternate;
+
 }
 
-@keyframes brilho{
+@keyframes sol{
 
     from{
         transform:scale(1);
@@ -57,39 +64,93 @@ body{
 
 }
 
-/* Conteúdo */
+/* Nuvens */
 
-.conteudo{
-    text-align:center;
-    z-index:2;
+.nuvem{
+
+    position:absolute;
+
+    background:white;
+
+    border-radius:50px;
+
+    opacity:.9;
+
 }
 
-h1{
-    color:white;
-    font-size:55px;
-    text-shadow:0 0 15px rgba(0,0,0,.25);
+.nuvem::before,
+.nuvem::after{
+
+    content:"";
+
+    position:absolute;
+
+    background:white;
+
+    border-radius:50%;
+
 }
 
-p{
-    margin-top:20px;
-    color:white;
-    font-size:22px;
-    line-height:35px;
+.n1{
+
+    width:140px;
+    height:45px;
+
+    left:-180px;
+    top:90px;
+
+    animation:nuvem1 40s linear infinite;
+
 }
 
-/* Girassol */
+.n1::before{
 
-.girassol{
+    width:55px;
+    height:55px;
 
-    font-size:170px;
+    left:18px;
+    top:-25px;
 
-    margin-top:40px;
-
-    cursor:pointer;
-
-    transition:.4s;
 }
 
-.girassol:hover{
+.n1::after{
 
-    transform:scale(1.1)
+    width:70px;
+    height:70px;
+
+    right:18px;
+    top:-35px;
+
+}
+
+@keyframes nuvem1{
+
+    from{
+
+        transform:translateX(0);
+
+    }
+
+    to{
+
+        transform:translateX(calc(100vw + 300px));
+
+    }
+
+}
+
+/* Grama */
+
+.grama{
+
+    position:absolute;
+
+    bottom:0;
+
+    width:100%;
+
+    height:170px;
+
+    background:#57b847;
+
+}
