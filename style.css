@@ -154,3 +154,44 @@ body{
     background:#57b847;
 
 }
+#garden{
+    height:320px;
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    margin-top:40px;
+}
+
+#sunflower{
+    font-size:170px;
+    cursor:pointer;
+    user-select:none;
+    transition:transform .3s;
+    animation:balanco 3s ease-in-out infinite;
+}
+
+#sunflower:hover{
+    transform:scale(1.08);
+}
+
+@keyframes balanco{
+
+    0%{
+        transform:rotate(-3deg);
+    }
+
+    50%{
+        transform:rotate(3deg);
+    }
+
+    100%{
+        transform:rotate(-3deg);
+    }
+
+}
+
+.clique{
+    margin-top:25px;
+    font-size:20px;
+    animation:pulsar 1.5s infinite;
+}
