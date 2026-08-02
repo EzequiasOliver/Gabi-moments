@@ -336,3 +336,160 @@ body{
         transform:translateY(-120px);
     }
 }
+/* ==========================================
+   GIRASSOL
+========================================== */
+
+#garden{
+
+    position:relative;
+
+    width:220px;
+    height:340px;
+
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+
+    margin-top:35px;
+
+}
+
+#sunflower{
+
+    position:relative;
+
+    width:180px;
+    height:300px;
+
+    animation:flowerWind 4s ease-in-out infinite;
+
+    transform-origin:bottom center;
+
+    cursor:pointer;
+
+}
+
+/* Pétalas */
+
+.petals{
+
+    position:absolute;
+
+    width:150px;
+    height:150px;
+
+    left:15px;
+    top:0;
+
+    border-radius:50%;
+
+    background:
+        repeating-conic-gradient(
+            #FFD84D 0deg 10deg,
+            #FFC107 10deg 20deg
+        );
+
+    filter:
+        drop-shadow(0 0 10px rgba(255,210,0,.5));
+
+}
+
+/* Miolo */
+
+.center{
+
+    position:absolute;
+
+    width:75px;
+    height:75px;
+
+    left:53px;
+    top:38px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #7a4a18,
+            #4b2b0d
+        );
+
+    box-shadow:
+        inset 0 0 10px rgba(0,0,0,.4);
+
+}
+
+/* Caule */
+
+.stem{
+
+    position:absolute;
+
+    width:12px;
+    height:170px;
+
+    left:84px;
+    top:120px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            #3aa73a,
+            #2b7d2b
+        );
+
+}
+
+/* Folhas */
+
+.leaf{
+
+    position:absolute;
+
+    width:60px;
+    height:30px;
+
+    background:#49b84a;
+
+    border-radius:60px 0;
+
+}
+
+.left{
+
+    left:28px;
+    top:180px;
+
+    transform:rotate(-35deg);
+
+}
+
+.right{
+
+    right:28px;
+    top:220px;
+
+    transform:rotate(35deg);
+
+}
+
+/* Balanço */
+
+@keyframes flowerWind{
+
+    0%,100%{
+
+        transform:rotate(-2deg);
+
+    }
+
+    50%{
+
+        transform:rotate(2deg);
+
+    }
+
+}
