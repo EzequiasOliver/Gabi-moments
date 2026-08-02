@@ -305,42 +305,34 @@ body{
 /* ==========================================
    PARTÍCULAS
 ========================================== */
+
 .light{
-
-position:absolute;
-
-inset:0;
-
-pointer-events:none;
-
+    position:absolute;
+    inset:0;
+    pointer-events:none;
 }
 
 .light::before{
+    content:"";
+    position:absolute;
+    inset:0;
 
-content:"":
+    background-image:
+        radial-gradient(circle,#fff7b2 2px,transparent 2px);
 
-position:absolute;
+    background-size:120px 120px;
 
-inset:0;
+    opacity:.35;
 
-background-image:
-
-radial-gradient(circle, #fff7b2 2px, transparent 2px);
-
-background-size:120px 120px;
-
-opacity:.35;
-
-animation:lightMove 18s linear infinite;
-
-@keyframes lightMove{ from{ transform:translateY(0);
-
+    animation:lightMove 18s linear infinite;
 }
 
-to{
+@keyframes lightMove{
+    from{
+        transform:translateY(0);
+    }
 
-transform:translateY(-120px);
-
-}
-
+    to{
+        transform:translateY(-120px);
+    }
 }
