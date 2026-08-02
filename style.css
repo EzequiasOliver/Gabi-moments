@@ -323,3 +323,123 @@ body{
     z-index:2;
 
 }
+/* ==========================
+   GIRASSOL
+========================== */
+
+#garden{
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    height:360px;
+    margin-top:20px;
+}
+
+#sunflower{
+    position:relative;
+    width:180px;
+    height:300px;
+    cursor:pointer;
+    animation:wind 4s ease-in-out infinite;
+    transform-origin:bottom center;
+}
+
+.petals{
+
+    position:absolute;
+
+    top:10px;
+    left:20px;
+
+    width:140px;
+    height:140px;
+
+    border-radius:50%;
+
+    background:
+    repeating-conic-gradient(
+        #FFD84D 0deg 12deg,
+        #FFC800 12deg 24deg
+    );
+
+    filter:drop-shadow(0 0 10px rgba(255,210,0,.5));
+}
+
+.center{
+
+    position:absolute;
+
+    width:70px;
+    height:70px;
+
+    left:55px;
+    top:45px;
+
+    border-radius:50%;
+
+    background:#5d3313;
+
+    box-shadow:
+    inset 0 0 10px rgba(0,0,0,.4);
+}
+
+.stem{
+
+    position:absolute;
+
+    width:12px;
+    height:170px;
+
+    left:84px;
+    top:120px;
+
+    border-radius:20px;
+
+    background:#3d9b34;
+}
+
+.leaf{
+
+    position:absolute;
+
+    width:55px;
+    height:28px;
+
+    background:#45b53f;
+
+    border-radius:60px 0;
+
+}
+
+.left{
+
+    left:35px;
+    top:175px;
+
+    transform:rotate(-35deg);
+
+}
+
+.right{
+
+    right:35px;
+    top:220px;
+
+    transform:rotate(35deg);
+}
+
+@keyframes wind{
+
+    0%,100%{
+
+        transform:rotate(-2deg);
+
+    }
+
+    50%{
+
+        transform:rotate(2deg);
+
+    }
+
+}
