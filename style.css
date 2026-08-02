@@ -1,4 +1,4 @@
-*{
+8*{
     margin:0;
     padding:0;
     box-sizing:border-box;
@@ -384,6 +384,250 @@ body{
     to{
 
         transform:translateX(calc(100vw + 700px));
+
+    }
+
+}
+/* ===========================
+   GRAMA
+=========================== */
+
+.grass{
+
+    position:absolute;
+
+    bottom:0;
+
+    width:100%;
+    height:170px;
+
+    background:linear-gradient(
+        to top,
+        #2f8f2f,
+        #5fc55f
+    );
+
+    overflow:hidden;
+
+}
+
+/* pequenas folhas */
+
+.grass::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 8px,
+        rgba(255,255,255,.08) 9px,
+        transparent 10px
+    );
+
+    animation:grassMove 4s ease-in-out infinite;
+}
+
+@keyframes grassMove{
+
+    0%,100%{
+
+        transform:translateX(0);
+
+    }
+
+    50%{
+
+        transform:translateX(8px);
+
+    }
+
+}
+
+/* ===========================
+   CONTEÚDO
+=========================== */
+
+.content{
+
+    position:relative;
+
+    z-index:10;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    width:100%;
+
+    height:100%;
+
+    padding:25px;
+
+}
+
+.content h1{
+
+    color:white;
+
+    font-size:3rem;
+
+    text-shadow:
+    0 4px 12px rgba(0,0,0,.25);
+
+}
+
+.subtitle{
+
+    margin-top:18px;
+
+    max-width:650px;
+
+    color:white;
+
+    font-size:1.2rem;
+
+    line-height:1.6;
+
+    text-shadow:
+    0 2px 8px rgba(0,0,0,.25);
+
+}
+
+/* ===========================
+   GIRASSOL
+=========================== */
+
+#garden{
+
+    margin-top:35px;
+
+}
+
+#sunflower{
+
+    font-size:170px;
+
+    animation:
+        sunflower 4s ease-in-out infinite;
+
+    cursor:pointer;
+
+    user-select:none;
+
+    transition:.3s;
+
+}
+
+#sunflower:hover{
+
+    transform:scale(1.08);
+
+}
+
+@keyframes sunflower{
+
+    0%,100%{
+
+        transform:rotate(-2deg);
+
+    }
+
+    50%{
+
+        transform:rotate(2deg);
+
+    }
+
+}
+
+/* ===========================
+   TEXTO
+=========================== */
+
+.touch{
+
+    margin-top:20px;
+
+    color:white;
+
+    font-size:20px;
+
+    animation:pulse 2s infinite;
+
+}
+
+@keyframes pulse{
+
+    0%,100%{
+
+        opacity:1;
+
+    }
+
+    50%{
+
+        opacity:.45;
+
+    }
+
+}
+
+/* ===========================
+   PARTÍCULAS DOURADAS
+=========================== */
+
+.light{
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+}
+
+.light::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background-image:
+        radial-gradient(circle,#fff8b5 2px,transparent 2px);
+
+    background-size:120px 120px;
+
+    opacity:.35;
+
+    animation:particles 18s linear infinite;
+
+}
+
+@keyframes particles{
+
+    from{
+
+        transform:translateY(0);
+
+    }
+
+    to{
+
+        transform:translateY(-120px);
 
     }
 
