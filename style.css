@@ -1,3 +1,8 @@
+/* ==========================
+   JARDIM DAS LEMBRANÇAS
+   Base
+========================== */
+
 *{
     margin:0;
     padding:0;
@@ -5,205 +10,9 @@
 }
 
 body{
-    overflow:hidden;
-    font-family:Arial,Helvetica,sans-serif;
-    height:100vh;
-}
-
-.ceu{
-    width:100%;
-    height:100vh;
-    position:relative;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    background:linear-gradient(
-        to bottom,
-        #7fd3ff 0%,
-        #bcecff 55%,
-        #fff1a8 100%
-    );
-}
-
-/* Sol */
-
-.sol{
-
-    position:absolute;
-
-    width:170px;
-    height:170px;
-
-    border-radius:50%;
-
-    background:#FFD84D;
-
-    top:50px;
-    right:90px;
-
-    box-shadow:
-    0 0 40px #FFD84D,
-    0 0 80px #FFD84D,
-    0 0 150px #FFD84D;
-
-    animation:sol 3s infinite alternate;
-
-}
-
-@keyframes sol{
-
-    from{
-        transform:scale(1);
-    }
-
-    to{
-        transform:scale(1.08);
-    }
-
-}
-
-/* Nuvens */
-
-.nuvem{
-
-    position:absolute;
-
-    background:white;
-
-    border-radius:50px;
-
-    opacity:.9;
-
-}
-
-.nuvem::before,
-.nuvem::after{
-
-    content:"";
-
-    position:absolute;
-
-    background:white;
-
-    border-radius:50%;
-
-}
-
-.n1{
-
-    width:140px;
-    height:45px;
-
-    left:-180px;
-    top:90px;
-
-    animation:nuvem1 40s linear infinite;
-
-}
-
-.n1::before{
-
-    width:55px;
-    height:55px;
-
-    left:18px;
-    top:-25px;
-
-}
-
-.n1::after{
-
-    width:70px;
-    height:70px;
-
-    right:18px;
-    top:-35px;
-
-}
-
-@keyframes nuvem1{
-
-    from{
-
-        transform:translateX(0);
-
-    }
-
-    to{
-
-        transform:translateX(calc(100vw + 300px));
-
-    }
-
-}
-
-/* Grama */
-
-.grama{
-
-    position:absolute;
-
-    bottom:0;
-
-    width:100%;
-
-    height:170px;
-
-    background:#57b847;
-
-}
-#garden{
-    height:320px;
-    display:flex;
-    justify-content:center;
-    align-items:flex-end;
-    margin-top:40px;
-}
-
-#sunflower{
-    font-size:170px;
-    cursor:pointer;
-    user-select:none;
-    transition:transform .3s;
-    animation:balanco 3s ease-in-out infinite;
-}
-
-#sunflower:hover{
-    transform:scale(1.08);
-}
-
-@keyframes balanco{
-
-    0%{
-        transform:rotate(-3deg);
-    }
-
-    50%{
-        transform:rotate(3deg);
-    }
-
-    100%{
-        transform:rotate(-3deg);
-    }
-
-}
-
-.clique{
-    margin-top:25px;
-    font-size:20px;
-    animation:pulsar 1.5s infinite;
-}
-/* ===========================
-   JARDIM DAS LEMBRANÇAS
-   PARTE 1
-=========================== */
-
-body{
-    overflow:hidden;
-    background:#87CEEB;
     font-family:Arial, Helvetica, sans-serif;
+    overflow:hidden;
+    background:#87ceeb;
 }
 
 .sky{
@@ -212,81 +21,65 @@ body{
     height:100vh;
     overflow:hidden;
 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
     background:linear-gradient(
-        180deg,
-        #87d7ff 0%,
-        #b8ebff 55%,
+        to bottom,
+        #82d8ff 0%,
+        #c8f2ff 60%,
         #ffe9a8 100%
     );
 }
 
-/* ===========================
+/* ==========================
    SOL
-=========================== */
+========================== */
 
 .sun{
+
     position:absolute;
 
-    width:180px;
-    height:180px;
-
-    right:70px;
     top:40px;
+    right:60px;
+
+    width:170px;
+    height:170px;
 
     border-radius:50%;
 
-    background:#FFD54F;
+    background:#FFD84D;
 
     box-shadow:
-    0 0 40px rgba(255,213,79,.8),
-    0 0 90px rgba(255,213,79,.6),
-    0 0 180px rgba(255,213,79,.4);
+    0 0 40px rgba(255,216,77,.8),
+    0 0 90px rgba(255,216,77,.6),
+    0 0 170px rgba(255,216,77,.3);
 
-    animation:sunGlow 5s ease-in-out infinite;
+    animation:sunFloat 5s ease-in-out infinite;
+
+    z-index:1;
 }
 
-.sun::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:-25px;
-
-    border-radius:50%;
-
-    border:2px solid rgba(255,255,255,.25);
-
-    animation:sunRing 8s linear infinite;
-}
-
-@keyframes sunGlow{
+@keyframes sunFloat{
 
     0%,100%{
+
         transform:scale(1);
+
     }
 
     50%{
+
         transform:scale(1.05);
+
     }
 
 }
 
-@keyframes sunRing{
-
-    from{
-        transform:rotate(0deg);
-    }
-
-    to{
-        transform:rotate(360deg);
-    }
-
-}
-
-/* ===========================
+/* ==========================
    NUVENS
-=========================== */
+========================== */
 
 .cloud{
 
@@ -296,9 +89,8 @@ body{
 
     border-radius:100px;
 
-    opacity:.92;
+    opacity:.9;
 
-    filter:blur(.3px);
 }
 
 .cloud::before,
@@ -311,6 +103,7 @@ body{
     background:white;
 
     border-radius:50%;
+
 }
 
 .cloud1{
@@ -318,20 +111,19 @@ body{
     width:170px;
     height:55px;
 
+    left:-250px;
     top:90px;
 
-    left:-220px;
-
-    animation:cloudMove 48s linear infinite;
+    animation:cloud1 45s linear infinite;
 }
 
 .cloud1::before{
 
-    width:65px;
-    height:65px;
+    width:60px;
+    height:60px;
 
     left:20px;
-    top:-28px;
+    top:-25px;
 }
 
 .cloud1::after{
@@ -339,119 +131,60 @@ body{
     width:80px;
     height:80px;
 
-    right:18px;
-    top:-36px;
+    right:20px;
+    top:-35px;
 }
 
 .cloud2{
 
-    width:140px;
+    width:130px;
     height:45px;
 
-    top:180px;
+    left:-400px;
+    top:190px;
 
-    left:-300px;
+    opacity:.7;
 
-    opacity:.75;
-
-    animation:cloudMove 70s linear infinite;
-    animation-delay:-20s;
+    animation:cloud2 70s linear infinite;
 }
 
 .cloud3{
 
-    width:210px;
+    width:220px;
     height:60px;
 
-    top:45px;
-
-    left:-500px;
+    left:-600px;
+    top:60px;
 
     opacity:.55;
 
-    animation:cloudMove 95s linear infinite;
-    animation-delay:-50s;
+    animation:cloud3 95s linear infinite;
 }
 
-@keyframes cloudMove{
+@keyframes cloud1{
 
-    from{
-
-        transform:translateX(0);
-
-    }
-
-    to{
-
-        transform:translateX(calc(100vw + 700px));
-
-    }
-
-}
-/* ===========================
-   GRAMA
-=========================== */
-
-.grass{
-
-    position:absolute;
-
-    bottom:0;
-
-    width:100%;
-    height:170px;
-
-    background:linear-gradient(
-        to top,
-        #2f8f2f,
-        #5fc55f
-    );
-
-    overflow:hidden;
+    from{transform:translateX(0);}
+    to{transform:translateX(calc(100vw + 500px));}
 
 }
 
-/* pequenas folhas */
+@keyframes cloud2{
 
-.grass::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-    repeating-linear-gradient(
-        90deg,
-        transparent 0px,
-        transparent 8px,
-        rgba(255,255,255,.08) 9px,
-        transparent 10px
-    );
-
-    animation:grassMove 4s ease-in-out infinite;
-}
-
-@keyframes grassMove{
-
-    0%,100%{
-
-        transform:translateX(0);
-
-    }
-
-    50%{
-
-        transform:translateX(8px);
-
-    }
+    from{transform:translateX(0);}
+    to{transform:translateX(calc(100vw + 700px));}
 
 }
 
-/* ===========================
+@keyframes cloud3{
+
+    from{transform:translateX(0);}
+    to{transform:translateX(calc(100vw + 900px));}
+
+}
+
+/* ==========================
    CONTEÚDO
-=========================== */
+========================== */
 
 .content{
 
@@ -459,32 +192,19 @@ body{
 
     z-index:10;
 
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
     text-align:center;
 
-    width:100%;
+    padding:20px;
 
-    height:100%;
-
-    padding:25px;
+    color:white;
 
 }
 
 .content h1{
 
-    color:white;
-
     font-size:3rem;
 
-    text-shadow:
-    0 4px 12px rgba(0,0,0,.25);
+    text-shadow:0 4px 10px rgba(0,0,0,.25);
 
 }
 
@@ -492,26 +212,27 @@ body{
 
     margin-top:18px;
 
-    max-width:650px;
-
-    color:white;
-
     font-size:1.2rem;
+
+    max-width:600px;
 
     line-height:1.6;
 
-    text-shadow:
-    0 2px 8px rgba(0,0,0,.25);
-
 }
 
-/* ===========================
-   GIRASSOL
-=========================== */
+/* ==========================
+   JARDIM
+========================== */
 
 #garden{
 
-    margin-top:35px;
+    margin-top:40px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
 
 }
 
@@ -519,12 +240,11 @@ body{
 
     font-size:170px;
 
-    animation:
-        sunflower 4s ease-in-out infinite;
-
     cursor:pointer;
 
     user-select:none;
+
+    animation:sway 4s ease-in-out infinite;
 
     transition:.3s;
 
@@ -536,33 +256,29 @@ body{
 
 }
 
-@keyframes sunflower{
+@keyframes sway{
 
     0%,100%{
 
-        transform:rotate(-2deg);
+        transform:rotate(-3deg);
 
     }
 
     50%{
 
-        transform:rotate(2deg);
+        transform:rotate(3deg);
 
     }
 
 }
 
-/* ===========================
+/* ==========================
    TEXTO
-=========================== */
+========================== */
 
 .touch{
 
     margin-top:20px;
-
-    color:white;
-
-    font-size:20px;
 
     animation:pulse 2s infinite;
 
@@ -578,57 +294,32 @@ body{
 
     50%{
 
-        opacity:.45;
+        opacity:.4;
 
     }
 
 }
 
-/* ===========================
-   PARTÍCULAS DOURADAS
-=========================== */
+/* ==========================
+   GRAMA
+========================== */
 
-.light{
+.grass{
 
     position:absolute;
 
-    inset:0;
+    bottom:0;
 
-    pointer-events:none;
+    width:100%;
 
-}
+    height:180px;
 
-.light::before{
+    background:linear-gradient(
+        to top,
+        #2e8b2e,
+        #5fc45f
+    );
 
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background-image:
-        radial-gradient(circle,#fff8b5 2px,transparent 2px);
-
-    background-size:120px 120px;
-
-    opacity:.35;
-
-    animation:particles 18s linear infinite;
-
-}
-
-@keyframes particles{
-
-    from{
-
-        transform:translateY(0);
-
-    }
-
-    to{
-
-        transform:translateY(-120px);
-
-    }
+    z-index:2;
 
 }
