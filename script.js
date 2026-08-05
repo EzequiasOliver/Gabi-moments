@@ -115,6 +115,15 @@ flower.style.zIndex = Math.floor(pos.scale * 100);
         flower.dataset.photo = memories[index].foto;
         flower.dataset.text = memories[index].texto;
 
+setTimeout(() => {
+
+    showMemory(
+        flower.dataset.photo,
+        flower.dataset.text
+    );
+
+}, 1000);
+
         flower.onclick = () => {
 
             showMemory(
