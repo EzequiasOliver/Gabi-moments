@@ -55,44 +55,54 @@ sunflower.addEventListener("click", ()=>{
 });
 function plantFlower(index){
 
-    const seed = document.createElement("div");
+    const flower = document.createElement("img");
 
-    seed.className = "seed";
+    flower.src = "imagem/girassol.png";
+    flower.className = "memoryFlower";
 
-    seed.style.left = positions[index].x + 55 + "px";
-    seed.style.top = positions[index].y + 180 + "px";
+    // Começa no centro
+    flower.style.left = "50%";
+    flower.style.bottom = "20px";
+    flower.style.top = "auto";
+    flower.style.transform = "translateX(-50%) scale(0)";
 
-    gardenField.appendChild(seed);
+    gardenField.appendChild(flower);
 
-    setTimeout(()=>{
+    // Cresce
+    setTimeout(() => {
 
-        seed.remove();
+        flower.style.transition = "transform .5s";
+        flower.style.transform = "translateX(-50%) scale(1)";
 
-        const flower = document.createElement("img");
+    }, 50);
 
-        flower.src="imagem/girassol.png";
+    // Vai para o jardim
+    setTimeout(() => {
 
-        flower.className="memoryFlower";
+        flower.style.transition =
+            "left 1s ease, top 1s ease, transform 1s ease";
 
-        flower.style.left=positions[index].x+"px";
-        flower.style.top=positions[index].y+"px";
+        flower.style.left = positions[index].x + "px";
+        flower.style.top = positions[index].y + "px";
+        flower.style.bottom = "auto";
+        flower.style.transform = "scale(.8)";
 
-        flower.dataset.photo=memories[index].foto;
-        flower.dataset.text=memories[index].texto;
+    }, 700);
 
-        flower.onclick=()=>{
+    // Guarda a lembrança
+    flower.dataset.photo = memories[index].foto;
+    flower.dataset.text = memories[index].texto;
 
-            showMemory(
-                flower.dataset.photo,
-                flower.dataset.text
-            );
+    flower.onclick = () => {
 
-        };
+        showMemory(
+            flower.dataset.photo,
+            flower.dataset.text
+        );
 
-        gardenField.appendChild(flower);
+    };
 
-    },500);
-
+}
 }
 
 }
