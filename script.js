@@ -55,27 +55,45 @@ sunflower.addEventListener("click", ()=>{
 });
 function plantFlower(index){
 
-    const flower = document.createElement("img");
+    const seed = document.createElement("div");
 
-    flower.src = "imagem/girassol.png";
-    flower.className = "memoryFlower";
+    seed.className = "seed";
 
-    flower.style.left = positions[index].x + "px";
-    flower.style.top = positions[index].y + "px";
+    seed.style.left = positions[index].x + 55 + "px";
+    seed.style.top = positions[index].y + 180 + "px";
 
-    flower.dataset.photo = memories[index].foto;
-    flower.dataset.text = memories[index].texto;
+    gardenField.appendChild(seed);
 
-    flower.addEventListener("click", ()=>{
+    setTimeout(()=>{
 
-        showMemory(
-            flower.dataset.photo,
-            flower.dataset.text
-        );
+        seed.remove();
 
-    });
+        const flower = document.createElement("img");
 
-    gardenField.appendChild(flower);
+        flower.src="imagem/girassol.png";
+
+        flower.className="memoryFlower";
+
+        flower.style.left=positions[index].x+"px";
+        flower.style.top=positions[index].y+"px";
+
+        flower.dataset.photo=memories[index].foto;
+        flower.dataset.text=memories[index].texto;
+
+        flower.onclick=()=>{
+
+            showMemory(
+                flower.dataset.photo,
+                flower.dataset.text
+            );
+
+        };
+
+        gardenField.appendChild(flower);
+
+    },500);
+
+}
 
 }
 const modal = document.getElementById("memoryModal");
