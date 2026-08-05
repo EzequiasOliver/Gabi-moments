@@ -78,3 +78,21 @@ function plantFlower(index){
     gardenField.appendChild(flower);
 
 }
+const modal = document.getElementById("memoryModal");
+const modalImage = document.getElementById("memoryImage");
+const modalCaption = document.getElementById("memoryCaption");
+
+function showMemory(photo,text){
+
+    modalImage.src = photo;
+    modalCaption.textContent = text;
+
+    modal.classList.add("show");
+
+}
+
+modal.addEventListener("click",()=>{
+
+    modal.classList.remove("show");
+
+});
