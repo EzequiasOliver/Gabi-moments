@@ -113,8 +113,9 @@ flower.style.zIndex = Math.floor(pos.scale * 100);
             Math.floor(positions[index].scale * 100);
 
         flower.dataset.photo = memories[index].foto;
-        flower.dataset.text = memories[index].texto;
+flower.dataset.text = memories[index].texto;
 
+// Abre automaticamente a lembrança
 setTimeout(() => {
 
     showMemory(
@@ -124,17 +125,17 @@ setTimeout(() => {
 
 }, 1000);
 
-        flower.onclick = () => {
+// Permite rever a lembrança depois
+flower.onclick = () => {
 
-            showMemory(
-                flower.dataset.photo,
-                flower.dataset.text
-            );
+    showMemory(
+        flower.dataset.photo,
+        flower.dataset.text
+    );
 
-        };
+};
 
-        planting = false;
-
+planting = false;
     }, 700);
 
 }
