@@ -239,3 +239,258 @@ body{
     }
 
 }
+/* ==========================================================
+   PARTÍCULAS DE LUZ
+========================================================== */
+
+.light{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+}
+
+.light::before{
+
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background-image:
+        radial-gradient(circle,#fff8b8 2px,transparent 2px);
+
+    background-size:120px 120px;
+
+    opacity:.35;
+
+    animation:lightMove 18s linear infinite;
+
+}
+
+@keyframes lightMove{
+
+    from{
+        transform:translateY(0);
+    }
+
+    to{
+        transform:translateY(-120px);
+    }
+
+}
+
+/* ==========================================================
+   GRAMA
+========================================================== */
+
+.grass{
+
+    position:absolute;
+
+    left:0;
+    bottom:0;
+
+    width:100%;
+    height:180px;
+
+    background:linear-gradient(
+        to top,
+        #2f8f2f,
+        #61c85e
+    );
+
+    z-index:5;
+
+}
+
+.grass::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 8px,
+        rgba(255,255,255,.08) 9px,
+        transparent 10px
+    );
+
+    animation:grassWind 4s ease-in-out infinite;
+
+}
+
+@keyframes grassWind{
+
+    0%,100%{
+        transform:translateX(0);
+    }
+
+    50%{
+        transform:translateX(8px);
+    }
+
+}
+
+/* ==========================================================
+   CONTEÚDO
+========================================================== */
+
+.content{
+
+    position:relative;
+
+    z-index:20;
+
+    width:100%;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:25px;
+
+}
+
+.content h1{
+
+    color:#fff;
+
+    font-size:3rem;
+
+    text-shadow:
+        0 4px 12px rgba(0,0,0,.25);
+
+}
+
+.subtitle{
+
+    margin-top:18px;
+
+    max-width:650px;
+
+    color:white;
+
+    font-size:1.15rem;
+
+    line-height:1.6;
+
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.25);
+
+}
+
+.touch{
+
+    margin-top:20px;
+
+    color:white;
+
+    font-size:20px;
+
+    animation:pulse 2s infinite;
+
+}
+
+@keyframes pulse{
+
+    0%,100%{
+        opacity:1;
+    }
+
+    50%{
+        opacity:.45;
+    }
+
+}
+
+/* ==========================================================
+   JARDIM
+========================================================== */
+
+#garden{
+
+    position:relative;
+
+    width:100%;
+    height:420px;
+
+    margin-top:35px;
+
+}
+
+/* Campo onde os girassóis serão plantados */
+
+#gardenField{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:visible;
+
+}
+
+/* ==========================================================
+   GIRASSOL PRINCIPAL
+========================================================== */
+
+#sunflower{
+
+    position:absolute;
+
+    left:50%;
+    bottom:20px;
+
+    width:180px;
+    height:auto;
+
+    transform:translateX(-50%);
+
+    transform-origin:bottom center;
+
+    cursor:pointer;
+
+    z-index:15;
+
+    animation:flowerWind 4s ease-in-out infinite;
+
+    user-select:none;
+
+}
+
+#sunflower:hover{
+
+    transform:
+        translateX(-50%)
+        scale(1.05);
+
+}
+
+@keyframes flowerWind{
+
+    0%,100%{
+
+        transform:
+        translateX(-50%)
+        rotate(-2deg);
+
+    }
+
+    50%{
+
+        transform:
+        translateX(-50%)
+        rotate(2deg);
+
+    }
+
+}
