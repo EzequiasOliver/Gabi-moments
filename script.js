@@ -69,11 +69,13 @@ function plantFlower(index) {
     flower.src = "imagem/girassol.png";
     flower.className = "memoryFlower";
 
-    // Nasce no centro
-    flower.style.left = "50%";
-    flower.style.bottom = "20px";
-    flower.style.top = "auto";
-    flower.style.transform = "translateX(-50%) scale(0)";
+    const pos = positions[index];
+
+flower.style.left = pos.x + "px";
+flower.style.top = pos.y + "px";
+flower.style.bottom = "auto";
+flower.style.transform = `scale(${pos.scale})`;
+flower.style.zIndex = Math.floor(pos.scale * 100);
 
     gardenField.appendChild(flower);
 
