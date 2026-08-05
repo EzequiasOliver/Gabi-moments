@@ -53,3 +53,28 @@ sunflower.addEventListener("click", ()=>{
     current++;
 
 });
+function plantFlower(index){
+
+    const flower = document.createElement("img");
+
+    flower.src = "imagem/girassol.png";
+    flower.className = "memoryFlower";
+
+    flower.style.left = positions[index].x + "px";
+    flower.style.top = positions[index].y + "px";
+
+    flower.dataset.photo = memories[index].foto;
+    flower.dataset.text = memories[index].texto;
+
+    flower.addEventListener("click", ()=>{
+
+        showMemory(
+            flower.dataset.photo,
+            flower.dataset.text
+        );
+
+    });
+
+    gardenField.appendChild(flower);
+
+}
