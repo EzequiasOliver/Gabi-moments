@@ -708,3 +708,24 @@ body{
     }
 
 }
+.sparkle{
+    position:absolute;
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    background:#fff8a6;
+    box-shadow:0 0 20px #fff8a6;
+    animation:spark .8s forwards;
+    pointer-events:none;
+}
+
+@keyframes spark{
+    from{
+        transform:scale(0);
+        opacity:1;
+    }
+    to{
+        transform:scale(3);
+        opacity:0;
+    }
+}
