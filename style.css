@@ -679,3 +679,68 @@ body{
     line-height:1.5;
 
 }
+/* ==========================================
+   GIRASSÓIS DO JARDIM
+========================================== */
+
+.memoryFlower{
+
+    position:absolute;
+
+    width:120px;
+
+    cursor:pointer;
+
+    transform-origin:bottom center;
+
+    animation:growFlower .8s ease-out;
+
+    transition:.3s;
+
+}
+
+.memoryFlower:hover{
+
+    transform:scale(1.08);
+
+}
+
+@keyframes growFlower{
+
+    0%{
+
+        transform:
+        translateY(120px)
+        scale(0);
+
+        opacity:0;
+
+    }
+
+    40%{
+
+        transform:
+        translateY(50px)
+        scale(.4);
+
+    }
+
+    70%{
+
+        transform:
+        translateY(15px)
+        scale(.8);
+
+    }
+
+    100%{
+
+        transform:
+        translateY(0)
+        scale(1);
+
+        opacity:1;
+
+    }
+
+}
