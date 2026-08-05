@@ -10,7 +10,7 @@ const memoryCard = document.getElementById("memoryCard");
 const memories = [
     {
         foto: "imagem/foto1.jpg",
-        texto: "Nossa primeira lembrança 🌻"
+        texto: "uma imagem,várias memórias 🌻"
     },
     {
         foto: "imagem/foto2.jpg",
