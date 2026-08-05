@@ -1,7 +1,11 @@
-8/* ==========================================
-   JARDIM DAS LEMBRANÇAS - STYLE.CSS V2
-   BLOCO 1 - BASE
-========================================== */
+/* ==========================================================
+   JARDIM DAS LEMBRANÇAS
+   STYLE.CSS V3
+========================================================== */
+
+/* ==========================================================
+   RESET
+========================================================== */
 
 *{
     margin:0;
@@ -21,9 +25,9 @@ body{
     background:#87CEEB;
 }
 
-/* ==========================================
+/* ==========================================================
    CÉU
-========================================== */
+========================================================== */
 
 .sky{
 
@@ -39,28 +43,28 @@ body{
     align-items:center;
 
     background:linear-gradient(
-        180deg,
-        #6fcfff 0%,
-        #9fe5ff 35%,
-        #d9f7ff 70%,
-        #fff3b0 100%
+        to bottom,
+        #74d5ff 0%,
+        #9fe8ff 35%,
+        #dff8ff 70%,
+        #fff3b3 100%
     );
 
 }
 
-/* ==========================================
+/* ==========================================================
    SOL
-========================================== */
+========================================================== */
 
 .sun{
 
     position:absolute;
 
-    width:130px;
-    height:130px;
+    width:140px;
+    height:140px;
 
-    top:40px;
-    right:50px;
+    top:45px;
+    right:55px;
 
     border-radius:50%;
 
@@ -69,11 +73,11 @@ body{
     box-shadow:
         0 0 40px rgba(255,216,74,.8),
         0 0 90px rgba(255,216,74,.6),
-        0 0 160px rgba(255,216,74,.35);
+        0 0 170px rgba(255,216,74,.35);
 
-    animation:sunMove 6s ease-in-out infinite;
+    animation:sunFloat 6s ease-in-out infinite;
 
-    z-index:1;
+    z-index:2;
 
 }
 
@@ -87,673 +91,151 @@ body{
 
     border-radius:50%;
 
-    border:3px solid rgba(255,255,180,.35);
+    border:2px solid rgba(255,255,210,.35);
 
 }
 
-@keyframes sunMove{
+@keyframes sunFloat{
 
     0%,100%{
 
-        transform:translateY(0) scale(1);
+        transform:
+        translateY(0)
+        scale(1);
 
     }
 
     50%{
 
-        transform:translateY(-6px) scale(1.03);
+        transform:
+        translateY(-6px)
+        scale(1.03);
 
     }
 
 }
 
-/* ==========================================
-   CONTEÚDO
-========================================== */
-
-.content{
-
-    position:relative;
-
-    z-index:20;
-
-    width:100%;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-
-    text-align:center;
-
-    padding:25px;
-
-}
-
-.content h1{
-
-    color:white;
-
-    font-size:3rem;
-
-    text-shadow:
-        0 4px 12px rgba(0,0,0,.25);
-
-}
-
-.subtitle{
-
-    margin-top:18px;
-
-    max-width:650px;
-
-    color:white;
-
-    font-size:1.15rem;
-
-    line-height:1.6;
-
-    text-shadow:
-        0 2px 8px rgba(0,0,0,.25);
-
-}
-
-.touch{
-
-    margin-top:20px;
-
-    color:white;
-
-    font-size:20px;
-
-    animation:pulse 2s infinite;
-
-}
-
-@keyframes pulse{
-
-    0%,100%{
-
-        opacity:1;
-
-    }
-
-    50%{
-
-        opacity:.45;
-
-    }
-
-}
-/* ==========================================
+/* ==========================================================
    NUVENS
-========================================== */
+========================================================== */
 
 .cloud{
+
     position:absolute;
-    background:#fff;
+
+    background:white;
+
     border-radius:100px;
-    opacity:.9;
+
+    opacity:.92;
+
 }
 
 .cloud::before,
 .cloud::after{
+
     content:"";
-    position:absolute;
-    background:#fff;
-    border-radius:50%;
-}
-
-.cloud1{
-    width:170px;
-    height:55px;
-    top:80px;
-    left:-220px;
-    animation:cloud1 45s linear infinite;
-}
-
-.cloud1::before{
-    width:60px;
-    height:60px;
-    left:20px;
-    top:-25px;
-}
-
-.cloud1::after{
-    width:80px;
-    height:80px;
-    right:20px;
-    top:-35px;
-}
-
-.cloud2{
-    width:130px;
-    height:45px;
-    top:180px;
-    left:-350px;
-    opacity:.75;
-    animation:cloud2 70s linear infinite;
-}
-
-.cloud3{
-    width:220px;
-    height:60px;
-    top:40px;
-    left:-550px;
-    opacity:.55;
-    animation:cloud3 95s linear infinite;
-}
-
-@keyframes cloud1{
-    from{transform:translateX(0);}
-    to{transform:translateX(calc(100vw + 450px));}
-}
-
-@keyframes cloud2{
-    from{transform:translateX(0);}
-    to{transform:translateX(calc(100vw + 700px));}
-}
-
-@keyframes cloud3{
-    from{transform:translateX(0);}
-    to{transform:translateX(calc(100vw + 900px));}
-}
-
-/* ==========================================
-   GRAMA
-========================================== */
-
-.grass{
-    position:absolute;
-    bottom:0;
-    left:0;
-
-    width:100%;
-    height:180px;
-
-    background:linear-gradient(
-        to top,
-        #2f8f2f,
-        #62c95f
-    );
-
-    z-index:5;
-}
-
-.grass::before{
-    content:"";
-    position:absolute;
-    inset:0;
-
-    background:
-    repeating-linear-gradient(
-        90deg,
-        transparent 0px,
-        transparent 8px,
-        rgba(255,255,255,.08) 9px,
-        transparent 10px
-    );
-
-    animation:grassWind 4s ease-in-out infinite;
-}
-
-@keyframes grassWind{
-    0%,100%{transform:translateX(0);}
-    50%{transform:translateX(8px);}
-}
-
-/* ==========================================
-   PARTÍCULAS
-========================================== */
-
-.light{
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-}
-
-.light::before{
-    content:"";
-    position:absolute;
-    inset:0;
-
-    background-image:
-        radial-gradient(circle,#fff7b2 2px,transparent 2px);
-
-    background-size:120px 120px;
-
-    opacity:.35;
-
-    animation:lightMove 18s linear infinite;
-}
-
-@keyframes lightMove{
-    from{
-        transform:translateY(0);
-    }
-
-    to{
-        transform:translateY(-120px);
-    }
-}
-/* ==========================================
-   GIRASSOL
-========================================== */
-
-#garden{
-
-    position:relative;
-
-    width:220px;
-    height:340px;
-
-    display:flex;
-    justify-content:center;
-    align-items:flex-end;
-
-    margin-top:35px;
-
-}
-
-#sunflower{
-
-    position:relative;
-
-    width:180px;
-    height:300px;
-
-    animation:flowerWind 4s ease-in-out infinite;
-
-    transform-origin:bottom center;
-
-    cursor:pointer;
-
-}
-
-/* Pétalas */
-
-.petals{
 
     position:absolute;
-
-    width:150px;
-    height:150px;
-
-    left:15px;
-    top:0;
-
-    border-radius:50%;
-
-    background:
-        repeating-conic-gradient(
-            #FFD84D 0deg 10deg,
-            #FFC107 10deg 20deg
-        );
-
-    filter:
-        drop-shadow(0 0 10px rgba(255,210,0,.5));
-
-}
-
-/* Miolo */
-
-.center{
-
-    position:absolute;
-
-    width:75px;
-    height:75px;
-
-    left:53px;
-    top:38px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            #7a4a18,
-            #4b2b0d
-        );
-
-    box-shadow:
-        inset 0 0 10px rgba(0,0,0,.4);
-
-}
-
-/* Caule */
-
-.stem{
-
-    position:absolute;
-
-    width:12px;
-    height:170px;
-
-    left:84px;
-    top:120px;
-
-    border-radius:20px;
-
-    background:
-        linear-gradient(
-            #3aa73a,
-            #2b7d2b
-        );
-
-}
-
-/* Folhas */
-
-.leaf{
-
-    position:absolute;
-
-    width:60px;
-    height:30px;
-
-    background:#49b84a;
-
-    border-radius:60px 0;
-
-}
-
-.left{
-
-    left:28px;
-    top:180px;
-
-    transform:rotate(-35deg);
-
-}
-
-.right{
-
-    right:28px;
-    top:220px;
-
-    transform:rotate(35deg);
-
-}
-
-/* Balanço */
-
-@keyframes flowerWind{
-
-    0%,100%{
-
-        transform:rotate(-2deg);
-
-    }
-
-    50%{
-
-        transform:rotate(2deg);
-
-    }
-
-}
-#sunflower{
-    width:180px;
-    height:auto;
-    display:block;
-    animation:flowerWind 4s ease-in-out infinite;
-    transform-origin:bottom center;
-}
-
-@keyframes flowerWind{
-    0%,100%{
-        transform:rotate(-2deg);
-    }
-    50%{
-        transform:rotate(2deg);
-    }
-}
-#garden{
-    transform: translateY(-90px);
-}
-/* ==========================
-   LEMBRANÇA
-========================== */
-
-#memory{
-
-    opacity:0;
-
-    transform:translateY(40px);
-
-    transition:.8s;
-
-    margin-top:20px;
-
-    text-align:center;
-
-}
-
-#memory.show{
-
-    opacity:1;
-
-    transform:translateY(0);
-
-}
-
-#memoryPhoto{
-
-    width:220px;
-
-    border-radius:18px;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.25);
-
-}
-
-#memoryText{
-
-    margin-top:18px;
-
-    color:white;
-
-    font-size:18px;
-
-    text-shadow:0 2px 8px rgba(0,0,0,.25);
-
-    max-width:280px;
-
-}
-/* CAMPO DOS GIRASSÓIS */
-
-#garden{
-
-    position:relative;
-
-    width:100%;
-
-    height:420px;
-
-}
-
-#sunflower{
-
-    position:absolute;
-
-    left:50%;
-
-    bottom:20px;
-
-    width:170px;
-
-    transform:translateX(-50%);
-
-    cursor:pointer;
-
-    z-index:10;
-
-}
-
-#gardenField{
-
-    position:absolute;
-
-    inset:0;
-
-}
-/* ==========================
-   POLAROID
-========================== */
-
-#memoryModal{
-
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(0,0,0,.45);
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    opacity:0;
-
-    visibility:hidden;
-
-    transition:.35s;
-
-    z-index:999;
-
-}
-
-#memoryModal.show{
-
-    opacity:1;
-
-    visibility:visible;
-
-}
-
-#memoryCard{
-
-    width:320px;
 
     background:white;
 
-    border-radius:18px;
-
-    padding:15px;
-
-    box-shadow:0 25px 60px rgba(0,0,0,.35);
-
-    transform:translateY(40px) rotate(-3deg);
-
-    transition:.35s;
-
-}
-
-#memoryModal.show #memoryCard{
-
-    transform:translateY(0) rotate(0deg);
-
-}
-
-#memoryImage{
-
-    width:100%;
-
-    border-radius:10px;
-
-}
-
-#memoryCaption{
-
-    margin-top:15px;
-
-    text-align:center;
-
-    font-size:18px;
-
-    color:#444;
-
-    line-height:1.5;
-
-}
-/* ==========================================
-   GIRASSÓIS DO JARDIM
-========================================== */
-
-.memoryFlower{
-
-    position:absolute;
-
-    width:120px;
-
-    cursor:pointer;
-
-    transform-origin:bottom center;
-
-    animation:growFlower .8s ease-out;
-
-    transition:.3s;
-
-}
-
-.
-        translateY(0)
-        scale(1);
-
-        opacity:1;
-
-    }
-
-}
-.seed{
-
-    position:absolute;
-
-    width:10px;
-
-    height:10px;
-
     border-radius:50%;
 
-    background:#5b3a16;
+}
 
-    animation:seedGrow .5s;
+.cloud1{
+
+    width:180px;
+    height:55px;
+
+    top:80px;
+    left:-250px;
+
+    animation:cloudMove1 45s linear infinite;
 
 }
 
-@keyframes seedGrow{
+.cloud1::before{
+
+    width:60px;
+    height:60px;
+
+    left:20px;
+    top:-25px;
+
+}
+
+.cloud1::after{
+
+    width:80px;
+    height:80px;
+
+    right:20px;
+    top:-35px;
+
+}
+
+.cloud2{
+
+    width:130px;
+    height:45px;
+
+    top:190px;
+    left:-320px;
+
+    opacity:.75;
+
+    animation:cloudMove2 70s linear infinite;
+
+}
+
+.cloud3{
+
+    width:220px;
+    height:60px;
+
+    top:45px;
+    left:-520px;
+
+    opacity:.55;
+
+    animation:cloudMove3 95s linear infinite;
+
+}
+
+@keyframes cloudMove1{
 
     from{
-
-        transform:scale(0);
-
-        opacity:0;
-
+        transform:translateX(0);
     }
 
     to{
-
-        transform:scale(1);
-
-        opacity:1;
-
+        transform:translateX(calc(100vw + 500px));
     }
 
 }
-.memoryFlower{
 
-    position:absolute;
+@keyframes cloudMove2{
 
-    width:120px;
+    from{
+        transform:translateX(0);
+    }
 
-    cursor:pointer;
-
-    transform-origin:center bottom;
-
-    z-index:8;
+    to{
+        transform:translateX(calc(100vw + 700px));
+    }
 
 }
-  
+
+@keyframes cloudMove3{
+
+    from{
+        transform:translateX(0);
+    }
+
+    to{
+        transform:translateX(calc(100vw + 900px));
+    }
+
+}
