@@ -23,14 +23,23 @@ const memories = [
 ];
 
 const positions = [
-    { x: 40,  y: 250, scale: 0.65 },
-    { x: 150, y: 200, scale: 0.78 },
-    { x: 280, y: 255, scale: 0.62 },
-    { x: 420, y: 180, scale: 0.92 },
-    { x: 560, y: 245, scale: 0.70 },
-    { x: 700, y: 170, scale: 1.00 },
-    { x: 840, y: 235, scale: 0.80 },
-    { x: 980, y: 260, scale: 0.60 }
+
+    { x: 60,  y: 280, scale: 0.55 },
+
+    { x: 180, y: 210, scale: 0.75 },
+
+    { x: 310, y: 290, scale: 0.50 },
+
+    { x: 470, y: 170, scale: 1.00 },
+
+    { x: 620, y: 240, scale: 0.70 },
+
+    { x: 770, y: 150, scale: 1.15 },
+
+    { x: 920, y: 260, scale: 0.60 },
+
+    { x: 1080, y: 210, scale: 0.82 }
+
 ];
 
 let current = 0;
