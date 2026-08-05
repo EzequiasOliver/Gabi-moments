@@ -779,3 +779,38 @@ body{
     }
 
 }
+.seed{
+
+    position:absolute;
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:#5b3a16;
+
+    animation:seedGrow .5s;
+
+}
+
+@keyframes seedGrow{
+
+    from{
+
+        transform:scale(0);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+}
