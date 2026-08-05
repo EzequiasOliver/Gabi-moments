@@ -512,3 +512,52 @@ body{
 #garden{
     transform: translateY(-90px);
 }
+/* ==========================
+   LEMBRANÇA
+========================== */
+
+#memory{
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+    transition:.8s;
+
+    margin-top:20px;
+
+    text-align:center;
+
+}
+
+#memory.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+#memoryPhoto{
+
+    width:220px;
+
+    border-radius:18px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+
+}
+
+#memoryText{
+
+    margin-top:18px;
+
+    color:white;
+
+    font-size:18px;
+
+    text-shadow:0 2px 8px rgba(0,0,0,.25);
+
+    max-width:280px;
+
+}
