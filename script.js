@@ -150,3 +150,14 @@ memoryCard.addEventListener("click", (e) => {
     e.stopPropagation();
 
 });
+const sparkle = document.createElement("div");
+sparkle.className = "sparkle";
+
+sparkle.style.left = (positions[index].x + 50) + "px";
+sparkle.style.top = (positions[index].y + 40) + "px";
+
+gardenField.appendChild(sparkle);
+
+setTimeout(()=>{
+    sparkle.remove();
+},800);
