@@ -384,6 +384,21 @@ JARDIM
     z-index:10;
 
 }
+/*========================
+EFEITOS
+========================*/
+
+#effects{
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:25;
+
+}
 
 /*========================
 GIRASSOL PRINCIPAL
@@ -640,3 +655,4 @@ RESPONSIVO
     }
 
 }
+<div id="effects"></div>
