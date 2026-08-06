@@ -98,9 +98,11 @@ sunflower.addEventListener("click", () => {
         }
     );
 
-    plantFlower(memories[currentMemory]);
+    const memory = memories[currentMemory];
 
-    currentMemory++;
+plantFlower(memory);
+
+currentMemory++;
 
 });
 /*========================
@@ -110,6 +112,10 @@ PLANTAR GIRASSOL
 function plantFlower(memory){
 
     const place = positions[currentMemory];
+if (!place) {
+    planting = false;
+    return;
+}
 
     const flower = document.createElement("img");
 
@@ -125,6 +131,7 @@ flower.style.transform =
 
 flower.style.zIndex = Math.round(place.scale * 100);
     gardenField.appendChild(flower);
+createSpark(place);
 
     flower.animate(
 
@@ -141,7 +148,7 @@ flower.style.zIndex = Math.round(place.scale * 100);
 
         {
             duration:700,
-            easing:"ease-out"
+            easing:"ease-out",
 fill:"forwards"
         }
 
@@ -191,3 +198,27 @@ memoryCard.addEventListener("click", (event) => {
     event.stopPropagation();
 
 });
+/*========================
+BRILHO
+========================*/
+
+function createSpark(place){
+
+    const effects = document.getElementById("effects");
+
+    const spark = document.createElement("div");
+
+    spark.className = "spark";
+
+    spark.style.left = place.x + "%";
+    spark.style.top = place.y + "%";
+
+    effects.appendChild(spark);
+
+    setTimeout(() => {
+
+        spark.remove();
+
+    },800);
+
+}
