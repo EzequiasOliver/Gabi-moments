@@ -75,7 +75,7 @@ function plantFlower(index) {
 
     const pos = positions[index];
 
-flower.style.left = pos.x + "px";
+flower.style.left = (pos.x + (Math.random() * 20 - 10)) + "px";
 flower.style.top = pos.y + "px";
 flower.style.bottom = "auto";
 flower.style.transform = `scale(${positions[index].scale})`;
