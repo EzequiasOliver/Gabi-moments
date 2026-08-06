@@ -595,3 +595,48 @@ POLAROID
     line-height:1.5;
 
 }
+/*========================
+RESPONSIVO
+========================*/
+
+@media (max-width:768px){
+
+    .content{
+        padding-top:40px;
+    }
+
+    .content h1{
+        font-size:2.2rem;
+    }
+
+    .subtitle{
+        width:90%;
+        font-size:1rem;
+    }
+
+    .touch{
+        font-size:17px;
+    }
+
+    .sun{
+        width:90px;
+        height:90px;
+
+        top:25px;
+        right:20px;
+    }
+
+    #sunflower{
+        width:145px;
+        bottom:70px;
+    }
+
+    .memoryFlower{
+        width:95px;
+    }
+
+    #memoryCard{
+        width:88%;
+    }
+
+}
