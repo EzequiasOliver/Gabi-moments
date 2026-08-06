@@ -46,3 +46,68 @@ CONTROLE
 let currentMemory = 0;
 
 let planting = false;
+/*========================
+REGIÕES DOS MORROS
+========================*/
+
+const flowerAreas = [
+
+    // Morro esquerdo
+    {
+        minX: 8,
+        maxX: 28,
+        minY: 62,
+        maxY: 72,
+        minScale: 0.65,
+        maxScale: 0.80
+    },
+
+    // Morro central
+    {
+        minX: 32,
+        maxX: 68,
+        minY: 48,
+        maxY: 63,
+        minScale: 0.80,
+        maxScale: 1.05
+    },
+
+    // Morro direito
+    {
+        minX: 72,
+        maxX: 92,
+        minY: 58,
+        maxY: 72,
+        minScale: 0.65,
+        maxScale: 0.85
+    }
+
+];
+
+/*========================
+FUNÇÕES AUXILIARES
+========================*/
+
+function random(min, max){
+
+    return Math.random() * (max - min) + min;
+
+}
+
+function randomArea(){
+
+    const area = flowerAreas[
+        Math.floor(Math.random() * flowerAreas.length)
+    ];
+
+    return{
+
+        x: random(area.minX, area.maxX),
+
+        y: random(area.minY, area.maxY),
+
+        scale: random(area.minScale, area.maxScale)
+
+    };
+
+}
