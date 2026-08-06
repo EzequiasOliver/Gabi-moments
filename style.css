@@ -509,3 +509,89 @@ GIRASSÓIS DO JARDIM
     }
 
 }
+/*========================
+POLAROID
+========================*/
+
+#memoryModal{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.45);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.3s;
+
+    z-index:999;
+
+}
+
+#memoryModal.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+#memoryCard{
+
+    width:min(340px,90vw);
+
+    background:white;
+
+    padding:15px;
+
+    border-radius:18px;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.35);
+
+    transform:
+        translateY(30px)
+        rotate(-3deg);
+
+    transition:.35s;
+
+}
+
+#memoryModal.show #memoryCard{
+
+    transform:
+        translateY(0)
+        rotate(0deg);
+
+}
+
+#memoryImage{
+
+    width:100%;
+
+    display:block;
+
+    border-radius:10px;
+
+}
+
+#memoryCaption{
+
+    margin-top:15px;
+
+    color:#444;
+
+    text-align:center;
+
+    line-height:1.5;
+
+}
