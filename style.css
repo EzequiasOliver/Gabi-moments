@@ -316,13 +316,12 @@ body{
 
 .hill-back{
 
-    width:170%;
+    width:190%;
+    height:220px;
 
-    height:180px;
+    bottom:80px;
 
-    bottom:160px;
-
-    opacity:.9;
+}
 
 }
 
@@ -338,11 +337,12 @@ body{
 
 .hill-front{
 
-    width:200%;
+    width:240%;
+    height:300px;
 
-    height:260px;
+    bottom:-120px;
 
-    bottom:-70px;
+}
 
 }
 
