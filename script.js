@@ -50,67 +50,26 @@ let planting = false;
 REGIÕES DOS MORROS
 ========================*/
 
-const flowerAreas = [
+const positions = [
 
     // Morro esquerdo
-    {
-        minX: 8,
-        maxX: 28,
-        minY: 62,
-        maxY: 72,
-        minScale: 0.65,
-        maxScale: 0.80
-    },
+    { x: 12, y: 70, scale: 0.65 },
+    { x: 20, y: 64, scale: 0.75 },
+    { x: 28, y: 68, scale: 0.68 },
 
     // Morro central
-    {
-        minX: 32,
-        maxX: 68,
-        minY: 48,
-        maxY: 63,
-        minScale: 0.80,
-        maxScale: 1.05
-    },
+    { x: 38, y: 60, scale: 0.85 },
+    { x: 50, y: 54, scale: 1.00 },
+    { x: 62, y: 60, scale: 0.85 },
 
     // Morro direito
-    {
-        minX: 72,
-        maxX: 92,
-        minY: 58,
-        maxY: 72,
-        minScale: 0.65,
-        maxScale: 0.85
-    }
+    { x: 72, y: 68, scale: 0.72 },
+    { x: 82, y: 62, scale: 0.82 },
+    { x: 92, y: 70, scale: 0.68 }
 
+    
 ];
 
-/*========================
-FUNÇÕES AUXILIARES
-========================*/
-
-function random(min, max){
-
-    return Math.random() * (max - min) + min;
-
-}
-
-function randomArea(){
-
-    const area = flowerAreas[
-        Math.floor(Math.random() * flowerAreas.length)
-    ];
-
-    return{
-
-        x: random(area.minX, area.maxX),
-
-        y: random(area.minY, area.maxY),
-
-        scale: random(area.minScale, area.maxScale)
-
-    };
-
-}
 /*========================
 CLIQUE NO GIRASSOL
 ========================*/
