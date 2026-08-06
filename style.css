@@ -200,3 +200,87 @@ PARTÍCULAS DE LUZ
     }
 
 }
+/*========================
+MORROS
+========================*/
+
+#hills{
+
+    position:absolute;
+
+    left:0;
+    bottom:0;
+
+    width:100%;
+    height:45vh;
+
+    overflow:hidden;
+
+    z-index:2;
+
+    pointer-events:none;
+
+}
+
+.hill{
+
+    position:absolute;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    border-radius:50%;
+
+}
+
+/* Morro distante */
+
+.hill-back{
+
+    width:180%;
+
+    height:220px;
+
+    bottom:160px;
+
+    background:linear-gradient(
+        #91de66,
+        #6cc64a
+    );
+
+}
+
+/* Morro do meio */
+
+.hill-middle{
+
+    width:210%;
+
+    height:260px;
+
+    bottom:70px;
+
+    background:linear-gradient(
+        #74cf52,
+        #55b541
+    );
+
+}
+
+/* Morro da frente */
+
+.hill-front{
+
+    width:240%;
+
+    height:330px;
+
+    bottom:-180px;
+
+    background:linear-gradient(
+        #63c146,
+        #3d972f
+    );
+
+}
