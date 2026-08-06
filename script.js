@@ -23,21 +23,17 @@ const memories = [
 ];
 
 const positions = [
-
-    // morro de trás
-    {x:120,y:80,scale:.45},
-    {x:320,y:95,scale:.5},
-    {x:540,y:75,scale:.48},
-
-    // morro do meio
-    {x:70,y:180,scale:.7},
-    {x:270,y:170,scale:.8},
-    {x:470,y:190,scale:.75},
-
-    // morro da frente
-    {x:40,y:310,scale:1},
-    {x:260,y:295,scale:1.05},
-    {x:520,y:300,scale:.95}
+    { x: 70,  y: 235, scale: 0.55 },
+    { x: 150, y: 205, scale: 0.70 },
+    { x: 240, y: 225, scale: 0.60 },
+    { x: 340, y: 185, scale: 0.90 },
+    { x: 450, y: 215, scale: 0.75 },
+    { x: 560, y: 170, scale: 1.00 },
+    { x: 670, y: 205, scale: 0.82 },
+    { x: 790, y: 190, scale: 0.95 },
+    { x: 900, y: 225, scale: 0.70 },
+    { x: 1020, y: 205, scale: 0.80 },
+    { x: 1130, y: 235, scale: 0.60 }
 
 ];
 
