@@ -88,3 +88,115 @@ SOL
     }
 
 }
+/*========================
+NUVENS
+========================*/
+
+.cloud{
+    position:absolute;
+    background:#fff;
+    border-radius:100px;
+    opacity:.9;
+}
+
+.cloud::before,
+.cloud::after{
+    content:"";
+    position:absolute;
+    background:#fff;
+    border-radius:50%;
+}
+
+.cloud1{
+    width:180px;
+    height:55px;
+    top:90px;
+    left:-250px;
+    animation:cloud1Move 45s linear infinite;
+}
+
+.cloud1::before{
+    width:60px;
+    height:60px;
+    left:20px;
+    top:-25px;
+}
+
+.cloud1::after{
+    width:80px;
+    height:80px;
+    right:20px;
+    top:-35px;
+}
+
+.cloud2{
+    width:140px;
+    height:45px;
+    top:190px;
+    left:-350px;
+    opacity:.75;
+    animation:cloud2Move 65s linear infinite;
+}
+
+.cloud3{
+    width:230px;
+    height:60px;
+    top:50px;
+    left:-600px;
+    opacity:.55;
+    animation:cloud3Move 90s linear infinite;
+}
+
+@keyframes cloud1Move{
+    from{transform:translateX(0);}
+    to{transform:translateX(calc(100vw + 500px));}
+}
+
+@keyframes cloud2Move{
+    from{transform:translateX(0);}
+    to{transform:translateX(calc(100vw + 700px));}
+}
+
+@keyframes cloud3Move{
+    from{transform:translateX(0);}
+    to{transform:translateX(calc(100vw + 900px));}
+}
+
+/*========================
+PARTÍCULAS DE LUZ
+========================*/
+
+.light{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+}
+
+.light::before{
+
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background-image:
+        radial-gradient(circle,#fff8b5 2px,transparent 2px);
+
+    background-size:120px 120px;
+
+    opacity:.3;
+
+    animation:lightMove 18s linear infinite;
+}
+
+@keyframes lightMove{
+
+    from{
+        transform:translateY(0);
+    }
+
+    to{
+        transform:translateY(-120px);
+    }
+
+}
