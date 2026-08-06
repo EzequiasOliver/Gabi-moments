@@ -333,3 +333,4 @@ function startPetals(){
     },350);
 
 }
+flower.classList.add("active");
