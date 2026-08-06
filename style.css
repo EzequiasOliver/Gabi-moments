@@ -625,3 +625,232 @@ body{
         drop-shadow(0 0 14px rgba(255,220,0,.8));
 
 }
+/*==================================================
+    POLAROID
+==================================================*/
+
+#memoryModal{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    background:rgba(0,0,0,.45);
+
+    backdrop-filter:blur(3px);
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:.35s;
+
+    z-index:999;
+
+}
+
+#memoryModal.show{
+
+    opacity:1;
+    visibility:visible;
+
+}
+
+#memoryCard{
+
+    width:min(360px,90vw);
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:15px;
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.35);
+
+    transform:
+        translateY(40px)
+        rotate(-4deg)
+        scale(.9);
+
+    transition:.35s;
+
+}
+
+#memoryModal.show #memoryCard{
+
+    transform:
+        translateY(0)
+        rotate(0deg)
+        scale(1);
+
+}
+
+#memoryImage{
+
+    width:100%;
+
+    display:block;
+
+    border-radius:10px;
+
+}
+
+#memoryCaption{
+
+    margin-top:15px;
+
+    color:#444;
+
+    text-align:center;
+
+    line-height:1.6;
+
+    font-size:18px;
+
+}
+
+/*==================================================
+    BRILHO
+==================================================*/
+
+.spark{
+
+    position:absolute;
+
+    width:14px;
+    height:14px;
+
+    border-radius:50%;
+
+    background:#fff6a5;
+
+    box-shadow:
+        0 0 18px #fff6a5,
+        0 0 35px #ffe36a;
+
+    pointer-events:none;
+
+    animation:spark .8s forwards;
+
+}
+
+@keyframes spark{
+
+    from{
+
+        transform:scale(.2);
+
+        opacity:1;
+
+    }
+
+    to{
+
+        transform:scale(3);
+
+        opacity:0;
+
+    }
+
+}
+
+/*==================================================
+    PÉTALAS
+==================================================*/
+
+#petals{
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+    z-index:950;
+
+}
+
+.petal{
+
+    position:absolute;
+
+    width:10px;
+    height:16px;
+
+    background:#FFD84A;
+
+    border-radius:50% 50% 50% 0;
+
+    opacity:.9;
+
+}
+
+/*==================================================
+    RESPONSIVO
+==================================================*/
+
+@media (max-width:768px){
+
+    .content{
+
+        padding-top:40px;
+
+    }
+
+    .content h1{
+
+        font-size:2.2rem;
+
+    }
+
+    .subtitle{
+
+        font-size:1rem;
+
+    }
+
+    .touch{
+
+        font-size:17px;
+
+    }
+
+    .sun{
+
+        width:90px;
+        height:90px;
+
+        top:20px;
+        right:20px;
+
+    }
+
+    #sunflower{
+
+        width:145px;
+
+        bottom:95px;
+
+    }
+
+    .memoryFlower{
+
+        width:90px;
+
+    }
+
+    #memoryCard{
+
+        width:90%;
+
+    }
+
+}
