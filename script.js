@@ -131,7 +131,7 @@ flower.style.zIndex = Math.round(place.scale * 100);
         [
             {
                 opacity:0,
-                transform:`translate(-50%,-20%) scale(0)`
+                transform:`translate(-50%,0%) scale(0)`
             },
             {
                 opacity:1,
@@ -142,6 +142,7 @@ flower.style.zIndex = Math.round(place.scale * 100);
         {
             duration:700,
             easing:"ease-out"
+fill:"forwards"
         }
 
     );
