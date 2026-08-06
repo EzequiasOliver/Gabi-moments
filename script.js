@@ -109,7 +109,7 @@ PLANTAR GIRASSOL
 
 function plantFlower(memory){
 
-    const place = randomArea();
+    const place = positions[currentMemory];
 
     const flower = document.createElement("img");
 
