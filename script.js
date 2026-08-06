@@ -5,7 +5,8 @@
 /*========================
 ELEMENTOS
 ========================*/
-
+const effects = document.getElementById("effects");
+const touchText = document.querySelector(".touch");
 const sunflower = document.getElementById("sunflower");
 const gardenField = document.getElementById("gardenField");
 
