@@ -284,3 +284,159 @@ MORROS
     );
 
 }
+/*========================
+CONTEÚDO
+========================*/
+
+.content{
+
+    position:relative;
+
+    z-index:20;
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    text-align:center;
+
+    padding-top:60px;
+
+}
+
+.content h1{
+
+    color:#fff;
+
+    font-size:3rem;
+
+    text-shadow:0 4px 12px rgba(0,0,0,.25);
+
+}
+
+.subtitle{
+
+    margin-top:18px;
+
+    width:min(650px,90%);
+
+    color:white;
+
+    font-size:1.1rem;
+
+    line-height:1.6;
+
+    text-shadow:0 2px 8px rgba(0,0,0,.25);
+
+}
+
+.touch{
+
+    margin-top:25px;
+
+    color:white;
+
+    font-size:20px;
+
+    animation:pulse 2s infinite;
+
+}
+
+@keyframes pulse{
+
+    0%,100%{
+        opacity:1;
+    }
+
+    50%{
+        opacity:.45;
+    }
+
+}
+
+/*========================
+JARDIM
+========================*/
+
+#garden{
+
+    position:relative;
+
+    width:100%;
+
+    flex:1;
+
+    overflow:hidden;
+
+}
+
+/* Área onde nascerão os girassóis */
+
+#gardenField{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:10;
+
+}
+
+/*========================
+GIRASSOL PRINCIPAL
+========================*/
+
+#sunflower{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:85px;
+
+    width:180px;
+
+    transform:translateX(-50%);
+
+    transform-origin:bottom center;
+
+    cursor:pointer;
+
+    user-select:none;
+
+    z-index:30;
+
+    animation:flowerWind 4s ease-in-out infinite;
+
+}
+
+#sunflower:hover{
+
+    transform:
+        translateX(-50%)
+        scale(1.05);
+
+}
+
+@keyframes flowerWind{
+
+    0%,100%{
+
+        transform:
+            translateX(-50%)
+            rotate(-2deg);
+
+    }
+
+    50%{
+
+        transform:
+            translateX(-50%)
+            rotate(2deg);
+
+    }
+
+}
