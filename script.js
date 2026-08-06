@@ -82,7 +82,7 @@ function plantFlower(index) {
 flower.style.left = pos.x + "px";
 flower.style.top = pos.y + "px";
 flower.style.bottom = "auto";
-flower.style.transform = `scale(${pos.scale})`;
+flower.style.transform = `scale(${positions[index].scale})`;
 flower.style.zIndex = Math.floor(pos.scale * 100);
 
     gardenField.appendChild(flower);
