@@ -92,8 +92,6 @@ sunflower.addEventListener("click", () => {
     sunflower.animate(
 flower.style.opacity = "1";
 
-flower.style.transform =
-    `translate(-50%,-100%) scale(${place.scale})`;
 
         [
 
