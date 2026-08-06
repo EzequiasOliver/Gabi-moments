@@ -1,10 +1,9 @@
 /*==================================================
     JARDIM DAS LEMBRANÇAS - V4
 ==================================================*/
-
-/*========================
-RESET
-========================*/
+/*==================================================
+    RESET
+==================================================*/
 
 *{
     margin:0;
@@ -17,16 +16,16 @@ body{
     width:100%;
     height:100%;
     overflow:hidden;
-    font-family:Arial,Helvetica,sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 body{
     background:#87CEEB;
 }
 
-/*========================
-CÉU
-========================*/
+/*==================================================
+    CÉU
+==================================================*/
 
 .sky{
 
@@ -42,25 +41,25 @@ CÉU
     align-items:flex-start;
 
     background:linear-gradient(
-        to bottom,
-        #73d4ff 0%,
-        #9fe7ff 40%,
-        #dff8ff 75%,
-        #fff5bf 100%
+        180deg,
+        #6fcfff 0%,
+        #95e2ff 35%,
+        #d8f6ff 70%,
+        #fff6cb 100%
     );
 
 }
 
-/*========================
-SOL
-========================*/
+/*==================================================
+    SOL
+==================================================*/
 
 .sun{
 
     position:absolute;
 
-    top:40px;
-    right:50px;
+    top:45px;
+    right:45px;
 
     width:130px;
     height:130px;
@@ -70,106 +69,189 @@ SOL
     background:#FFD84A;
 
     box-shadow:
-        0 0 45px rgba(255,216,74,.8),
-        0 0 110px rgba(255,216,74,.45);
+        0 0 35px rgba(255,220,80,.9),
+        0 0 90px rgba(255,220,80,.55),
+        0 0 180px rgba(255,220,80,.25);
 
     animation:sunFloat 6s ease-in-out infinite;
+
+    z-index:2;
+
+}
+
+.sun::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-12px;
+
+    border-radius:50%;
+
+    border:2px solid rgba(255,255,180,.35);
 
 }
 
 @keyframes sunFloat{
 
     0%,100%{
-        transform:translateY(0);
+
+        transform:
+        translateY(0)
+        scale(1);
+
     }
 
     50%{
-        transform:translateY(-8px);
+
+        transform:
+        translateY(-8px)
+        scale(1.03);
+
     }
 
 }
-/*========================
-NUVENS
-========================*/
+
+/*==================================================
+    NUVENS
+==================================================*/
 
 .cloud{
+
     position:absolute;
-    background:#fff;
+
+    background:white;
+
     border-radius:100px;
+
     opacity:.9;
+
+    filter:blur(.3px);
+
 }
 
 .cloud::before,
 .cloud::after{
+
     content:"";
+
     position:absolute;
-    background:#fff;
+
+    background:white;
+
     border-radius:50%;
+
 }
 
 .cloud1{
+
     width:180px;
     height:55px;
-    top:90px;
+
+    top:80px;
     left:-250px;
-    animation:cloud1Move 45s linear infinite;
+
+    animation:cloudOne 42s linear infinite;
+
 }
 
 .cloud1::before{
-    width:60px;
-    height:60px;
-    left:20px;
+
+    width:65px;
+    height:65px;
+
+    left:18px;
     top:-25px;
+
 }
 
 .cloud1::after{
+
     width:80px;
     height:80px;
-    right:20px;
+
+    right:18px;
     top:-35px;
+
 }
 
 .cloud2{
+
     width:140px;
     height:45px;
-    top:190px;
+
+    top:185px;
     left:-350px;
+
     opacity:.75;
-    animation:cloud2Move 65s linear infinite;
+
+    animation:cloudTwo 60s linear infinite;
+
 }
 
 .cloud3{
+
     width:230px;
     height:60px;
-    top:50px;
-    left:-600px;
+
+    top:45px;
+    left:-650px;
+
     opacity:.55;
-    animation:cloud3Move 90s linear infinite;
+
+    animation:cloudThree 82s linear infinite;
+
 }
 
-@keyframes cloud1Move{
-    from{transform:translateX(0);}
-    to{transform:translateX(calc(100vw + 500px));}
+@keyframes cloudOne{
+
+    from{
+        transform:translateX(0);
+    }
+
+    to{
+        transform:translateX(calc(100vw + 550px));
+    }
+
 }
 
-@keyframes cloud2Move{
-    from{transform:translateX(0);}
-    to{transform:translateX(calc(100vw + 700px));}
+@keyframes cloudTwo{
+
+    from{
+        transform:translateX(0);
+    }
+
+    to{
+        transform:translateX(calc(100vw + 700px));
+    }
+
 }
 
-@keyframes cloud3Move{
-    from{transform:translateX(0);}
-    to{transform:translateX(calc(100vw + 900px));}
+@keyframes cloudThree{
+
+    from{
+        transform:translateX(0);
+    }
+
+    to{
+        transform:translateX(calc(100vw + 900px));
+    }
+
 }
 
-/*========================
-PARTÍCULAS DE LUZ
-========================*/
+/*==================================================
+    PARTÍCULAS DE LUZ
+==================================================*/
 
 .light{
+
     position:absolute;
+
     inset:0;
+
     pointer-events:none;
+
 }
 
 .light::before{
@@ -177,542 +259,32 @@ PARTÍCULAS DE LUZ
     content:"";
 
     position:absolute;
+
     inset:0;
 
     background-image:
-        radial-gradient(circle,#fff8b5 2px,transparent 2px);
+        radial-gradient(circle,#fff8b8 2px,transparent 2px);
 
     background-size:120px 120px;
 
     opacity:.3;
 
-    animation:lightMove 18s linear infinite;
+    animation:lightFloat 18s linear infinite;
+
 }
 
-@keyframes lightMove{
+@keyframes lightFloat{
 
     from{
+
         transform:translateY(0);
+
     }
 
     to{
+
         transform:translateY(-120px);
-    }
-
-}
-/*========================
-MORROS
-========================*/
-
-#hills{
-
-    position:absolute;
-
-    left:0;
-    bottom:0;
-
-    width:100%;
-    height:45vh;
-
-    overflow:hidden;
-
-    z-index:2;
-
-    pointer-events:none;
-
-}
-
-.hill{
-
-    position:absolute;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    border-radius:50%;
-
-}
-
-/* Morro distante */
-
-.hill-back{
-
-    width:180%;
-
-    height:220px;
-
-    bottom:160px;
-
-    background:linear-gradient(
-        #91de66,
-        #6cc64a
-    );
-
-}
-
-/* Morro do meio */
-
-.hill-middle{
-
-    width:210%;
-
-    height:260px;
-
-    bottom:70px;
-
-    background:linear-gradient(
-        #74cf52,
-        #55b541
-    );
-
-}
-
-/* Morro da frente */
-
-.hill-front{
-
-    width:240%;
-
-    height:330px;
-
-    bottom:-180px;
-
-    background:linear-gradient(
-        #63c146,
-        #3d972f
-    );
-
-}
-/*========================
-CONTEÚDO
-========================*/
-
-.content{
-
-    position:relative;
-
-    z-index:20;
-
-    width:100%;
-    height:100%;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-
-    text-align:center;
-
-    padding-top:60px;
-
-}
-
-.content h1{
-
-    color:#fff;
-
-    font-size:3rem;
-
-    text-shadow:0 4px 12px rgba(0,0,0,.25);
-
-}
-
-.subtitle{
-
-    margin-top:18px;
-
-    width:min(650px,90%);
-
-    color:white;
-
-    font-size:1.1rem;
-
-    line-height:1.6;
-
-    text-shadow:0 2px 8px rgba(0,0,0,.25);
-
-}
-
-.touch{
-
-    margin-top:25px;
-
-    color:white;
-
-    font-size:20px;
-
-    animation:pulse 2s infinite;
-
-}
-
-@keyframes pulse{
-
-    0%,100%{
-        opacity:1;
-    }
-
-    50%{
-        opacity:.45;
-    }
-
-}
-
-/*========================
-JARDIM
-========================*/
-
-#garden{
-
-    position:relative;
-
-    width:100%;
-
-    flex:1;
-
-    overflow:hidden;
-
-}
-
-/* Área onde nascerão os girassóis */
-
-#gardenField{
-
-    position:absolute;
-
-    inset:0;
-
-    z-index:10;
-
-}
-/*========================
-EFEITOS
-========================*/
-
-#effects{
-
-    position:absolute;
-
-    inset:0;
-
-    pointer-events:none;
-
-    z-index:25;
-
-}
-
-/*========================
-GIRASSOL PRINCIPAL
-========================*/
-
-#sunflower{
-
-    position:absolute;
-
-    left:50%;
-
-    bottom:85px;
-
-    width:180px;
-
-    transform:translateX(-50%);
-
-    transform-origin:bottom center;
-
-    cursor:pointer;
-
-    user-select:none;
-
-    z-index:30;
-
-    animation:flowerWind 4s ease-in-out infinite;
-
-}
-
-#sunflower:hover{
-
-    transform:
-        translateX(-50%)
-        scale(1.05);
-
-}
-
-@keyframes flowerWind{
-
-    0%,100%{
-
-        transform:
-            translateX(-50%)
-            rotate(-2deg);
 
     }
-
-    50%{
-
-        transform:
-            translateX(-50%)
-            rotate(2deg);
-
-    }
-
-}
-/*========================
-GIRASSÓIS DO JARDIM
-========================*/
-
-.memoryFlower{
-
-    position:absolute;
-
-    width:120px;
-
-    transform-origin:bottom center;
-
-    cursor:pointer;
-
-    user-select:none;
-
-    z-index:15;
-
-    animation:
-        flowerGrow .7s ease-out,
-        flowerWind 4s ease-in-out infinite;
-
-    transition:
-        transform .25s,
-        filter .25s;
-
-}
-
-.memoryFlower:hover{
-
-    filter:drop-shadow(0 0 14px rgba(255,215,0,.75));
-
-}
-
-@keyframes flowerGrow{
-
-    0%{
-
-        opacity:0;
-
-        transform:
-            scale(0)
-            translateY(80px);
-
-    }
-
-    60%{
-
-        opacity:1;
-
-        transform:
-            scale(1.08)
-            translateY(-8px);
-
-    }
-
-    100%{
-
-        opacity:1;
-
-        transform:
-            scale(1)
-            translateY(0);
-
-    }
-
-}
-/*========================
-POLAROID
-========================*/
-
-#memoryModal{
-
-    position:fixed;
-
-    inset:0;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    background:rgba(0,0,0,.45);
-
-    opacity:0;
-
-    visibility:hidden;
-
-    transition:.3s;
-
-    z-index:999;
-
-}
-
-#memoryModal.show{
-
-    opacity:1;
-
-    visibility:visible;
-
-}
-
-#memoryCard{
-
-    width:min(340px,90vw);
-
-    background:white;
-
-    padding:15px;
-
-    border-radius:18px;
-
-    box-shadow:
-        0 20px 60px rgba(0,0,0,.35);
-
-    transform:
-        translateY(30px)
-        rotate(-3deg);
-
-    transition:.35s;
-
-}
-
-#memoryModal.show #memoryCard{
-
-    transform:
-        translateY(0)
-        rotate(0deg);
-
-}
-
-#memoryImage{
-
-    width:100%;
-
-    display:block;
-
-    border-radius:10px;
-
-}
-
-#memoryCaption{
-
-    margin-top:15px;
-
-    color:#444;
-
-    text-align:center;
-
-    line-height:1.5;
-
-}
-/*========================
-RESPONSIVO
-========================*/
-
-@media (max-width:768px){
-
-    .content{
-        padding-top:40px;
-    }
-
-    .content h1{
-        font-size:2.2rem;
-    }
-
-    .subtitle{
-        width:90%;
-        font-size:1rem;
-    }
-
-    .touch{
-        font-size:17px;
-    }
-
-    .sun{
-        width:90px;
-        height:90px;
-
-        top:25px;
-        right:20px;
-    }
-
-    #sunflower{
-        width:145px;
-        bottom:70px;
-    }
-
-    .memoryFlower{
-        width:95px;
-    }
-
-    #memoryCard{
-        width:88%;
-    }
-
-}
-<div id="effects"></div>
-/*========================
-BRILHO
-========================*/
-
-.spark{
-
-    position:absolute;
-
-    width:12px;
-    height:12px;
-
-    border-radius:50%;
-
-    background:#fff8a5;
-
-    box-shadow:
-        0 0 18px #fff6a0,
-        0 0 35px #ffe36a;
-
-    pointer-events:none;
-
-    animation:spark .8s forwards;
-
-}
-
-@keyframes spark{
-
-    from{
-
-        transform:scale(.2);
-
-        opacity:1;
-
-    }
-
-    to{
-
-        transform:scale(3);
-
-        opacity:0;
-
-    }
-
-}
-/*========================
-PÉTALAS
-========================*/
-
-.petal{
-
-    position:absolute;
-
-    width:10px;
-    height:16px;
-
-    background:#FFD84A;
-
-    border-radius:50% 50% 50% 0;
-
-    pointer-events:none;
 
 }
