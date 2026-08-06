@@ -654,3 +654,65 @@ RESPONSIVO
 
 }
 <div id="effects"></div>
+/*========================
+BRILHO
+========================*/
+
+.spark{
+
+    position:absolute;
+
+    width:12px;
+    height:12px;
+
+    border-radius:50%;
+
+    background:#fff8a5;
+
+    box-shadow:
+        0 0 18px #fff6a0,
+        0 0 35px #ffe36a;
+
+    pointer-events:none;
+
+    animation:spark .8s forwards;
+
+}
+
+@keyframes spark{
+
+    from{
+
+        transform:scale(.2);
+
+        opacity:1;
+
+    }
+
+    to{
+
+        transform:scale(3);
+
+        opacity:0;
+
+    }
+
+}
+/*========================
+PÉTALAS
+========================*/
+
+.petal{
+
+    position:absolute;
+
+    width:10px;
+    height:16px;
+
+    background:#FFD84A;
+
+    border-radius:50% 50% 50% 0;
+
+    pointer-events:none;
+
+}
