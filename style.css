@@ -739,3 +739,28 @@ padding-top: 70px;
         opacity:0;
     }
 }
+.memoryFlower{
+
+    animation:
+        growFlower .8s ease-out,
+        flowerWind 4s ease-in-out infinite;
+
+}
+
+@keyframes growFlower{
+
+    from{
+
+        transform:scale(0);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
