@@ -15,11 +15,11 @@
 <body>
 
     <!-- Música -->
-    <audio id="bgMusic" loop>
+    <audio id="bgMusic" loop preload="auto">
         <source src="musica.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Céu -->
+    <!-- Cenário -->
     <div class="sky">
 
         <!-- Sol -->
@@ -43,52 +43,45 @@
             </p>
 
             <!-- Jardim -->
-<section id="garden">
+            <section id="garden">
 
-    <div id="gardenField"></div>
+                <!-- Terreno -->
+                <div id="terrain">
 
-    <img
-        id="sunflower"
-        src="imagem/girassol.png"
-        alt="Girassol">
+                    <div class="hill hill-back"></div>
 
-    <!-- Partículas das flores -->
-    <div id="effects"></div>
+                    <div class="hill hill-middle"></div>
 
-</section>
+                    <div class="hill hill-front"></div>
 
-    <!-- Girassóis plantados -->
-    <div id="gardenField"></div>
+                </div>
 
-    <!-- Girassol principal -->
-    <img
-        id="sunflower"
-        src="imagem/girassol.png"
-        alt="Girassol">
+                <!-- Flores plantadas -->
+                <div id="gardenField"></div>
 
-</section>
+                <!-- Efeitos -->
+                <div id="effects"></div>
+
+                <!-- Girassol principal -->
+                <img
+                    id="sunflower"
+                    src="imagem/girassol.png"
+                    alt="Girassol">
+
+            </section>
+
             <p class="touch">
                 Toque no girassol 🌻
             </p>
 
         </main>
 
-        <div id="hills">
-
-    <div class="hill hill-back"></div>
-
-    <div class="hill hill-middle"></div>
-
-    <div class="hill hill-front"></div>
-
-</div>
     </div>
 
     <!-- Polaroid -->
     <div id="memoryModal">
 
         <div id="memoryCard">
-<div id="typingCursor"></div>
 
             <img
                 id="memoryImage"
@@ -100,7 +93,10 @@
         </div>
 
     </div>
-<div id="petals"></div>
+
+    <!-- Pétalas -->
+    <div id="petals"></div>
+
     <script src="script.js"></script>
 
 </body>
