@@ -204,3 +204,32 @@ function plantFlower(memory){
     });
 
 }
+/*========================
+ABRIR LEMBRANÇA
+========================*/
+
+function showMemory(memory){
+
+    modalImage.src = memory.photo;
+
+    modalCaption.textContent = memory.text;
+
+    modal.classList.add("show");
+
+}
+
+/*========================
+FECHAR MODAL
+========================*/
+
+modal.addEventListener("click", () => {
+
+    modal.classList.remove("show");
+
+});
+
+memoryCard.addEventListener("click", (event) => {
+
+    event.stopPropagation();
+
+});
