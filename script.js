@@ -59,7 +59,14 @@ sunflower.addEventListener("click", () => {
     ], {
         duration: 500
     });
+function getGroundY(x) {
 
+    const h1 = 40 * Math.sin((x / 1200) * Math.PI * 2);
+    const h2 = 20 * Math.sin((x / 600) * Math.PI * 4);
+
+    return 260 - h1 - h2;
+
+}
     plantFlower(current);
 
     current++;
