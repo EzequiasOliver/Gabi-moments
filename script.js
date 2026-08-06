@@ -333,3 +333,16 @@ function startPetals(){
     },350);
 
 }
+.memoryFlower{
+
+    transition:
+        filter .25s,
+        box-shadow .25s;
+
+}
+
+.memoryFlower.active{
+
+    filter:drop-shadow(0 0 14px rgba(255,220,0,.8));
+
+}
