@@ -118,14 +118,12 @@ function plantFlower(memory){
     flower.className = "memoryFlower";
 
     flower.style.left = place.x + "%";
-    flower.style.top = place.y + "%";
+flower.style.top = place.y + "%";
 
-    flower.style.transform =
-        `translate(-50%,-100%) scale(${place.scale})`;
+flower.style.transform =
+    `translate(-50%, -100%) scale(${place.scale})`;
 
-    flower.style.zIndex =
-        Math.floor(place.scale * 100);
-
+flower.style.zIndex = Math.round(place.scale * 100);
     gardenField.appendChild(flower);
 
     flower.animate(
