@@ -400,3 +400,228 @@ body{
     );
 
 }
+/*==================================================
+    CONTEÚDO
+==================================================*/
+
+.content{
+
+    position:relative;
+
+    z-index:20;
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    text-align:center;
+
+    padding-top:60px;
+
+}
+
+.content h1{
+
+    color:#fff;
+
+    font-size:3rem;
+
+    text-shadow:0 4px 12px rgba(0,0,0,.25);
+
+}
+
+.subtitle{
+
+    width:min(650px,90%);
+
+    margin-top:18px;
+
+    color:#fff;
+
+    line-height:1.6;
+
+    font-size:1.1rem;
+
+    text-shadow:0 2px 8px rgba(0,0,0,.25);
+
+}
+
+.touch{
+
+    margin-top:25px;
+
+    color:#fff;
+
+    font-size:20px;
+
+    animation:pulse 2s infinite;
+
+}
+
+@keyframes pulse{
+
+    0%,100%{
+
+        opacity:1;
+
+    }
+
+    50%{
+
+        opacity:.45;
+
+    }
+
+}
+
+/*==================================================
+    JARDIM
+==================================================*/
+
+#garden{
+
+    position:relative;
+
+    flex:1;
+
+    width:100%;
+
+    overflow:hidden;
+
+}
+
+/*==================================================
+    CAMPO DAS FLORES
+==================================================*/
+
+#gardenField{
+
+    position:absolute;
+
+    left:0;
+
+    right:0;
+
+    top:0;
+
+    bottom:0;
+
+    z-index:15;
+
+    pointer-events:none;
+
+}
+
+/* As flores continuam clicáveis */
+
+.memoryFlower{
+
+    pointer-events:auto;
+
+}
+
+/*==================================================
+    CAMADA DE EFEITOS
+==================================================*/
+
+#effects{
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:25;
+
+}
+
+/*==================================================
+    GIRASSOL PRINCIPAL
+==================================================*/
+
+#sunflower{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:120px;
+
+    width:180px;
+
+    transform:translateX(-50%);
+
+    transform-origin:center bottom;
+
+    cursor:pointer;
+
+    user-select:none;
+
+    z-index:30;
+
+    animation:flowerWind 4s ease-in-out infinite;
+
+    transition:transform .25s;
+
+}
+
+#sunflower:hover{
+
+    transform:
+        translateX(-50%)
+        scale(1.05);
+
+}
+
+@keyframes flowerWind{
+
+    0%,100%{
+
+        transform:
+            translateX(-50%)
+            rotate(-2deg);
+
+    }
+
+    50%{
+
+        transform:
+            translateX(-50%)
+            rotate(2deg);
+
+    }
+
+}
+
+/*==================================================
+    FLORES DO JARDIM
+==================================================*/
+
+.memoryFlower{
+
+    position:absolute;
+
+    width:110px;
+
+    transform-origin:center bottom;
+
+    user-select:none;
+
+    cursor:pointer;
+
+    transition:
+        filter .25s,
+        transform .25s;
+
+}
+
+.memoryFlower:hover{
+
+    filter:
+        drop-shadow(0 0 14px rgba(255,220,0,.8));
+
+}
