@@ -283,57 +283,66 @@ body{
 /* ==========================================================
    GRAMA
 ========================================================== */
-
-.grass{
+#hills{
 
     position:absolute;
 
-    left:0;
     bottom:0;
 
     width:100%;
-    height:300px;
 
-    background:linear-gradient(
-        to top,
-        #2f8f2f,
-        #61c85e
-    );
+    height:45vh;
 
-    z-index:5;
+    pointer-events:none;
 
 }
 
-.grass::before{
-
-    content:"";
+.hill{
 
     position:absolute;
 
-    inset:0;
+    left:50%;
 
-    background:
-    repeating-linear-gradient(
-        90deg,
-        transparent 0px,
-        transparent 8px,
-        rgba(255,255,255,.08) 9px,
-        transparent 10px
+    transform:translateX(-50%);
+
+    border-radius:50% 50% 0 0;
+
+    background:linear-gradient(
+        #7fd44e,
+        #4ba33d
     );
-
-    animation:grassWind 4s ease-in-out infinite;
 
 }
 
-@keyframes grassWind{
+.hill-back{
 
-    0%,100%{
-        transform:translateX(0);
-    }
+    width:170%;
 
-    50%{
-        transform:translateX(8px);
-    }
+    height:180px;
+
+    bottom:160px;
+
+    opacity:.9;
+
+}
+
+.hill-middle{
+
+    width:180%;
+
+    height:230px;
+
+    bottom:90px;
+
+}
+
+.hill-front{
+
+    width:200%;
+
+    height:260px;
+
+    bottom:-70px;
 
 }
 
