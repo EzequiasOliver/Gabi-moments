@@ -1,387 +1,426 @@
 /*==================================================
-        JARDIM DAS LEMBRANÇAS V7
+        JARDIM DAS LEMBRANÇAS - V7
+        SCRIPT.JS - PARTE 1
 ==================================================*/
 
-/*========================
-ELEMENTOS
-========================*/
+/*==================================================
+        ELEMENTOS
+==================================================*/
 
 const sunflower = document.getElementById("sunflower");
-const gardenField = document.getElementById("gardenField");
-const decorations = document.getElementById("decorations");
-const effects = document.getElementById("effects");
 
-const music = document.getElementById("bgMusic");
+const gardenField =
+    document.getElementById("gardenField");
 
-const modal = document.getElementById("memoryModal");
-const modalImage = document.getElementById("memoryImage");
-const modalCaption = document.getElementById("memoryCaption");
-const memoryCard = document.getElementById("memoryCard");
+const grassLayer =
+    document.getElementById("grassLayer");
 
-const ladybug = document.getElementById("ladybug");
-const ladybugModal = document.getElementById("ladybugModal");
-const ladybugCard = document.getElementById("ladybugCard");
+const flowerLayer =
+    document.getElementById("flowerLayer");
 
-/*========================
-MEMÓRIAS
-========================*/
+const effectLayer =
+    document.getElementById("effectLayer");
+
+const music =
+    document.getElementById("bgMusic");
+
+const ladybug =
+    document.getElementById("ladybug");
+
+const ladybugModal =
+    document.getElementById("ladybugModal");
+
+const ladybugCard =
+    document.getElementById("ladybugCard");
+
+const memoryModal =
+    document.getElementById("memoryModal");
+
+const memoryCard =
+    document.getElementById("memoryCard");
+
+const memoryImage =
+    document.getElementById("memoryImage");
+
+const memoryCaption =
+    document.getElementById("memoryCaption");
+
+const petals =
+    document.getElementById("petals");
+
+
+/*==================================================
+        MEMÓRIAS
+==================================================*/
 
 const memories = [
 
-{
-    photo:"imagem/foto1.jpg",
-    text:"Uma imagem, várias memórias. 🌻"
-},
+    {
+        photo: "imagem/foto1.jpg",
 
-{
-    photo:"imagem/foto2.jpg",
-    text:"Aquele dia foi especial. ☀️"
-},
+        text:
+        "Uma imagem, várias memórias. 🌻"
+    },
 
-{
-    photo:"imagem/foto3.jpg",
-    text:"Ainda lembro dessa risada. 💛"
-}
+    {
+        photo: "imagem/foto2.jpg",
+
+        text:
+        "Aquele dia foi especial. ☀️"
+    },
+
+    {
+        photo: "imagem/foto3.jpg",
+
+        text:
+        "Ainda lembro dessa risada. 💛"
+    }
 
 ];
 
-/*========================
-POSIÇÕES DAS FLORES
-========================*/
+
+/*==================================================
+        CONTROLE
+==================================================*/
+
+let currentMemory = 0;
+
+let planting = false;
+
+
+/*==================================================
+        POSIÇÕES DOS GIRASSÓIS
+==================================================*/
 
 /*
-Estas posições foram escolhidas para:
+    left = posição horizontal
+    bottom = altura em relação ao chão
+    scale = tamanho
 
-✔ ficar sobre os morros
-✔ não cobrir o girassol principal
-✔ não cobrir a frase "Toque no girassol"
+    Todos ficam abaixo da legenda.
 */
 
-const positions=[
+const sunflowerPositions = [
 
-{left:14,bottom:145,scale:.60},
-{left:26,bottom:175,scale:.72},
-{left:38,bottom:160,scale:.68},
+    {
+        left: 12,
+        bottom: 55,
+        scale: .55
+    },
 
-{left:50,bottom:205,scale:.92},
-{left:62,bottom:220,scale:1},
-{left:74,bottom:195,scale:.86},
+    {
+        left: 25,
+        bottom: 75,
+        scale: .70
+    },
 
-{left:84,bottom:165,scale:.70},
-{left:93,bottom:150,scale:.62}
+    {
+        left: 38,
+        bottom: 60,
+        scale: .60
+    },
+
+    {
+        left: 50,
+        bottom: 90,
+        scale: .85
+    },
+
+    {
+        left: 62,
+        bottom: 65,
+        scale: .72
+    },
+
+    {
+        left: 75,
+        bottom: 80,
+        scale: .80
+    },
+
+    {
+        left: 88,
+        bottom: 55,
+        scale: .58
+    }
 
 ];
 
-/*========================
-CONTROLE
-========================*/
-
-let currentMemory=0;
-
-let planting=false;
-
-/*========================
-MÚSICA
-========================*/
-
-function startMusic(){
-
-    if(!music.paused) return;
-
-    music.volume=0;
-
-    music.play().catch(()=>{});
-
-    const fade=setInterval(()=>{
-
-        music.volume+=0.05;
-
-        if(music.volume>=1){
-
-            music.volume=1;
-
-            clearInterval(fade);
-
-        }
-
-    },120);
-
-}
-
-/*========================
-CLIQUE NO GIRASSOL
-========================*/
-
-sunflower.addEventListener("click",()=>{
-
-    if(planting) return;
-
-    if(currentMemory>=memories.length) return;
-
-    planting=true;
-
-    startMusic();
-
-    sunflower.animate([
-
-        {
-            transform:"translateX(-50%) scale(1)"
-        },
-
-        {
-            transform:"translateX(-50%) scale(1.12) rotate(4deg)"
-        },
-
-        {
-            transform:"translateX(-50%) scale(1)"
-        }
-
-    ],{
-
-        duration:500,
-
-        easing:"ease-out"
-
-    });
-
-    plantFlower();
-
-});
-/*==================================================
-    PLANTAR GIRASSOL
-==================================================*/
-
-function plantFlower(){
-
-    const memory = memories[currentMemory];
-    const place = positions[currentMemory];
-
-    const flower = document.createElement("img");
-
-    flower.src = "imagem/girassol.png";
-    flower.className = "memoryFlower";
-
-    flower.style.left = place.left + "%";
-    flower.style.bottom = place.bottom + "px";
-    flower.style.transform =
-        `translateX(-50%) scale(${place.scale})`;
-
-    flower.style.zIndex =
-        Math.round(place.scale * 100);
-
-    gardenField.appendChild(flower);
-
-    createSpark(place.left, place.bottom);
-
-    flower.onclick = () => {
-
-        showMemory(memory);
-
-    };
-
-    setTimeout(() => {
-
-        showMemory(memory);
-
-        planting = false;
-
-        currentMemory++;
-
-        if(currentMemory === memories.length){
-
-            startPetals();
-
-        }
-
-    },700);
-
-}
 
 /*==================================================
-    POLAROID
+        CLIQUE NO GIRASSOL PRINCIPAL
 ==================================================*/
 
-function showMemory(memory){
+sunflower.addEventListener("click", () => {
 
-    modalImage.src = memory.photo;
+    /*
+        Evita dois cliques simultâneos.
+    */
 
-    modalCaption.textContent = memory.text;
+    if (planting) {
+        return;
+    }
 
-    modal.classList.add("show");
 
-}
+    /*
+        Não há mais memórias para plantar.
+    */
 
-modal.addEventListener("click",()=>{
+    if (currentMemory >= memories.length) {
 
-    modal.classList.remove("show");
+        sunflower.animate(
 
-});
+            [
+                {
+                    transform:
+                    "translateX(-50%) scale(1)"
+                },
 
-memoryCard.addEventListener("click",(e)=>{
+                {
+                    transform:
+                    "translateX(-50%) scale(1.08)"
+                },
 
-    e.stopPropagation();
+                {
+                    transform:
+                    "translateX(-50%) scale(1)"
+                }
+            ],
 
-});
+            {
+                duration:400
+            }
 
-/*==================================================
-    BRILHO
-==================================================*/
+        );
 
-function createSpark(left,bottom){
+        return;
+    }
 
-    const spark=document.createElement("div");
 
-    spark.className="spark";
+    planting = true;
 
-    spark.style.left=left+"%";
 
-    spark.style.bottom=(bottom+40)+"px";
+    /*========================
+        MÚSICA
+    ========================*/
 
-    effects.appendChild(spark);
+    if (music.paused) {
 
-    setTimeout(()=>{
-
-        spark.remove();
-
-    },800);
-
-}
-
-/*==================================================
-    FLORES DECORATIVAS
-==================================================*/
-
-function createDecorations(){
-
-    for(let i=0;i<120;i++){
-
-        const flower=document.createElement("div");
-
-        flower.className=
-            Math.random()<0.5
-            ? "smallFlower"
-            : "pinkFlower";
-
-        flower.style.left=
-            Math.random()*100+"%";
-
-        flower.style.bottom=
-            (25+Math.random()*210)+"px";
-
-        flower.style.opacity=
-            .4+Math.random()*.6;
-
-        flower.style.transform=
-            `scale(${.6+Math.random()})`;
-
-        decorations.appendChild(flower);
+        music
+            .play()
+            .catch(() => {});
 
     }
 
-}
 
-createDecorations();
+    /*========================
+        ANIMAÇÃO DO GIRASSOL
+    ========================*/
 
-/*==================================================
-    JOANINHA
-==================================================*/
-
-ladybug.onclick=()=>{
-
-    ladybugModal.classList.add("show");
-
-};
-
-ladybugModal.onclick=()=>{
-
-    ladybugModal.classList.remove("show");
-
-};
-
-ladybugCard.onclick=(e)=>{
-
-    e.stopPropagation();
-
-};
-
-/*==================================================
-    PÉTALAS
-==================================================*/
-
-let petalsStarted=false;
-
-function startPetals(){
-
-    if(petalsStarted) return;
-
-    petalsStarted=true;
-
-    const container=
-        document.getElementById("petals");
-
-    setInterval(()=>{
-
-        const petal=
-            document.createElement("div");
-
-        petal.className="petal";
-
-        petal.style.left=
-            Math.random()*100+"vw";
-
-        petal.style.top="-20px";
-
-        petal.style.background=
-            Math.random()<0.5
-            ? "#FFD84A"
-            : "#FFE98A";
-
-        petal.style.width="10px";
-        petal.style.height="16px";
-        petal.style.borderRadius="50% 50% 50% 0";
-
-        container.appendChild(petal);
-
-        petal.animate(
+    sunflower.animate(
 
         [
 
             {
-
                 transform:
-                "translateY(0) rotate(0deg)",
-
-                opacity:1
-
+                "translateX(-50%) scale(1)"
             },
 
             {
-
                 transform:
-                `translate(${(Math.random()-0.5)*180}px,110vh)
-                rotate(${720+Math.random()*360}deg)`,
+                "translateX(-50%) scale(1.15) rotate(5deg)"
+            },
 
-                opacity:.2
-
+            {
+                transform:
+                "translateX(-50%) scale(1)"
             }
 
         ],
 
         {
 
-            duration:
-            7000+Math.random()*3000,
+            duration:500,
 
-            easing:"linear"
+            easing:"ease-out"
 
-        });
+        }
 
-        setTimeout(()=>{
+    );
 
-            petal.remove();
 
-        },10000);
+    /*========================
+        PLANTAR
+    ========================*/
 
-    },350);
+    plantMemoryFlower(
+        currentMemory
+    );
+
+});
+
+
+/*==================================================
+        PLANTAR GIRASSOL
+==================================================*/
+
+function plantMemoryFlower(index) {
+
+    const memory =
+        memories[index];
+
+    const position =
+        sunflowerPositions[
+            index %
+            sunflowerPositions.length
+        ];
+
+
+    const flower =
+        document.createElement("img");
+
+
+    flower.src =
+        "imagem/girassol.png";
+
+
+    flower.className =
+        "memoryFlower";
+
+
+    /*
+        Posicionamento usando LEFT + BOTTOM.
+
+        Isso é importante.
+
+        Não usamos TOP aqui, porque o terreno
+        está na parte inferior da tela.
+    */
+
+    flower.style.left =
+        position.left + "%";
+
+
+    flower.style.bottom =
+        position.bottom + "px";
+
+
+    flower.style.transform =
+        `translateX(-50%) scale(${position.scale})`;
+
+
+    flower.style.zIndex =
+        Math.round(
+            10 +
+            position.scale * 10
+        );
+
+
+    gardenField.appendChild(
+        flower
+    );
+
+
+    /*========================
+        ANIMAÇÃO DE NASCIMENTO
+    ========================*/
+
+    flower.animate(
+
+        [
+
+            {
+                opacity:0,
+
+                transform:
+                `translateX(-50%)
+                 translateY(35px)
+                 scale(0)`
+            },
+
+            {
+                opacity:1,
+
+                transform:
+                `translateX(-50%)
+                 translateY(-5px)
+                 scale(${position.scale * 1.08})`
+            },
+
+            {
+                opacity:1,
+
+                transform:
+                `translateX(-50%)
+                 translateY(0)
+                 scale(${position.scale})`
+            }
+
+        ],
+
+        {
+
+            duration:800,
+
+            easing:"ease-out",
+
+            fill:"forwards"
+
+        }
+
+    );
+
+
+    /*========================
+        BRILHO
+    ========================*/
+
+    createSpark(
+        position.left,
+        position.bottom
+    );
+
+
+    /*========================
+        CLIQUE NA FLOR
+    ========================*/
+
+    flower.addEventListener(
+        "click",
+        (event) => {
+
+            /*
+                Impede que o clique
+                atravesse para outros elementos.
+            */
+
+            event.stopPropagation();
+
+            showMemory(
+                memory
+            );
+
+        }
+    );
+
+
+    /*========================
+        ABRIR MEMÓRIA
+    ========================*/
+
+    setTimeout(() => {
+
+        showMemory(
+            memory
+        );
+
+
+        planting = false;
+
+
+        currentMemory++;
+
+
+    }, 850);
 
 }
