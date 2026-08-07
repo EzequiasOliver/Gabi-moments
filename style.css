@@ -615,3 +615,321 @@ CONTEÚDO
     pointer-events:none;
 
 }
+/*==================================================
+    GIRASSOL PRINCIPAL
+==================================================*/
+
+#sunflower{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:90px;
+
+    width:180px;
+
+    transform:translateX(-50%);
+
+    transform-origin:center bottom;
+
+    cursor:pointer;
+
+    user-select:none;
+
+    z-index:50;
+
+    animation:flowerWind 4s ease-in-out infinite;
+
+}
+
+#sunflower:hover{
+
+    filter:drop-shadow(0 0 18px rgba(255,215,0,.8));
+
+}
+
+@keyframes flowerWind{
+
+    0%,100%{
+
+        transform:translateX(-50%) rotate(-2deg);
+
+    }
+
+    50%{
+
+        transform:translateX(-50%) rotate(2deg);
+
+    }
+
+}
+
+/*==================================================
+    FLORES DAS LEMBRANÇAS
+==================================================*/
+
+.memoryFlower{
+
+    position:absolute;
+
+    width:110px;
+
+    transform:translate(-50%,-100%);
+
+    transform-origin:center bottom;
+
+    cursor:pointer;
+
+    z-index:20;
+
+    animation:flowerAppear .8s ease-out;
+
+}
+
+@keyframes flowerAppear{
+
+    from{
+
+        opacity:0;
+
+        transform:translate(-50%,20%) scale(0);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translate(-50%,-100%) scale(1);
+
+    }
+
+}
+
+/*==================================================
+    JOANINHA
+==================================================*/
+
+#ladybug{
+
+    position:absolute;
+
+    font-size:34px;
+
+    left:-60px;
+
+    top:120px;
+
+    cursor:pointer;
+
+    z-index:100;
+
+    animation:ladybugFly 24s linear infinite;
+
+    filter:drop-shadow(0 3px 5px rgba(0,0,0,.25));
+
+}
+
+@keyframes ladybugFly{
+
+    0%{
+
+        left:-60px;
+        top:140px;
+
+    }
+
+    20%{
+
+        left:18%;
+        top:90px;
+
+    }
+
+    40%{
+
+        left:45%;
+        top:180px;
+
+    }
+
+    60%{
+
+        left:70%;
+        top:120px;
+
+    }
+
+    80%{
+
+        left:92%;
+        top:200px;
+
+    }
+
+    100%{
+
+        left:110%;
+        top:130px;
+
+    }
+
+}
+
+/*==================================================
+    MODAL
+==================================================*/
+
+#memoryModal,
+#ladybugModal{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.45);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.3s;
+
+    z-index:999;
+
+}
+
+#memoryModal.show,
+#ladybugModal.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+#memoryCard,
+#ladybugCard{
+
+    width:min(360px,90vw);
+
+    background:white;
+
+    padding:15px;
+
+    border-radius:18px;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.35);
+
+    animation:cardPop .35s ease;
+
+}
+
+@keyframes cardPop{
+
+    from{
+
+        transform:translateY(40px) scale(.9);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:translateY(0) scale(1);
+
+        opacity:1;
+
+    }
+
+}
+
+#memoryImage,
+#ladybugImage{
+
+    width:100%;
+
+    border-radius:10px;
+
+    display:block;
+
+}
+
+#memoryCaption,
+#ladybugCard p{
+
+    margin-top:15px;
+
+    text-align:center;
+
+    color:#444;
+
+    line-height:1.6;
+
+}
+
+/*==================================================
+    PÉTALAS
+==================================================*/
+
+#petals{
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:998;
+
+}
+
+/*==================================================
+    RESPONSIVO
+==================================================*/
+
+@media(max-width:768px){
+
+    .content h1{
+
+        font-size:2.2rem;
+
+    }
+
+    .subtitle{
+
+        font-size:1rem;
+
+        width:90%;
+
+    }
+
+    #sunflower{
+
+        width:145px;
+
+        bottom:75px;
+
+    }
+
+    .memoryFlower{
+
+        width:90px;
+
+    }
+
+    #ladybug{
+
+        font-size:28px;
+
+    }
+
+}
