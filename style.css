@@ -278,3 +278,238 @@ NUVENS
     }
 
 }
+/*==================================================
+        TERRENO
+==================================================*/
+
+.content{
+
+    position:relative;
+
+    z-index:20;
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding-top:60px;
+
+}
+
+.content h1{
+
+    color:white;
+
+    font-size:3rem;
+
+    text-shadow:0 4px 10px rgba(0,0,0,.25);
+
+}
+
+.subtitle{
+
+    margin-top:18px;
+
+    width:min(650px,90%);
+
+    color:white;
+
+    font-size:1.1rem;
+
+    line-height:1.6;
+
+    text-shadow:0 2px 8px rgba(0,0,0,.25);
+
+}
+
+.touch{
+
+    margin-top:25px;
+
+    color:white;
+
+    font-size:20px;
+
+    animation:pulse 2s infinite;
+
+}
+
+@keyframes pulse{
+
+    0%,100%{
+
+        opacity:1;
+
+    }
+
+    50%{
+
+        opacity:.45;
+
+    }
+
+}
+
+/*========================
+JARDIM
+========================*/
+
+#garden{
+
+    position:relative;
+
+    flex:1;
+
+    width:100%;
+
+    overflow:hidden;
+
+}
+
+/*========================
+MORROS
+========================*/
+
+#terrain{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:1;
+
+}
+
+.hill{
+
+    position:absolute;
+
+    border-radius:50%;
+
+}
+
+.hill1{
+
+    width:180%;
+
+    height:210px;
+
+    left:-45%;
+
+    bottom:230px;
+
+    background:linear-gradient(#9ce36d,#77c84d);
+
+}
+
+.hill2{
+
+    width:170%;
+
+    height:190px;
+
+    right:-40%;
+
+    bottom:210px;
+
+    background:linear-gradient(#98df67,#73c34c);
+
+}
+
+.hill3{
+
+    width:220%;
+
+    height:270px;
+
+    left:-60%;
+
+    bottom:110px;
+
+    background:linear-gradient(#7fd356,#58b640);
+
+}
+
+.hill4{
+
+    width:180%;
+
+    height:250px;
+
+    left:-35%;
+
+    bottom:-10px;
+
+    background:linear-gradient(#63bf45,#469833);
+
+}
+
+.hill5{
+
+    width:190%;
+
+    height:270px;
+
+    right:-45%;
+
+    bottom:-35px;
+
+    background:linear-gradient(#58b63d,#3b8c2c);
+
+}
+
+/*========================
+CAMADAS
+========================*/
+
+#grassLayer{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:3;
+
+    pointer-events:none;
+
+}
+
+#flowerLayer{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:4;
+
+    pointer-events:none;
+
+}
+
+#gardenField{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:6;
+
+}
+
+#effectLayer{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:15;
+
+    pointer-events:none;
+
+}
