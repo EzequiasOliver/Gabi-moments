@@ -1,9 +1,10 @@
 /*==================================================
-    JARDIM DAS LEMBRANÇAS - V4
+        JARDIM DAS LEMBRANÇAS V7
 ==================================================*/
-/*==================================================
-    RESET
-==================================================*/
+
+/*========================
+RESET
+========================*/
 
 *{
     margin:0;
@@ -13,19 +14,25 @@
 
 html,
 body{
+
     width:100%;
     height:100%;
+
     overflow:hidden;
-    font-family:Arial, Helvetica, sans-serif;
+
+    font-family:Arial,Helvetica,sans-serif;
+
 }
 
 body{
-    background:#87CEEB;
+
+    background:#86d7ff;
+
 }
 
-/*==================================================
-    CÉU
-==================================================*/
+/*========================
+CÉU
+========================*/
 
 .sky{
 
@@ -36,60 +43,50 @@ body{
 
     overflow:hidden;
 
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
+    background:
+    linear-gradient(
 
-    background:linear-gradient(
         180deg,
-        #6fcfff 0%,
-        #95e2ff 35%,
-        #d8f6ff 70%,
-        #fff6cb 100%
+
+        #69cfff 0%,
+
+        #98e7ff 35%,
+
+        #dff8ff 75%,
+
+        #fff6c8 100%
+
     );
 
 }
 
-/*==================================================
-    SOL
-==================================================*/
+/*========================
+SOL
+========================*/
 
 .sun{
 
     position:absolute;
 
-    top:45px;
-    right:45px;
+    top:35px;
+    right:35px;
 
-    width:130px;
-    height:130px;
+    width:140px;
+    height:140px;
 
     border-radius:50%;
 
-    background:#FFD84A;
+    background:#FFD94F;
 
     box-shadow:
-        0 0 35px rgba(255,220,80,.9),
-        0 0 90px rgba(255,220,80,.55),
-        0 0 180px rgba(255,220,80,.25);
 
-    animation:sunFloat 6s ease-in-out infinite;
+        0 0 40px rgba(255,220,90,.9),
 
-    z-index:2;
+        0 0 120px rgba(255,220,90,.5),
 
-}
+        0 0 220px rgba(255,220,90,.25);
 
-.sun::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:-12px;
-
-    border-radius:50%;
-
-    border:2px solid rgba(255,255,180,.35);
+    animation:sunFloat 7s ease-in-out infinite;
 
 }
 
@@ -97,25 +94,71 @@ body{
 
     0%,100%{
 
-        transform:
-        translateY(0)
-        scale(1);
+        transform:translateY(0);
 
     }
 
     50%{
 
-        transform:
-        translateY(-8px)
-        scale(1.03);
+        transform:translateY(-10px);
 
     }
 
 }
 
-/*==================================================
-    NUVENS
-==================================================*/
+/*========================
+LUZ
+========================*/
+
+.light{
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+}
+
+.light::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background-image:
+
+    radial-gradient(#fff9c6 2px,transparent 2px);
+
+    background-size:130px 130px;
+
+    opacity:.30;
+
+    animation:lightMove 18s linear infinite;
+
+}
+
+@keyframes lightMove{
+
+    from{
+
+        transform:translateY(0);
+
+    }
+
+    to{
+
+        transform:translateY(-130px);
+
+    }
+
+}
+
+/*========================
+NUVENS
+========================*/
 
 .cloud{
 
@@ -126,8 +169,6 @@ body{
     border-radius:100px;
 
     opacity:.9;
-
-    filter:blur(.3px);
 
 }
 
@@ -152,16 +193,16 @@ body{
     top:80px;
     left:-250px;
 
-    animation:cloudOne 42s linear infinite;
+    animation:cloud1 42s linear infinite;
 
 }
 
 .cloud1::before{
 
-    width:65px;
-    height:65px;
+    width:60px;
+    height:60px;
 
-    left:18px;
+    left:20px;
     top:-25px;
 
 }
@@ -171,7 +212,7 @@ body{
     width:80px;
     height:80px;
 
-    right:18px;
+    right:20px;
     top:-35px;
 
 }
@@ -181,228 +222,62 @@ body{
     width:140px;
     height:45px;
 
-    top:185px;
+    top:180px;
     left:-350px;
 
-    opacity:.75;
+    opacity:.7;
 
-    animation:cloudTwo 60s linear infinite;
+    animation:cloud2 60s linear infinite;
 
 }
 
 .cloud3{
 
-    width:230px;
+    width:220px;
     height:60px;
 
     top:45px;
-    left:-650px;
+    left:-550px;
 
-    opacity:.55;
+    opacity:.5;
 
-    animation:cloudThree 82s linear infinite;
-
-}
-
-@keyframes cloudOne{
-
-    from{
-        transform:translateX(0);
-    }
-
-    to{
-        transform:translateX(calc(100vw + 550px));
-    }
+    animation:cloud3 90s linear infinite;
 
 }
 
-@keyframes cloudTwo{
-
-    from{
-        transform:translateX(0);
-    }
+@keyframes cloud1{
 
     to{
+
+        transform:translateX(calc(100vw + 500px));
+
+    }
+
+}
+
+@keyframes cloud2{
+
+    to{
+
         transform:translateX(calc(100vw + 700px));
+
     }
 
 }
 
-@keyframes cloudThree{
-
-    from{
-        transform:translateX(0);
-    }
+@keyframes cloud3{
 
     to{
+
         transform:translateX(calc(100vw + 900px));
-    }
-
-}
-
-/*==================================================
-    PARTÍCULAS DE LUZ
-==================================================*/
-
-.light{
-
-    position:absolute;
-
-    inset:0;
-
-    pointer-events:none;
-
-}
-
-.light::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background-image:
-        radial-gradient(circle,#fff8b8 2px,transparent 2px);
-
-    background-size:120px 120px;
-
-    opacity:.3;
-
-    animation:lightFloat 18s linear infinite;
-
-}
-
-@keyframes lightFloat{
-
-    from{
-
-        transform:translateY(0);
-
-    }
-
-    to{
-
-        transform:translateY(-120px);
 
     }
 
 }
-/*==================================================
-    TERRENO / MORROS
-==================================================*/
 
-#terrain{
-
-    position:absolute;
-
-    inset:0;
-
-    overflow:hidden;
-
-    z-index:3;
-
-    pointer-events:none;
-
-}
-
-.hill{
-
-    position:absolute;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    border-radius:50% 50% 0 0;
-
-}
-
-/* Morro distante */
-
-.hill-back{
-
-    width:170%;
-    height:180px;
-
-    bottom:170px;
-
-    background:linear-gradient(
-        to bottom,
-        #8edb68,
-        #71c854
-    );
-
-    border-radius:45% 45% 0 0;
-
-}
-
-/* Morro central */
-
-.hill-middle{
-
-    width:200%;
-    height:230px;
-
-    bottom:80px;
-
-    background:linear-gradient(
-        to bottom,
-        #73cd55,
-        #57b442
-    );
-
-    border-radius:45% 45% 0 0;
-
-}
-
-/* Morro principal */
-
-.hill-front{
-
-    width:260%;
-    height:320px;
-
-    bottom:-170px;
-
-    background:linear-gradient(
-        to bottom,
-        #5ebd47,
-        #3d962f
-    );
-
-    border-radius:48% 48% 0 0;
-
-    box-shadow:
-        inset 0 10px 25px rgba(255,255,255,.12);
-
-}
-
-/*==================================================
-    SOMBRA DO TERRENO
-==================================================*/
-
-.hill-front::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:0;
-    right:0;
-    bottom:0;
-
-    height:70px;
-
-    background:linear-gradient(
-        transparent,
-        rgba(0,0,0,.12)
-    );
-
-}
-/*==================================================
-    CONTEÚDO
-==================================================*/
+/*========================
+CONTEÚDO
+========================*/
 
 .content{
 
@@ -410,460 +285,36 @@ body{
 
     z-index:20;
 
-    width:100%;
     height:100%;
 
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
 
-    text-align:center;
-
     padding-top:60px;
+
+    text-align:center;
 
 }
 
 .content h1{
 
-    color:#fff;
+    color:white;
 
     font-size:3rem;
 
-    text-shadow:0 4px 12px rgba(0,0,0,.25);
+    text-shadow:
+
+        0 4px 12px rgba(0,0,0,.25);
 
 }
 
 .subtitle{
 
-    width:min(650px,90%);
-
     margin-top:18px;
 
-    color:#fff;
+    width:min(650px,90%);
 
-    line-height:1.6;
-
-    font-size:1.1rem;
-
-    text-shadow:0 2px 8px rgba(0,0,0,.25);
-
-}
-
-.touch{
-
-    margin-top:25px;
-
-    color:#fff;
-
-    font-size:20px;
-
-    animation:pulse 2s infinite;
-
-}
-
-@keyframes pulse{
-
-    0%,100%{
-
-        opacity:1;
-
-    }
-
-    50%{
-
-        opacity:.45;
-
-    }
-
-}
-
-/*==================================================
-    JARDIM
-==================================================*/
-
-#garden{
-
-    position:relative;
-
-    flex:1;
-
-    width:100%;
-
-    overflow:hidden;
-
-}
-
-/*==================================================
-    CAMPO DAS FLORES
-==================================================*/
-
-#gardenField{
-
-    position:absolute;
-
-    left:0;
-
-    right:0;
-
-    top:0;
-
-    bottom:0;
-
-    z-index:15;
-
-    pointer-events:none;
-
-}
-
-/* As flores continuam clicáveis */
-
-.memoryFlower{
-
-    pointer-events:auto;
-
-}
-
-/*==================================================
-    CAMADA DE EFEITOS
-==================================================*/
-
-#effects{
-
-    position:absolute;
-
-    inset:0;
-
-    pointer-events:none;
-
-    z-index:25;
-
-}
-
-/*==================================================
-    GIRASSOL PRINCIPAL
-==================================================*/
-
-#sunflower{
-
-    position:absolute;
-
-    left:50%;
-
-    bottom:120px;
-
-    width:180px;
-
-    transform:translateX(-50%);
-
-    transform-origin:center bottom;
-
-    cursor:pointer;
-
-    user-select:none;
-
-    z-index:30;
-
-    animation:flowerWind 4s ease-in-out infinite;
-
-    transition:transform .25s;
-
-}
-
-#sunflower:hover{
-
-    transform:
-        translateX(-50%)
-        scale(1.05);
-
-}
-
-@keyframes flowerWind{
-
-    0%,100%{
-
-        transform:
-            translateX(-50%)
-            rotate(-2deg);
-
-    }
-
-    50%{
-
-        transform:
-            translateX(-50%)
-            rotate(2deg);
-
-    }
-
-}
-
-/*==================================================
-    FLORES DO JARDIM
-==================================================*/
-
-.memoryFlower{
-
-    position:absolute;
-
-    width:110px;
-
-    transform-origin:center bottom;
-
-    user-select:none;
-
-    cursor:pointer;
-
-    transition:
-        filter .25s,
-        transform .25s;
-
-}
-
-.memoryFlower:hover{
-
-    filter:
-        drop-shadow(0 0 14px rgba(255,220,0,.8));
-
-}
-/*==================================================
-    POLAROID
-==================================================*/
-
-#memoryModal{
-
-    position:fixed;
-
-    inset:0;
-
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
-
-    background:rgba(0,0,0,.45);
-
-    backdrop-filter:blur(3px);
-
-    opacity:0;
-    visibility:hidden;
-
-    transition:.35s;
-
-    z-index:999;
-
-}
-
-#memoryModal.show{
-
-    opacity:1;
-    visibility:visible;
-
-}
-
-#memoryCard{
-
-    width:min(360px,90vw);
-
-    background:white;
-
-    border-radius:18px;
-
-    padding:15px;
-
-    box-shadow:
-        0 25px 60px rgba(0,0,0,.35);
-
-    transform:
-        translateY(40px)
-        rotate(-4deg)
-        scale(.9);
-
-    transition:.35s;
-
-}
-
-#memoryModal.show #memoryCard{
-
-    transform:
-        translateY(0)
-        rotate(0deg)
-        scale(1);
-
-}
-
-#memoryImage{
-
-    width:100%;
-
-    display:block;
-
-    border-radius:10px;
-
-}
-
-#memoryCaption{
-
-    margin-top:15px;
-
-    color:#444;
-
-    text-align:center;
-
-    line-height:1.6;
-
-    font-size:18px;
-
-}
-
-/*==================================================
-    BRILHO
-==================================================*/
-
-.spark{
-
-    position:absolute;
-
-    width:14px;
-    height:14px;
-
-    border-radius:50%;
-
-    background:#fff6a5;
-
-    box-shadow:
-        0 0 18px #fff6a5,
-        0 0 35px #ffe36a;
-
-    pointer-events:none;
-
-    animation:spark .8s forwards;
-
-}
-
-@keyframes spark{
-
-    from{
-
-        transform:scale(.2);
-
-        opacity:1;
-
-    }
-
-    to{
-
-        transform:scale(3);
-
-        opacity:0;
-
-    }
-
-}
-
-/*==================================================
-    PÉTALAS
-==================================================*/
-
-#petals{
-
-    position:fixed;
-
-    inset:0;
-
-    pointer-events:none;
-
-    overflow:hidden;
-
-    z-index:950;
-
-}
-
-.petal{
-
-    position:absolute;
-
-    width:10px;
-    height:16px;
-
-    background:#FFD84A;
-
-    border-radius:50% 50% 50% 0;
-
-    opacity:.9;
-
-}
-
-/*==================================================
-    RESPONSIVO
-==================================================*/
-
-@media (max-width:768px){
-
-    .content{
-
-        padding-top:40px;
-
-    }
-
-    .content h1{
-
-        font-size:2.2rem;
-
-    }
-
-    .subtitle{
-
-        font-size:1rem;
-
-    }
-
-    .touch{
-
-        font-size:17px;
-
-    }
-
-    .sun{
-
-        width:90px;
-        height:90px;
-
-        top:20px;
-        right:20px;
-
-    }
-
-    #sunflower{
-
-        width:145px;
-
-        bottom:95px;
-
-    }
-
-    .memoryFlower{
-
-        width:90px;
-
-    }
-
-    #memoryCard{
-
-        width:90%;
-
-    }
-
-}
-.memoryFlower{
-
-    transition:
-        filter .25s,
-        box-shadow .25s;
-
-}
-
-.memoryFlower.active{
-
-    filter:drop-shadow(0 0 14px rgba(255,220,0,.8));
-
-}
+   
