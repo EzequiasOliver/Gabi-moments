@@ -687,3 +687,328 @@ function createSpark(left, bottom) {
 createGrass();
 
 createDecorativeFlowers();
+/*==================================================
+        INTERAÇÕES
+        SCRIPT.JS - PARTE 3
+==================================================*/
+
+/*==================================================
+        ABRIR MEMÓRIA
+==================================================*/
+
+function showMemory(memory) {
+
+    memoryImage.src =
+        memory.photo;
+
+    memoryCaption.textContent =
+        memory.text;
+
+    memoryModal.classList.add(
+        "show"
+    );
+
+}
+
+
+/*==================================================
+        FECHAR MEMÓRIA
+==================================================*/
+
+memoryModal.addEventListener(
+    "click",
+    () => {
+
+        memoryModal.classList.remove(
+            "show"
+        );
+
+    }
+);
+
+
+/*
+    Clicar na foto não fecha
+    o modal.
+*/
+
+memoryCard.addEventListener(
+    "click",
+    (event) => {
+
+        event.stopPropagation();
+
+    }
+);
+
+
+/*==================================================
+        JOANINHA
+==================================================*/
+
+ladybug.addEventListener(
+    "click",
+    (event) => {
+
+        event.stopPropagation();
+
+        /*
+            Pausa a animação durante
+            a interação.
+        */
+
+        ladybug.style.animationPlayState =
+            "paused";
+
+
+        ladybugModal.classList.add(
+            "show"
+        );
+
+    }
+);
+
+
+/*==================================================
+        FECHAR MODAL DA JOANINHA
+==================================================*/
+
+ladybugModal.addEventListener(
+    "click",
+    () => {
+
+        ladybugModal.classList.remove(
+            "show"
+        );
+
+
+        /*
+            Joaninha volta a voar.
+        */
+
+        ladybug.style.animationPlayState =
+            "running";
+
+    }
+);
+
+
+/*
+    Não fechar quando clicar
+    dentro do cartão.
+*/
+
+ladybugCard.addEventListener(
+    "click",
+    (event) => {
+
+        event.stopPropagation();
+
+    }
+);
+
+
+/*==================================================
+        PÉTALAS
+==================================================*/
+
+function createPetal() {
+
+    const petal =
+        document.createElement("div");
+
+
+    petal.className =
+        "petal";
+
+
+    /*
+        Posição inicial aleatória.
+    */
+
+    petal.style.left =
+        Math.random() * 100 + "vw";
+
+
+    petal.style.top =
+        "-20px";
+
+
+    /*
+        Tamanho aleatório.
+    */
+
+    const size =
+        6 + Math.random() * 7;
+
+
+    petal.style.width =
+        size + "px";
+
+
+    petal.style.height =
+        (size * 1.4) + "px";
+
+
+    /*
+        Movimento horizontal.
+    */
+
+    const drift =
+        -100 + Math.random() * 200;
+
+
+    const duration =
+        5 + Math.random() * 5;
+
+
+    /*
+        Uma das cores suaves
+        das pétalas.
+    */
+
+    const colors = [
+
+        "#fff4a8",
+        "#ffd86b",
+        "#ffe99b"
+
+    ];
+
+
+    petal.style.background =
+        colors[
+            Math.floor(
+                Math.random() *
+                colors.length
+            )
+        ];
+
+
+    petals.appendChild(
+        petal
+    );
+
+
+    /*
+        Animação.
+    */
+
+    petal.animate(
+
+        [
+
+            {
+                transform:
+                    "translate(0,0) rotate(0deg)",
+
+                opacity:0
+
+            },
+
+            {
+                transform:
+                    `translate(${drift / 2}px,45vh)
+                     rotate(180deg)`,
+
+                opacity:.9
+
+            },
+
+            {
+                transform:
+                    `translate(${drift}px,110vh)
+                     rotate(360deg)`,
+
+                opacity:0
+
+            }
+
+        ],
+
+        {
+
+            duration:
+                duration * 1000,
+
+            easing:
+                "linear"
+
+        }
+
+    );
+
+
+    setTimeout(() => {
+
+        petal.remove();
+
+    }, duration * 1000);
+
+}
+
+
+/*==================================================
+        GERADOR DE PÉTALAS
+==================================================*/
+
+setInterval(
+    createPetal,
+    2500
+);
+
+
+/*==================================================
+        TECLA ESC
+==================================================*/
+
+document.addEventListener(
+    "keydown",
+    (event) => {
+
+        if(event.key === "Escape"){
+
+            memoryModal.classList.remove(
+                "show"
+            );
+
+            ladybugModal.classList.remove(
+                "show"
+            );
+
+            ladybug.style.animationPlayState =
+                "running";
+
+        }
+
+    }
+);
+
+
+/*==================================================
+        PREVENIR DRAG DAS IMAGENS
+==================================================*/
+
+document.addEventListener(
+    "dragstart",
+    (event) => {
+
+        if(
+            event.target.tagName === "IMG"
+        ){
+
+            event.preventDefault();
+
+        }
+
+    }
+);
+
+
+/*==================================================
+        FIM DA V7
+==================================================*/
+
+console.log(
+    "🌻 Jardim das Lembranças V7 carregado!"
+);
