@@ -3,130 +3,131 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
 
-    <title>Para Gabi 🌻</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+<title>Para Gabi 🌻</title>
+
+<link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-    <!-- Música -->
-    <audio id="bgMusic" loop>
-        <source src="musica.mp3" type="audio/mpeg">
-    </audio>
+<audio id="bgMusic" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
 
-    <!-- Céu -->
-    <div class="sky">
+<div class="sky">
 
-        <!-- Sol -->
-        <div class="sun"></div>
+    <!-- Sol -->
+    <div class="sun"></div>
 
-        <!-- Luz -->
-        <div class="light"></div>
+    <!-- Luz -->
+    <div class="light"></div>
 
-        <!-- Nuvens -->
-        <div class="cloud cloud1"></div>
-        <div class="cloud cloud2"></div>
-        <div class="cloud cloud3"></div>
+    <!-- Nuvens -->
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
 
-        <!-- Joaninha -->
-        <div id="ladybug">🐞</div>
+    <!-- Joaninha -->
+    <img
+        id="ladybug"
+        src="imagem/joaninha.png"
+        alt="Joaninha">
 
-        <!-- Conteúdo -->
-        <main class="content">
+    <main class="content">
 
-            <h1>Para Gabi ☀️</h1>
+        <h1>Para Gabi ☀️</h1>
 
-            <p class="subtitle">
-                Algumas pessoas deixam o mundo mais bonito apenas por existirem.
-            </p>
+        <p class="subtitle">
+            Algumas pessoas deixam o mundo mais bonito apenas por existirem.
+        </p>
 
-            <section id="garden">
+        <section id="garden">
 
-                <!-- Morros -->
-                <div id="terrain">
+            <!-- Morros -->
+            <div id="terrain">
 
-                    <div class="hill back"></div>
-                    <div class="hill back2"></div>
+                <div class="hill hill1"></div>
+                <div class="hill hill2"></div>
+                <div class="hill hill3"></div>
+                <div class="hill hill4"></div>
+                <div class="hill hill5"></div>
 
-                    <div class="hill middle"></div>
+            </div>
 
-                    <div class="hill front"></div>
-                    <div class="hill front2"></div>
+            <!-- Gramas -->
+            <div id="grassLayer"></div>
 
-                </div>
+            <!-- Flores decorativas -->
+            <div id="flowerLayer"></div>
 
-                <!-- Grama -->
-                <div id="grass"></div>
+            <!-- Girassóis plantados -->
+            <div id="gardenField"></div>
 
-                <!-- Flores decorativas -->
-                <div id="decorations"></div>
+            <!-- Brilhos -->
+            <div id="effectLayer"></div>
 
-                <!-- Girassóis plantados -->
-                <div id="gardenField"></div>
-
-                <!-- Efeitos -->
-                <div id="effects"></div>
-
-                <!-- Girassol principal -->
-                <img
-                    id="sunflower"
-                    src="imagem/girassol.png"
-                    alt="Girassol">
-
-            </section>
-
-            <p class="touch">
-                Toque no girassol 🌻
-            </p>
-
-        </main>
-
-        <!-- Pétalas caindo -->
-        <div id="petals"></div>
-
-    </div>
-
-    <!-- Modal das lembranças -->
-    <div id="memoryModal">
-
-        <div id="memoryCard">
-
+            <!-- Girassol principal -->
             <img
-                id="memoryImage"
-                src=""
-                alt="Foto">
+                id="sunflower"
+                src="imagem/girassol.png"
+                alt="Girassol">
 
-            <p id="memoryCaption"></p>
+        </section>
 
-        </div>
+        <p class="touch">
+            Toque no girassol 🌻
+        </p>
+
+    </main>
+
+</div>
+
+<!-- Modal -->
+
+<div id="memoryModal">
+
+    <div id="memoryCard">
+
+        <img
+            id="memoryImage"
+            src=""
+            alt="Foto">
+
+        <p id="memoryCaption"></p>
 
     </div>
 
-    <!-- Modal da Joaninha -->
-    <div id="ladybugModal">
+</div>
 
-        <div id="ladybugCard">
+<!-- Modal Joaninha -->
 
-            <img
-                id="ladybugImage"
-                src="imagem/joaninha.jpg"
-                alt="Joaninha">
+<div id="ladybugModal">
 
-            <p>
-                A joaninha resolveu posar para a câmera 😂🐞
-            </p>
+    <div id="ladybugCard">
 
-        </div>
+        <img
+            src="imagem/joaninha-engracada.jpg"
+            id="ladybugImage">
+
+        <p>
+            Até a joaninha resolveu posar para a câmera 😂🐞
+        </p>
 
     </div>
 
-    <script src="script.js"></script>
+</div>
+
+<!-- Pétalas -->
+
+<div id="petals"></div>
+
+<script src="script.js"></script>
 
 </body>
 
-</
+</html>
