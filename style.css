@@ -513,3 +513,640 @@ body{
     pointer-events:none;
 
 }
+/*==================================================
+    TERRENO — V8
+==================================================*/
+
+#terrain{
+
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    width:100%;
+    height:58%;
+
+    z-index:5;
+
+    pointer-events:none;
+
+}
+
+
+/*==================================================
+    BASE DOS MORROS
+==================================================*/
+
+.hill{
+
+    position:absolute;
+
+    left:50%;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        50% 50% 0 0;
+
+}
+
+
+/*==================================================
+    MORRO DISTANTE
+==================================================*/
+
+.hill-far{
+
+    width:145%;
+    height:240px;
+
+    bottom:170px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #a9df79 0%,
+            #8dca61 55%,
+            #78b653 100%
+        );
+
+    opacity:.8;
+
+    z-index:1;
+
+}
+
+
+/*==================================================
+    MORRO TRASEIRO
+==================================================*/
+
+.hill-back{
+
+    width:175%;
+    height:270px;
+
+    bottom:110px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #83cf62 0%,
+            #69b94e 60%,
+            #5ba644 100%
+        );
+
+    z-index:2;
+
+}
+
+
+/*==================================================
+    MORRO CENTRAL
+==================================================*/
+
+.hill-middle{
+
+    width:200%;
+    height:310px;
+
+    bottom:45px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #6ec652 0%,
+            #58b544 55%,
+            #499d39 100%
+        );
+
+    z-index:3;
+
+}
+
+
+/*==================================================
+    MORRO DA FRENTE
+==================================================*/
+
+.hill-front{
+
+    width:235%;
+    height:350px;
+
+    bottom:-185px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #58b947 0%,
+            #469e38 55%,
+            #39882e 100%
+        );
+
+    z-index:4;
+
+}
+
+
+/*==================================================
+    SOMBRA SUAVE ENTRE OS MORROS
+==================================================*/
+
+.hill-back::after,
+.hill-middle::after,
+.hill-front::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    right:0;
+
+    top:0;
+
+    height:35px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(40,100,35,.16),
+            transparent
+        );
+
+}
+
+
+/*==================================================
+    PEQUENAS VARIAÇÕES DE TERRENO
+==================================================*/
+
+#terrain::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-10%;
+    bottom:25px;
+
+    width:120%;
+    height:100px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(40,100,35,.12),
+            transparent 70%
+        );
+
+    z-index:6;
+
+}
+
+
+/*==================================================
+    GRAMA
+==================================================*/
+
+#grassLayer{
+
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    width:100%;
+    height:48%;
+
+    z-index:12;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+}
+
+
+/*==================================================
+    TUFO DE GRAMA
+==================================================*/
+
+.grassDecoration{
+
+    position:absolute;
+
+    width:65px;
+    height:auto;
+
+    transform-origin:
+        50% 100%;
+
+    object-fit:contain;
+
+    user-select:none;
+
+    pointer-events:none;
+
+    filter:
+        drop-shadow(
+            0 2px 2px
+            rgba(0,0,0,.12)
+        );
+
+    animation:
+        grassSway
+        var(--grass-speed,4s)
+        ease-in-out
+        infinite;
+
+}
+
+
+/*==================================================
+    VENTO DA GRAMA
+==================================================*/
+
+@keyframes grassSway{
+
+    0%,
+    100%{
+
+        rotate:
+            calc(
+                var(--grass-rotation,0deg) - 2deg
+            );
+
+    }
+
+    50%{
+
+        rotate:
+            calc(
+                var(--grass-rotation,0deg) + 2deg
+            );
+
+    }
+
+}
+
+
+/*==================================================
+    FLORES DECORATIVAS
+==================================================*/
+
+#flowerLayer{
+
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    width:100%;
+    height:46%;
+
+    z-index:14;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+}
+
+
+/*==================================================
+    FLOR DECORATIVA
+==================================================*/
+
+.decorFlower{
+
+    position:absolute;
+
+    width:42px;
+    height:auto;
+
+    object-fit:contain;
+
+    transform-origin:
+        50% 100%;
+
+    user-select:none;
+
+    pointer-events:none;
+
+    filter:
+        drop-shadow(
+            0 2px 2px
+            rgba(0,0,0,.1)
+        );
+
+    animation:
+        flowerSway
+        var(--flower-speed,5s)
+        ease-in-out
+        infinite;
+
+}
+
+
+/*==================================================
+    BALANÇO DAS FLORES
+==================================================*/
+
+@keyframes flowerSway{
+
+    0%,
+    100%{
+
+        rotate:
+            calc(
+                var(--flower-rotation,0deg) - 2deg
+            );
+
+    }
+
+    50%{
+
+        rotate:
+            calc(
+                var(--flower-rotation,0deg) + 2deg
+            );
+
+    }
+
+}
+
+
+/*==================================================
+    FLORES MENORES
+==================================================*/
+
+.decorFlower.tiny{
+
+    width:28px;
+
+}
+
+
+.decorFlower.small{
+
+    width:38px;
+
+}
+
+
+/*==================================================
+    GIRASSÓIS DAS MEMÓRIAS
+==================================================*/
+
+#memoryFlowers{
+
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    width:100%;
+    height:48%;
+
+    z-index:25;
+
+    pointer-events:none;
+
+    overflow:visible;
+
+}
+
+
+/*==================================================
+    GIRASSOL PLANTADO
+==================================================*/
+
+.memoryFlower{
+
+    position:absolute;
+
+    width:105px;
+    height:auto;
+
+    transform-origin:
+        50% 100%;
+
+    user-select:none;
+
+    pointer-events:auto;
+
+    cursor:pointer;
+
+    filter:
+        drop-shadow(
+            0 4px 4px
+            rgba(0,0,0,.14)
+        );
+
+    animation:
+        memoryFlowerWind
+        4s
+        ease-in-out
+        infinite;
+
+    transition:
+        filter .25s;
+
+}
+
+
+/*==================================================
+    GIRASSOL PLANTADO — HOVER
+==================================================*/
+
+.memoryFlower:hover{
+
+    filter:
+        drop-shadow(
+            0 0 12px
+            rgba(255,220,60,.75)
+        );
+
+}
+
+
+/*==================================================
+    MOVIMENTO DOS GIRASSÓIS
+==================================================*/
+
+@keyframes memoryFlowerWind{
+
+    0%,
+    100%{
+
+        rotate:-1.5deg;
+
+    }
+
+    50%{
+
+        rotate:1.5deg;
+
+    }
+
+}
+
+
+/*==================================================
+    GIRASSOL PRINCIPAL
+==================================================*/
+
+#mainFlowerContainer{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:30px;
+
+    width:190px;
+    height:230px;
+
+    transform:
+        translateX(-50%);
+
+    z-index:35;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:center;
+
+    pointer-events:none;
+
+}
+
+
+/*==================================================
+    GIRASSOL PRINCIPAL
+==================================================*/
+
+#sunflower{
+
+    display:block;
+
+    width:180px;
+    height:auto;
+
+    transform-origin:
+        50% 100%;
+
+    user-select:none;
+
+    cursor:pointer;
+
+    pointer-events:auto;
+
+    filter:
+        drop-shadow(
+            0 5px 5px
+            rgba(0,0,0,.15)
+        );
+
+    animation:
+        mainFlowerWind
+        4s
+        ease-in-out
+        infinite;
+
+}
+
+
+/*==================================================
+    VENTO DO GIRASSOL PRINCIPAL
+==================================================*/
+
+@keyframes mainFlowerWind{
+
+    0%,
+    100%{
+
+        transform:
+            rotate(-2deg);
+
+    }
+
+    50%{
+
+        transform:
+            rotate(2deg);
+
+    }
+
+}
+
+
+/*==================================================
+    MENSAGEM
+==================================================*/
+
+#touchMessage{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:8px;
+
+    transform:
+        translateX(-50%);
+
+    width:max-content;
+
+    max-width:90%;
+
+    color:#fff;
+
+    font-size:18px;
+
+    font-weight:500;
+
+    text-shadow:
+        0 2px 7px
+        rgba(0,0,0,.35);
+
+    z-index:45;
+
+    pointer-events:none;
+
+    animation:
+        messagePulse
+        2.2s
+        ease-in-out
+        infinite;
+
+}
+
+
+@keyframes messagePulse{
+
+    0%,
+    100%{
+
+        opacity:1;
+
+    }
+
+    50%{
+
+        opacity:.5;
+
+    }
+
+}
