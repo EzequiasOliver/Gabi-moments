@@ -14,6 +14,464 @@
     padding: 0;
     box-sizing: border-box;
 }
+/* ==================================================
+   V10 — PARTE 2
+   VEGETAÇÃO DOS MORROS
+================================================== */
+
+
+/* ==================================================
+   CAMADAS DE VEGETAÇÃO
+================================================== */
+
+.nature-layer {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+}
+
+
+/*
+   A vegetação fica acima do morro correspondente,
+   mas abaixo das flores principais.
+*/
+
+.terrain-far {
+    z-index: 40;
+}
+
+.terrain-back {
+    z-index: 41;
+}
+
+.terrain-middle {
+    z-index: 42;
+}
+
+.terrain-front {
+    z-index: 43;
+}
+
+
+/* ==================================================
+   GRAMA
+================================================== */
+
+.grassDecoration {
+
+    position: absolute;
+
+    display: block;
+
+    width: 30px;
+    height: auto;
+
+    transform:
+        translateX(-50%)
+        rotate(
+            var(--grass-rotation, 0deg)
+        );
+
+    transform-origin:
+        bottom center;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+    filter:
+        drop-shadow(
+            0 2px 2px
+            rgba(0,0,0,.13)
+        );
+
+    animation:
+        grassWind
+        var(--grass-speed, 4s)
+        ease-in-out
+        infinite;
+
+}
+
+
+/* ==================================================
+   VENTO DA GRAMA
+================================================== */
+
+@keyframes grassWind {
+
+    0%,
+    100% {
+
+        transform:
+            translateX(-50%)
+            rotate(
+                var(--grass-rotation, 0deg)
+            );
+
+    }
+
+    50% {
+
+        transform:
+            translateX(-50%)
+            rotate(
+                calc(
+                    var(--grass-rotation, 0deg)
+                    + 4deg
+                )
+            );
+
+    }
+
+}
+
+
+/* ==================================================
+   FLORES DECORATIVAS
+================================================== */
+
+.decorFlower {
+
+    position: absolute;
+
+    display: block;
+
+    width: 28px;
+    height: auto;
+
+    transform:
+        translateX(-50%)
+        rotate(
+            var(--flower-rotation, 0deg)
+        );
+
+    transform-origin:
+        bottom center;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+    filter:
+        drop-shadow(
+            0 2px 2px
+            rgba(0,0,0,.12)
+        );
+
+    animation:
+        flowerWind
+        var(--flower-speed, 5s)
+        ease-in-out
+        infinite;
+
+}
+
+
+/* ==================================================
+   VENTO DAS FLORES
+================================================== */
+
+@keyframes flowerWind {
+
+    0%,
+    100% {
+
+        transform:
+            translateX(-50%)
+            rotate(
+                var(--flower-rotation, 0deg)
+            );
+
+    }
+
+    50% {
+
+        transform:
+            translateX(-50%)
+            rotate(
+                calc(
+                    var(--flower-rotation, 0deg)
+                    + 3deg
+                )
+            );
+
+    }
+
+}
+
+
+/* ==================================================
+   TAMANHOS — DISTANTE
+================================================== */
+
+.terrain-far
+.grassDecoration {
+
+    width: 18px;
+
+    opacity: .58;
+
+}
+
+
+.terrain-far
+.decorFlower {
+
+    width: 17px;
+
+    opacity: .58;
+
+}
+
+
+/* ==================================================
+   TAMANHOS — TRASEIRO
+================================================== */
+
+.terrain-back
+.grassDecoration {
+
+    width: 23px;
+
+    opacity: .76;
+
+}
+
+
+.terrain-back
+.decorFlower {
+
+    width: 21px;
+
+    opacity: .76;
+
+}
+
+
+/* ==================================================
+   TAMANHOS — MEIO
+================================================== */
+
+.terrain-middle
+.grassDecoration {
+
+    width: 29px;
+
+    opacity: .9;
+
+}
+
+
+.terrain-middle
+.decorFlower {
+
+    width: 26px;
+
+    opacity: .9;
+
+}
+
+
+/* ==================================================
+   TAMANHOS — FRENTE
+================================================== */
+
+.terrain-front
+.grassDecoration {
+
+    width: 35px;
+
+    opacity: 1;
+
+}
+
+
+.terrain-front
+.decorFlower {
+
+    width: 31px;
+
+    opacity: 1;
+
+}
+
+
+/* ==================================================
+   PROFUNDIDADE DA VEGETAÇÃO
+================================================== */
+
+.terrain-far img {
+
+    filter:
+        saturate(.72)
+        brightness(1.04)
+        drop-shadow(
+            0 1px 1px
+            rgba(0,0,0,.08)
+        );
+
+}
+
+
+.terrain-back img {
+
+    filter:
+        saturate(.82)
+        drop-shadow(
+            0 1px 2px
+            rgba(0,0,0,.1)
+        );
+
+}
+
+
+.terrain-middle img {
+
+    filter:
+        saturate(.94)
+        drop-shadow(
+            0 2px 2px
+            rgba(0,0,0,.11)
+        );
+
+}
+
+
+.terrain-front img {
+
+    filter:
+        saturate(1)
+        drop-shadow(
+            0 2px 3px
+            rgba(0,0,0,.13)
+        );
+
+}
+
+
+/* ==================================================
+   PROTEÇÃO CONTRA ELEMENTOS ESTRANHOS
+================================================== */
+
+.fieldFlower {
+
+    display: none !important;
+
+}
+
+
+#decorations {
+
+    display: none !important;
+
+}
+
+
+#gardenField {
+
+    display: none !important;
+
+}
+
+
+/* ==================================================
+   NENHUMA VEGETAÇÃO PODE INTERCEPTAR CLIQUES
+================================================== */
+
+.nature-layer,
+.nature-layer * {
+
+    pointer-events: none;
+
+}
+
+
+/* ==================================================
+   RESPONSIVIDADE — CELULAR
+================================================== */
+
+@media (
+    max-width: 600px
+) {
+
+    .terrain-far
+    .grassDecoration {
+
+        width: 15px;
+
+    }
+
+
+    .terrain-far
+    .decorFlower {
+
+        width: 14px;
+
+    }
+
+
+    .terrain-back
+    .grassDecoration {
+
+        width: 20px;
+
+    }
+
+
+    .terrain-back
+    .decorFlower {
+
+        width: 18px;
+
+    }
+
+
+    .terrain-middle
+    .grassDecoration {
+
+        width: 25px;
+
+    }
+
+
+    .terrain-middle
+    .decorFlower {
+
+        width: 23px;
+
+    }
+
+
+    .terrain-front
+    .grassDecoration {
+
+        width: 30px;
+
+    }
+
+
+    .terrain-front
+    .decorFlower {
+
+        width: 27px;
+
+    }
+
+}
 
 
 html {
