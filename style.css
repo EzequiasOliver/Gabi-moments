@@ -686,8 +686,8 @@ body {
 
 }
 /* ==================================================
-   V9 — PARTE 2
-   VEGETAÇÃO E FLORES
+   V9 — PARTE 2 CORRIGIDA
+   VEGETAÇÃO DOS QUATRO MORROS
 ================================================== */
 
 
@@ -704,9 +704,9 @@ body {
     width: 100%;
     height: 100%;
 
-    pointer-events: none;
-
     overflow: hidden;
+
+    pointer-events: none;
 
 }
 
@@ -719,17 +719,18 @@ body {
 
     position: absolute;
 
-    width: 38px;
+    display: block;
+
+    width: 34px;
     height: auto;
 
-    object-fit: contain;
-
-    transform-origin:
-        bottom center;
+    transform-origin: bottom center;
 
     pointer-events: none;
 
     user-select: none;
+
+    -webkit-user-drag: none;
 
     filter:
         drop-shadow(
@@ -746,6 +747,10 @@ body {
 }
 
 
+/* ==================================================
+   MOVIMENTO DA GRAMA
+================================================== */
+
 @keyframes grassWind {
 
     0%,
@@ -754,10 +759,7 @@ body {
         transform:
             translateX(-50%)
             rotate(
-                calc(
-                    var(--grass-rotation, 0deg)
-                    - 2deg
-                )
+                var(--grass-rotation, 0deg)
             );
 
     }
@@ -769,36 +771,11 @@ body {
             rotate(
                 calc(
                     var(--grass-rotation, 0deg)
-                    + 3deg
+                    + 4deg
                 )
             );
 
     }
-
-}
-
-
-/* ==================================================
-   GRAMA PEQUENA
-================================================== */
-
-.grassDecoration.tiny {
-
-    width: 24px;
-
-}
-
-
-.grassDecoration.small {
-
-    width: 31px;
-
-}
-
-
-.grassDecoration.medium {
-
-    width: 42px;
 
 }
 
@@ -811,10 +788,10 @@ body {
 
     position: absolute;
 
-    width: 34px;
-    height: auto;
+    display: block;
 
-    object-fit: contain;
+    width: 30px;
+    height: auto;
 
     transform-origin:
         bottom center;
@@ -822,6 +799,8 @@ body {
     pointer-events: none;
 
     user-select: none;
+
+    -webkit-user-drag: none;
 
     filter:
         drop-shadow(
@@ -838,6 +817,10 @@ body {
 }
 
 
+/* ==================================================
+   MOVIMENTO DAS FLORES
+================================================== */
+
 @keyframes flowerWind {
 
     0%,
@@ -846,10 +829,7 @@ body {
         transform:
             translateX(-50%)
             rotate(
-                calc(
-                    var(--flower-rotation, 0deg)
-                    - 2deg
-                )
+                var(--flower-rotation, 0deg)
             );
 
     }
@@ -871,329 +851,225 @@ body {
 
 
 /* ==================================================
-   TAMANHOS DAS FLORES
+   TAMANHOS
 ================================================== */
 
-.decorFlower.tiny {
+.grassDecoration.tiny {
 
-    width: 20px;
+    width: 21px;
 
 }
 
 
-.decorFlower.small {
+.grassDecoration.small {
 
     width: 28px;
 
 }
 
 
-.decorFlower.medium {
+.grassDecoration.medium {
 
-    width: 38px;
-
-}
-
-
-/* ==================================================
-   FLORES DISTANTES
-================================================== */
-
-.terrain-far
-.decorFlower {
-
-    opacity: .72;
-
-    filter:
-        saturate(.85)
-        brightness(1.05)
-        drop-shadow(
-            0 1px 2px
-            rgba(0,0,0,.08)
-        );
+    width: 36px;
 
 }
 
 
-/* ==================================================
-   VEGETAÇÃO DO MORRO TRASEIRO
-================================================== */
-
-.terrain-back
-.grassDecoration {
-
-    opacity: .88;
-
-}
-
-
-.terrain-back
-.decorFlower {
-
-    opacity: .9;
-
-}
-
-
-/* ==================================================
-   VEGETAÇÃO DO MORRO MÉDIO
-================================================== */
-
-.terrain-middle
-.grassDecoration {
-
-    opacity: .96;
-
-}
-
-
-.terrain-middle
-.decorFlower {
-
-    opacity: .98;
-
-}
-
-
-/* ==================================================
-   VEGETAÇÃO DA FRENTE
-================================================== */
-
-.terrain-front
-.grassDecoration {
-
-    opacity: 1;
-
-}
-
-
-.terrain-front
-.decorFlower {
-
-    opacity: 1;
-
-}
-
-
-/* ==================================================
-   PEQUENAS FOLHAS
-================================================== */
-
-.leafDecoration {
-
-    position: absolute;
-
-    width: 17px;
-    height: 9px;
-
-    border-radius:
-        100% 0 100% 0;
-
-    background:
-        #55a940;
-
-    opacity: .9;
-
-    transform-origin:
-        bottom center;
-
-    pointer-events: none;
-
-    animation:
-        leafWind
-        var(--leaf-speed, 4s)
-        ease-in-out
-        infinite;
-
-}
-
-
-@keyframes leafWind {
-
-    0%,
-    100% {
-
-        transform:
-            rotate(
-                var(--leaf-angle, -8deg)
-            );
-
-    }
-
-    50% {
-
-        transform:
-            rotate(
-                calc(
-                    var(--leaf-angle, -8deg)
-                    + 8deg
-                )
-            );
-
-    }
-
-}
-
-
-/* ==================================================
-   PEQUENAS FLORES DE CAMPO
-================================================== */
-
-.fieldFlower {
-
-    position: absolute;
-
-    width: 14px;
-    height: 14px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            #ffd94a 0 20%,
-            transparent 21%
-        );
-
-    pointer-events: none;
-
-    opacity: .9;
-
-}
-
-
-.fieldFlower::before {
-
-    content: "";
-
-    position: absolute;
-
-    inset: -4px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle at 50% 0%,
-            #fffdf0 0 24%,
-            transparent 25%
-        ),
-
-        radial-gradient(
-            circle at 100% 50%,
-            #fffdf0 0 24%,
-            transparent 25%
-        ),
-
-        radial-gradient(
-            circle at 50% 100%,
-            #fffdf0 0 24%,
-            transparent 25%
-        ),
-
-        radial-gradient(
-            circle at 0% 50%,
-            #fffdf0 0 24%,
-            transparent 25%
-        );
-
-}
-
-
-/* ==================================================
-   DISTÂNCIA VISUAL
-================================================== */
-
-.terrain-far
-.grassDecoration {
-
-    filter:
-        blur(.15px)
-        saturate(.72);
-
-}
-
-
-.terrain-far
-.fieldFlower {
-
-    transform:
-        scale(.7);
-
-}
-
-
-.terrain-back
-.fieldFlower {
-
-    transform:
-        scale(.85);
-
-}
-
-
-/* ==================================================
-   SOMBRA DAS PLANTAS
-================================================== */
-
-.grassDecoration::after,
-.decorFlower::after {
-
-    content: "";
-
-    position: absolute;
-
-    left: 50%;
-    bottom: 0;
+.decorFlower.tiny {
 
     width: 18px;
-    height: 5px;
 
-    transform:
-        translateX(-50%);
+}
 
-    border-radius: 50%;
 
-    background:
-        rgba(28,73,25,.18);
+.decorFlower.small {
 
-    filter:
-        blur(2px);
+    width: 25px;
+
+}
+
+
+.decorFlower.medium {
+
+    width: 32px;
 
 }
 
 
 /* ==================================================
-   MOVIMENTO SUAVE DO JARDIM
+   DISTÂNCIA — MORRO MAIS LONGE
 ================================================== */
 
-#garden {
+.terrain-far
+.grassDecoration {
 
-    animation:
-        gardenBreath
-        10s
-        ease-in-out
-        infinite;
+    opacity: .65;
+
+    filter:
+        saturate(.7)
+        brightness(1.08);
 
 }
 
 
-@keyframes gardenBreath {
+.terrain-far
+.decorFlower {
 
-    0%,
-    100% {
+    opacity: .65;
 
-        transform:
-            translateY(0);
+}
 
-    }
 
-    50% {
+/* ==================================================
+   MORRO TRASEIRO
+================================================== */
 
-        transform:
-            translateY(-1px);
+.terrain-back
+.grassDecoration {
 
-    }
+    opacity: .82;
+
+}
+
+
+.terrain-back
+.decorFlower {
+
+    opacity: .84;
+
+}
+
+
+/* ==================================================
+   MORRO DO MEIO
+================================================== */
+
+.terrain-middle
+.grassDecoration {
+
+    opacity: .94;
+
+}
+
+
+.terrain-middle
+.decorFlower {
+
+    opacity: .94;
+
+}
+
+
+/* ==================================================
+   MORRO DA FRENTE
+================================================== */
+
+.terrain-front
+.grassDecoration {
+
+    opacity: 1;
+
+}
+
+
+.terrain-front
+.decorFlower {
+
+    opacity: 1;
+
+}
+
+
+/* ==================================================
+   PEQUENA SOMBRA NO CHÃO
+================================================== */
+
+.grassDecoration,
+.decorFlower {
+
+    will-change:
+        transform;
+
+}
+
+
+/* ==================================================
+   GARANTIR QUE A VEGETAÇÃO NÃO CUBRA
+   O GIRASSOL PRINCIPAL
+================================================== */
+
+#mainFlowerContainer {
+
+    z-index: 80 !important;
+
+}
+
+
+#sunflower {
+
+    position: relative;
+
+    z-index: 81;
+
+}
+
+
+/* ==================================================
+   FLORES DAS MEMÓRIAS
+================================================== */
+
+#memoryFlowers {
+
+    z-index: 70 !important;
+
+}
+
+
+/* ==================================================
+   JOANINHA SEMPRE CLICÁVEL
+================================================== */
+
+#ladybug {
+
+    z-index: 150 !important;
+
+    pointer-events: auto !important;
+
+}
+
+
+#ladybug img {
+
+    pointer-events: none;
+
+}
+
+
+/* ==================================================
+   REMOVER A FLOR ARTIFICIAL ESTRANHA
+================================================== */
+
+.fieldFlower {
+
+    display: none !important;
+
+}
+
+
+/* ==================================================
+   PROTEÇÃO CONTRA ELEMENTOS INVISÍVEIS
+================================================== */
+
+.nature-layer {
+
+    pointer-events: none;
+
+}
+
+
+.nature-layer img {
+
+    pointer-events: none;
 
 }
 /* ==================================================
