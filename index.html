@@ -1,321 +1,30 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="theme-color"
-        content="#8fd8ff"
-    >
-
-    <title>Para Gabi 🌻</title>
-
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-
-</head>
-
-
-<body>
-
-
-<!-- ==================================================
-     CÉU
-================================================== -->
-
-<div id="sky">
-
-    <!-- Sol -->
-
-    <div id="sun"></div>
-
-
-    <!-- Brilho do sol -->
-
-    <div id="sunGlow"></div>
-
-
-    <!-- Nuvens -->
-
-    <div class="cloud cloud-1"></div>
-
-    <div class="cloud cloud-2"></div>
-
-    <div class="cloud cloud-3"></div>
-
-
-    <!-- Joaninha -->
-
-    <button
-        id="ladybug"
-        type="button"
-        aria-label="Joaninha"
-    >
-
-        <img
-            src="imagem/joaninha.png"
-            alt="Joaninha"
-        >
-
-    </button>
-
-</div>
-
-
-
-<!-- ==================================================
-     CONTEÚDO PRINCIPAL
-================================================== -->
-
-<main id="mainContent">
-
-
-    <!-- Título -->
-
-    <header id="intro">
-
-        <h1>
-            Para Gabi ☀️
-        </h1>
-
-        <p id="subtitle">
-            Algumas pessoas deixam o mundo mais bonito
-            apenas por existirem.
-        </p>
-
-    </header>
-
-
-
-    <!-- ==================================================
-         JARDIM
-    ================================================== -->
-
-    <section
-        id="garden"
-        aria-label="Jardim das lembranças"
-    >
-
-
-        <!-- ==============================================
-             MORRO DISTANTE
-        =============================================== -->
-
-        <div
-            class="terrain-layer terrain-far"
-            id="terrainFar"
-        >
-
-            <div class="hill hill-far"></div>
-
-            <div
-                class="nature-layer"
-                id="natureFar"
-            ></div>
-
-        </div>
-
-
-
-        <!-- ==============================================
-             MORRO TRASEIRO
-        =============================================== -->
-
-        <div
-            class="terrain-layer terrain-back"
-            id="terrainBack"
-        >
-
-            <div class="hill hill-back"></div>
-
-            <div
-                class="nature-layer"
-                id="natureBack"
-            ></div>
-
-        </div>
-
-
-
-        <!-- ==============================================
-             MORRO DO MEIO
-        =============================================== -->
-
-        <div
-            class="terrain-layer terrain-middle"
-            id="terrainMiddle"
-        >
-
-            <div class="hill hill-middle"></div>
-
-            <div
-                class="nature-layer"
-                id="natureMiddle"
-            ></div>
-
-        </div>
-
-
-
-        <!-- ==============================================
-             MORRO DA FRENTE
-        =============================================== -->
-
-        <div
-            class="terrain-layer terrain-front"
-            id="terrainFront"
-        >
-
-            <div class="hill hill-front"></div>
-
-            <div
-                class="nature-layer"
-                id="natureFront"
-            ></div>
-
-        </div>
-
-
-
-        <!-- ==============================================
-             GIRASSÓIS DAS MEMÓRIAS
-        =============================================== -->
-
-        <div
-            id="memoryFlowers"
-            aria-label="Memórias descobertas"
-        ></div>
-
-
-
-        <!-- ==============================================
-             GIRASSOL PRINCIPAL
-        =============================================== -->
-
-        <div id="mainFlowerContainer">
-
-            <img
-                id="sunflower"
-                src="imagem/girassol.png"
-                alt="Girassol"
-                draggable="false"
-            >
-
-        </div>
-
-
-
-        <!-- ==============================================
-             MENSAGEM
-        =============================================== -->
-
-        <p id="touchMessage">
-            Toque no girassol 🌻
-        </p>
-
-
-    </section>
-
-</main>
-
-
-
-<!-- ==================================================
-     MODAL DA MEMÓRIA
-================================================== -->
-
-<div
-    id="memoryModal"
-    class="modal"
-    aria-hidden="true"
->
-
-    <div
-        class="memory-card"
-        role="dialog"
-        aria-modal="true"
-    >
-
-        <button
-            id="closeMemory"
-            class="close-button"
-            type="button"
-            aria-label="Fechar"
-        >
-            ×
-        </button>
-
-
-        <div class="memory-photo-container">
-
-            <img
-                id="memoryImage"
-                src=""
-                alt="Foto da memória"
-            >
-
-        </div>
-
-
-        <p id="memoryCaption"></p>
-
-
-        <p
-            id="memoryCounter"
-            class="memory-counter"
-        ></p>
-
-    </div>
-
-</div>
-
-
-
-<!-- ==================================================
-     MODAL DA JOANINHA
-================================================== -->
-
 <div
     id="ladybugModal"
     class="modal"
     aria-hidden="true"
+    role="dialog"
+    aria-modal="true"
 >
 
-    <div
-        class="memory-card ladybug-card"
-        role="dialog"
-        aria-modal="true"
-    >
+    <div class="memory-card ladybug-card">
 
         <button
             id="closeLadybug"
             class="close-button"
             type="button"
-            aria-label="Fechar"
+            aria-label="Fechar joaninha"
         >
             ×
         </button>
 
-
         <img
-            id="ladybugImage"
             src="imagem/joaninha-engracada.jpg"
-            alt="Foto engraçada da joaninha"
+            alt="Joaninha"
+            draggable="false"
         >
 
-
         <p>
-            A joaninha resolveu posar para a câmera
-            😂🐞
+            A joaninha resolveu posar para a câmera 😂🐞
         </p>
 
     </div>
@@ -323,25 +32,7 @@
 </div>
 
 
-
-<!-- ==================================================
-     PARTÍCULAS
-================================================== -->
-
-<div
-    id="petalLayer"
-    aria-hidden="true"
-></div>
-
-
-
-<!-- ==================================================
-     JAVASCRIPT
-================================================== -->
-
 <script src="script.js"></script>
 
-
 </body>
-
 </html>
