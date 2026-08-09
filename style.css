@@ -1724,3 +1724,588 @@ body {
     }
 
 }
+/* ==================================================
+   V10 — PARTE 4
+   MODAIS + ACABAMENTO + RESPONSIVIDADE
+================================================== */
+
+
+/* ==================================================
+   MODAIS
+================================================== */
+
+.modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    z-index: 500;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(
+            20,
+            45,
+            28,
+            .58
+        );
+
+    backdrop-filter:
+        blur(8px);
+
+    -webkit-backdrop-filter:
+        blur(8px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity .3s ease,
+        visibility .3s ease;
+
+}
+
+
+/* ==================================================
+   MODAL ABERTO
+================================================== */
+
+.modal.show {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+}
+
+
+/* ==================================================
+   CARTÃO
+================================================== */
+
+.memory-card {
+
+    position: relative;
+
+    width: min(
+        92vw,
+        470px
+    );
+
+    max-height: 90vh;
+
+    padding: 18px;
+
+    overflow: auto;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffef7,
+            #f7f2dc
+        );
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.3),
+
+        0 4px 15px
+        rgba(45,90,45,.15);
+
+    transform:
+        translateY(25px)
+        scale(.92);
+
+    transition:
+        transform .35s
+        cubic-bezier(.2,.8,.2,1);
+
+}
+
+
+/* ==================================================
+   CARTÃO ABERTO
+================================================== */
+
+.modal.show
+.memory-card {
+
+    transform:
+        translateY(0)
+        scale(1);
+
+}
+
+
+/* ==================================================
+   BOTÃO FECHAR
+================================================== */
+
+.close-button {
+
+    position: absolute;
+
+    top: 10px;
+    right: 10px;
+
+    width: 38px;
+    height: 38px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #fff;
+
+    font-size: 25px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    z-index: 20;
+
+    background:
+        rgba(
+            45,
+            92,
+            45,
+            .75
+        );
+
+    box-shadow:
+        0 3px 8px
+        rgba(0,0,0,.18);
+
+    transition:
+        transform .2s ease,
+        background .2s ease;
+
+}
+
+
+.close-button:hover {
+
+    transform:
+        scale(1.08);
+
+    background:
+        rgba(
+            39,
+            80,
+            39,
+            .9
+        );
+
+}
+
+
+.close-button:active {
+
+    transform:
+        scale(.92);
+
+}
+
+
+/* ==================================================
+   FOTO DA MEMÓRIA
+================================================== */
+
+.memory-photo-container {
+
+    width: 100%;
+
+    max-height: 65vh;
+
+    overflow: hidden;
+
+    border-radius: 17px;
+
+    background:
+        #e9e5d5;
+
+}
+
+
+#memoryImage {
+
+    display: block;
+
+    width: 100%;
+
+    max-height: 65vh;
+
+    object-fit: contain;
+
+    border-radius: 17px;
+
+}
+
+
+/* ==================================================
+   LEGENDA
+================================================== */
+
+#memoryCaption {
+
+    margin-top: 15px;
+
+    padding:
+        0 10px;
+
+    color:
+        #476347;
+
+    font-size:
+        clamp(
+            1rem,
+            3vw,
+            1.15rem
+        );
+
+    line-height: 1.55;
+
+    text-align: center;
+
+}
+
+
+/* ==================================================
+   CONTADOR
+================================================== */
+
+.memory-counter {
+
+    margin-top: 10px;
+
+    color:
+        rgba(
+            65,
+            92,
+            65,
+            .65
+        );
+
+    font-size: .82rem;
+
+    text-align: center;
+
+}
+
+
+/* ==================================================
+   MODAL DA JOANINHA
+================================================== */
+
+.ladybug-card {
+
+    width: min(
+        90vw,
+        400px
+    );
+
+    text-align: center;
+
+}
+
+
+.ladybug-card > img {
+
+    display: block;
+
+    width: 100%;
+
+    max-height: 65vh;
+
+    object-fit: contain;
+
+    border-radius: 18px;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+}
+
+
+.ladybug-card p {
+
+    margin-top: 15px;
+
+    padding:
+        0 8px;
+
+    color:
+        #4e654e;
+
+    font-size:
+        clamp(
+            1rem,
+            3vw,
+            1.12rem
+        );
+
+    line-height: 1.5;
+
+}
+
+
+/* ==================================================
+   FOCO DO BOTÃO
+================================================== */
+
+#sunflower:focus-visible,
+#ladybug:focus-visible,
+.close-button:focus-visible {
+
+    outline:
+        3px solid
+        rgba(
+            255,
+            235,
+            100,
+            .95
+        );
+
+    outline-offset: 4px;
+
+}
+
+
+/* ==================================================
+   DESABILITAR SELEÇÃO DE ELEMENTOS DECORATIVOS
+================================================== */
+
+#sun,
+#sunGlow,
+.cloud,
+.hill,
+.nature-layer,
+#petalLayer {
+
+    user-select: none;
+
+}
+
+
+/* ==================================================
+   CELULAR
+================================================== */
+
+@media (
+    max-width: 600px
+) {
+
+    .modal {
+
+        padding:
+            12px;
+
+    }
+
+
+    .memory-card {
+
+        width: 94vw;
+
+        max-height: 88vh;
+
+        padding: 13px;
+
+        border-radius: 20px;
+
+    }
+
+
+    .close-button {
+
+        width: 36px;
+        height: 36px;
+
+        top: 8px;
+        right: 8px;
+
+    }
+
+
+    .memory-photo-container {
+
+        border-radius: 14px;
+
+    }
+
+
+    #memoryImage {
+
+        max-height:
+            58vh;
+
+    }
+
+
+    .ladybug-card > img {
+
+        max-height:
+            58vh;
+
+    }
+
+
+    #memoryCaption {
+
+        margin-top: 12px;
+
+        font-size: .98rem;
+
+    }
+
+
+    .ladybug-card p {
+
+        font-size: .98rem;
+
+    }
+
+}
+
+
+/* ==================================================
+   TELAS MUITO PEQUENAS
+================================================== */
+
+@media (
+    max-width: 380px
+) {
+
+    #intro h1 {
+
+        font-size:
+            1.8rem;
+
+    }
+
+
+    #subtitle {
+
+        font-size:
+            .84rem;
+
+    }
+
+
+    #garden {
+
+        height:
+            500px;
+
+    }
+
+
+    #mainFlowerContainer {
+
+        bottom:
+            34px;
+
+    }
+
+
+    #ladybug {
+
+        left:
+            7%;
+
+        bottom:
+            100px;
+
+    }
+
+}
+
+
+/* ==================================================
+   TELAS GRANDES
+================================================== */
+
+@media (
+    min-width: 1000px
+) {
+
+    #garden {
+
+        max-width:
+            1400px;
+
+        margin-left:
+            auto;
+
+        margin-right:
+            auto;
+
+    }
+
+
+    #intro {
+
+        margin-top:
+            70px;
+
+    }
+
+}
+
+
+/* ==================================================
+   REDUZIR ANIMAÇÕES QUANDO SOLICITADO
+================================================== */
+
+@media (
+    prefers-reduced-motion: reduce
+) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        scroll-behavior:
+            auto !important;
+
+        transition-duration:
+            .01ms !important;
+
+    }
+
+}
+
+
+/* ==================================================
+   FIM DO STYLE.CSS — V10
+================================================== */
