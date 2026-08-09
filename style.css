@@ -1196,3 +1196,1011 @@ body {
     }
 
 }
+/* ==================================================
+   V9 — PARTE 3
+   GIRASSOL • MEMÓRIAS • JOANINHA • CELULAR
+================================================== */
+
+
+/* ==================================================
+   GIRASSOL PRINCIPAL
+================================================== */
+
+#mainFlowerContainer {
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 58px;
+
+    width: 190px;
+    height: 300px;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 30;
+
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: center;
+
+    pointer-events: none;
+
+}
+
+
+/* ==================================================
+   GIRASSOL
+================================================== */
+
+#sunflower {
+
+    position: relative;
+
+    width: 175px;
+    height: auto;
+
+    display: block;
+
+    transform-origin:
+        50% 100%;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+    pointer-events: auto;
+
+    cursor: pointer;
+
+    filter:
+        drop-shadow(
+            0 8px 7px
+            rgba(35,75,25,.25)
+        );
+
+    transition:
+        filter .3s ease;
+
+}
+
+
+#sunflower:hover {
+
+    filter:
+        drop-shadow(
+            0 8px 7px
+            rgba(35,75,25,.25)
+        )
+        drop-shadow(
+            0 0 16px
+            rgba(255,220,70,.55)
+        );
+
+}
+
+
+#sunflower:active {
+
+    transform:
+        scale(.94);
+
+}
+
+
+/* ==================================================
+   GIRASSÓIS DAS MEMÓRIAS
+================================================== */
+
+#memoryFlowers {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 22;
+
+    pointer-events: none;
+
+}
+
+
+/* ==================================================
+   FLOR DE MEMÓRIA
+================================================== */
+
+.memoryFlower {
+
+    position: absolute;
+
+    width: 90px;
+    height: auto;
+
+    display: block;
+
+    transform-origin:
+        50% 100%;
+
+    cursor: pointer;
+
+    pointer-events: auto;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+    filter:
+        drop-shadow(
+            0 5px 5px
+            rgba(30,70,25,.22)
+        );
+
+    transition:
+        filter .25s ease;
+
+}
+
+
+.memoryFlower:hover {
+
+    filter:
+        drop-shadow(
+            0 5px 5px
+            rgba(30,70,25,.22)
+        )
+        drop-shadow(
+            0 0 12px
+            rgba(255,222,67,.45)
+        );
+
+}
+
+
+.memoryFlower:active {
+
+    filter:
+        brightness(1.1)
+        drop-shadow(
+            0 0 14px
+            rgba(255,230,80,.7)
+        );
+
+}
+
+
+/* ==================================================
+   MENSAGEM
+================================================== */
+
+#touchMessage {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 20px;
+
+    transform:
+        translateX(-50%);
+
+    width:
+        max-content;
+
+    max-width: 90%;
+
+    padding:
+        7px 15px;
+
+    border-radius:
+        30px;
+
+    background:
+        rgba(40,85,35,.28);
+
+    backdrop-filter:
+        blur(5px);
+
+    -webkit-backdrop-filter:
+        blur(5px);
+
+    color: #ffffff;
+
+    font-size:
+        clamp(
+            .82rem,
+            2.5vw,
+            1rem
+        );
+
+    font-weight: 600;
+
+    letter-spacing: .2px;
+
+    text-align: center;
+
+    text-shadow:
+        0 2px 4px
+        rgba(0,0,0,.25);
+
+    box-shadow:
+        0 3px 10px
+        rgba(0,0,0,.08);
+
+    z-index: 50;
+
+    pointer-events: none;
+
+    animation:
+        messageFloat
+        3.5s
+        ease-in-out
+        infinite;
+
+}
+
+
+@keyframes messageFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translateX(-50%)
+            translateY(0);
+
+    }
+
+    50% {
+
+        transform:
+            translateX(-50%)
+            translateY(-3px);
+
+    }
+
+}
+
+
+/* ==================================================
+   JOANINHA
+================================================== */
+
+#ladybug {
+
+    position: absolute;
+
+    top: 47%;
+    left: -80px;
+
+    width: 52px;
+    height: 52px;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    z-index: 35;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    animation:
+        ladybugFlight
+        22s
+        linear
+        infinite;
+
+    pointer-events: auto;
+
+}
+
+
+#ladybug img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+    filter:
+        drop-shadow(
+            0 4px 4px
+            rgba(0,0,0,.2)
+        );
+
+}
+
+
+@keyframes ladybugFlight {
+
+    0% {
+
+        transform:
+            translate(
+                -70px,
+                0
+            )
+            rotate(-8deg);
+
+    }
+
+    18% {
+
+        transform:
+            translate(
+                20vw,
+                -35px
+            )
+            rotate(8deg);
+
+    }
+
+    37% {
+
+        transform:
+            translate(
+                42vw,
+                25px
+            )
+            rotate(-5deg);
+
+    }
+
+    56% {
+
+        transform:
+            translate(
+                64vw,
+                -45px
+            )
+            rotate(9deg);
+
+    }
+
+    78% {
+
+        transform:
+            translate(
+                82vw,
+                15px
+            )
+            rotate(-7deg);
+
+    }
+
+    100% {
+
+        transform:
+            translate(
+                calc(100vw + 100px),
+                -20px
+            )
+            rotate(5deg);
+
+    }
+
+}
+
+
+/* ==================================================
+   EFEITO AO PASSAR NA JOANINHA
+================================================== */
+
+#ladybug:hover img {
+
+    filter:
+        drop-shadow(
+            0 4px 4px
+            rgba(0,0,0,.2)
+        )
+        drop-shadow(
+            0 0 12px
+            rgba(255,255,255,.8)
+        );
+
+    transform:
+        scale(1.12);
+
+}
+
+
+/* ==================================================
+   MODAIS
+================================================== */
+
+.modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(20,50,25,.48);
+
+    backdrop-filter:
+        blur(7px);
+
+    -webkit-backdrop-filter:
+        blur(7px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    z-index: 200;
+
+    transition:
+        opacity .3s ease,
+        visibility .3s ease;
+
+}
+
+
+.modal.show {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+}
+
+
+/* ==================================================
+   CARTÃO DA MEMÓRIA
+================================================== */
+
+.memory-card {
+
+    position: relative;
+
+    width:
+        min(92vw, 470px);
+
+    max-height: 90vh;
+
+    padding: 18px;
+
+    overflow: auto;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.97),
+            rgba(250,255,244,.97)
+        );
+
+    color: #385b31;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.28);
+
+    transform:
+        translateY(25px)
+        scale(.94);
+
+    transition:
+        transform .35s
+        cubic-bezier(.2,.8,.2,1);
+
+}
+
+
+.modal.show
+.memory-card {
+
+    transform:
+        translateY(0)
+        scale(1);
+
+}
+
+
+/* ==================================================
+   FOTO DA MEMÓRIA
+================================================== */
+
+.memory-photo-container {
+
+    width: 100%;
+
+    overflow: hidden;
+
+    border-radius: 17px;
+
+    background: #eef4e9;
+
+}
+
+
+#memoryImage {
+
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+
+    max-height: 62vh;
+
+    object-fit: contain;
+
+}
+
+
+/* ==================================================
+   TEXTO DA MEMÓRIA
+================================================== */
+
+#memoryCaption {
+
+    margin-top: 15px;
+
+    padding:
+        0 5px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(
+            1rem,
+            3.5vw,
+            1.2rem
+        );
+
+    line-height: 1.5;
+
+    text-align: center;
+
+}
+
+
+.memory-counter {
+
+    margin-top: 8px;
+
+    text-align: center;
+
+    font-size: .8rem;
+
+    opacity: .55;
+
+}
+
+
+/* ==================================================
+   BOTÃO FECHAR
+================================================== */
+
+.close-button {
+
+    position: absolute;
+
+    top: 9px;
+    right: 9px;
+
+    width: 38px;
+    height: 38px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        rgba(30,60,30,.7);
+
+    color: #ffffff;
+
+    font-size: 25px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    z-index: 10;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    transition:
+        transform .2s ease,
+        background .2s ease;
+
+}
+
+
+.close-button:hover {
+
+    background:
+        rgba(30,60,30,.9);
+
+    transform:
+        rotate(90deg)
+        scale(1.05);
+
+}
+
+
+.close-button:active {
+
+    transform:
+        scale(.9);
+
+}
+
+
+/* ==================================================
+   JOANINHA — CARTÃO
+================================================== */
+
+.ladybug-card {
+
+    max-width: 420px;
+
+    text-align: center;
+
+}
+
+
+.ladybug-card > img {
+
+    display: block;
+
+    width: 100%;
+
+    max-height: 65vh;
+
+    object-fit: contain;
+
+    border-radius: 17px;
+
+}
+
+
+.ladybug-card p {
+
+    margin-top: 15px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        1.08rem;
+
+    line-height: 1.45;
+
+}
+
+
+/* ==================================================
+   PÉTALAS
+================================================== */
+
+#petalLayer {
+
+    position: fixed;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    z-index: 100;
+
+    pointer-events: none;
+
+}
+
+
+.petal {
+
+    position: absolute;
+
+    top: -20px;
+
+    border-radius:
+        70% 30% 70% 30%;
+
+    pointer-events: none;
+
+    box-shadow:
+        0 1px 3px
+        rgba(0,0,0,.1);
+
+}
+
+
+/* ==================================================
+   CELULAR
+================================================== */
+
+@media (max-width: 700px) {
+
+    #sun {
+
+        width: 78px;
+        height: 78px;
+
+        top: 30px;
+        right: 25px;
+
+    }
+
+
+    #sunGlow {
+
+        top: -65px;
+        right: -65px;
+
+        width: 220px;
+        height: 220px;
+
+    }
+
+
+    #intro {
+
+        top: 28px;
+
+        width: 86%;
+
+    }
+
+
+    #intro h1 {
+
+        font-size:
+            clamp(
+                1.8rem,
+                8vw,
+                2.5rem
+            );
+
+    }
+
+
+    #subtitle {
+
+        font-size:
+            .88rem;
+
+        margin-top: 5px;
+
+    }
+
+
+    #garden {
+
+        height: 61%;
+
+    }
+
+
+    #mainFlowerContainer {
+
+        bottom: 46px;
+
+        width: 155px;
+        height: 245px;
+
+    }
+
+
+    #sunflower {
+
+        width: 145px;
+
+    }
+
+
+    .memoryFlower {
+
+        width: 70px;
+
+    }
+
+
+    #touchMessage {
+
+        bottom: 13px;
+
+        font-size:
+            .78rem;
+
+        padding:
+            6px 12px;
+
+    }
+
+
+    #ladybug {
+
+        width: 42px;
+        height: 42px;
+
+    }
+
+
+    .hill-far {
+
+        bottom: 120px;
+
+        height: 165px;
+
+    }
+
+
+    .hill-back {
+
+        bottom: 70px;
+
+        height: 205px;
+
+    }
+
+
+    .hill-middle {
+
+        bottom: 10px;
+
+        height: 235px;
+
+    }
+
+
+    .hill-front {
+
+        bottom: -150px;
+
+        height: 310px;
+
+    }
+
+
+    .grassDecoration {
+
+        max-width: 32px;
+
+    }
+
+
+    .decorFlower {
+
+        max-width: 28px;
+
+    }
+
+}
+
+
+/* ==================================================
+   CELULAR PEQUENO
+================================================== */
+
+@media (max-width: 390px) {
+
+    #intro {
+
+        top: 22px;
+
+    }
+
+
+    #intro h1 {
+
+        font-size:
+            1.75rem;
+
+    }
+
+
+    #subtitle {
+
+        font-size:
+            .8rem;
+
+    }
+
+
+    #garden {
+
+        height: 58%;
+
+    }
+
+
+    #mainFlowerContainer {
+
+        bottom: 42px;
+
+        width: 135px;
+        height: 215px;
+
+    }
+
+
+    #sunflower {
+
+        width: 125px;
+
+    }
+
+
+    .memoryFlower {
+
+        width: 60px;
+
+    }
+
+
+    #touchMessage {
+
+        bottom: 10px;
+
+        font-size:
+            .72rem;
+
+    }
+
+}
+
+
+/* ==================================================
+   TELAS MUITO ALTAS
+================================================== */
+
+@media (min-height: 850px) {
+
+    #garden {
+
+        height: 67%;
+
+    }
+
+
+    #mainFlowerContainer {
+
+        bottom: 65px;
+
+    }
+
+}
