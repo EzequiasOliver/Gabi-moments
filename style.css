@@ -685,3 +685,514 @@ body {
     pointer-events: none;
 
 }
+/* ==================================================
+   V9 — PARTE 2
+   VEGETAÇÃO E FLORES
+================================================== */
+
+
+/* ==================================================
+   CAMADA DE NATUREZA
+================================================== */
+
+.nature-layer {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+}
+
+
+/* ==================================================
+   GRAMA
+================================================== */
+
+.grassDecoration {
+
+    position: absolute;
+
+    width: 38px;
+    height: auto;
+
+    object-fit: contain;
+
+    transform-origin:
+        bottom center;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    filter:
+        drop-shadow(
+            0 2px 2px
+            rgba(0,0,0,.12)
+        );
+
+    animation:
+        grassWind
+        var(--grass-speed, 4s)
+        ease-in-out
+        infinite;
+
+}
+
+
+@keyframes grassWind {
+
+    0%,
+    100% {
+
+        transform:
+            translateX(-50%)
+            rotate(
+                calc(
+                    var(--grass-rotation, 0deg)
+                    - 2deg
+                )
+            );
+
+    }
+
+    50% {
+
+        transform:
+            translateX(-50%)
+            rotate(
+                calc(
+                    var(--grass-rotation, 0deg)
+                    + 3deg
+                )
+            );
+
+    }
+
+}
+
+
+/* ==================================================
+   GRAMA PEQUENA
+================================================== */
+
+.grassDecoration.tiny {
+
+    width: 24px;
+
+}
+
+
+.grassDecoration.small {
+
+    width: 31px;
+
+}
+
+
+.grassDecoration.medium {
+
+    width: 42px;
+
+}
+
+
+/* ==================================================
+   FLORES DECORATIVAS
+================================================== */
+
+.decorFlower {
+
+    position: absolute;
+
+    width: 34px;
+    height: auto;
+
+    object-fit: contain;
+
+    transform-origin:
+        bottom center;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    filter:
+        drop-shadow(
+            0 2px 2px
+            rgba(0,0,0,.12)
+        );
+
+    animation:
+        flowerWind
+        var(--flower-speed, 5s)
+        ease-in-out
+        infinite;
+
+}
+
+
+@keyframes flowerWind {
+
+    0%,
+    100% {
+
+        transform:
+            translateX(-50%)
+            rotate(
+                calc(
+                    var(--flower-rotation, 0deg)
+                    - 2deg
+                )
+            );
+
+    }
+
+    50% {
+
+        transform:
+            translateX(-50%)
+            rotate(
+                calc(
+                    var(--flower-rotation, 0deg)
+                    + 3deg
+                )
+            );
+
+    }
+
+}
+
+
+/* ==================================================
+   TAMANHOS DAS FLORES
+================================================== */
+
+.decorFlower.tiny {
+
+    width: 20px;
+
+}
+
+
+.decorFlower.small {
+
+    width: 28px;
+
+}
+
+
+.decorFlower.medium {
+
+    width: 38px;
+
+}
+
+
+/* ==================================================
+   FLORES DISTANTES
+================================================== */
+
+.terrain-far
+.decorFlower {
+
+    opacity: .72;
+
+    filter:
+        saturate(.85)
+        brightness(1.05)
+        drop-shadow(
+            0 1px 2px
+            rgba(0,0,0,.08)
+        );
+
+}
+
+
+/* ==================================================
+   VEGETAÇÃO DO MORRO TRASEIRO
+================================================== */
+
+.terrain-back
+.grassDecoration {
+
+    opacity: .88;
+
+}
+
+
+.terrain-back
+.decorFlower {
+
+    opacity: .9;
+
+}
+
+
+/* ==================================================
+   VEGETAÇÃO DO MORRO MÉDIO
+================================================== */
+
+.terrain-middle
+.grassDecoration {
+
+    opacity: .96;
+
+}
+
+
+.terrain-middle
+.decorFlower {
+
+    opacity: .98;
+
+}
+
+
+/* ==================================================
+   VEGETAÇÃO DA FRENTE
+================================================== */
+
+.terrain-front
+.grassDecoration {
+
+    opacity: 1;
+
+}
+
+
+.terrain-front
+.decorFlower {
+
+    opacity: 1;
+
+}
+
+
+/* ==================================================
+   PEQUENAS FOLHAS
+================================================== */
+
+.leafDecoration {
+
+    position: absolute;
+
+    width: 17px;
+    height: 9px;
+
+    border-radius:
+        100% 0 100% 0;
+
+    background:
+        #55a940;
+
+    opacity: .9;
+
+    transform-origin:
+        bottom center;
+
+    pointer-events: none;
+
+    animation:
+        leafWind
+        var(--leaf-speed, 4s)
+        ease-in-out
+        infinite;
+
+}
+
+
+@keyframes leafWind {
+
+    0%,
+    100% {
+
+        transform:
+            rotate(
+                var(--leaf-angle, -8deg)
+            );
+
+    }
+
+    50% {
+
+        transform:
+            rotate(
+                calc(
+                    var(--leaf-angle, -8deg)
+                    + 8deg
+                )
+            );
+
+    }
+
+}
+
+
+/* ==================================================
+   PEQUENAS FLORES DE CAMPO
+================================================== */
+
+.fieldFlower {
+
+    position: absolute;
+
+    width: 14px;
+    height: 14px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #ffd94a 0 20%,
+            transparent 21%
+        );
+
+    pointer-events: none;
+
+    opacity: .9;
+
+}
+
+
+.fieldFlower::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -4px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            #fffdf0 0 24%,
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 100% 50%,
+            #fffdf0 0 24%,
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 50% 100%,
+            #fffdf0 0 24%,
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 0% 50%,
+            #fffdf0 0 24%,
+            transparent 25%
+        );
+
+}
+
+
+/* ==================================================
+   DISTÂNCIA VISUAL
+================================================== */
+
+.terrain-far
+.grassDecoration {
+
+    filter:
+        blur(.15px)
+        saturate(.72);
+
+}
+
+
+.terrain-far
+.fieldFlower {
+
+    transform:
+        scale(.7);
+
+}
+
+
+.terrain-back
+.fieldFlower {
+
+    transform:
+        scale(.85);
+
+}
+
+
+/* ==================================================
+   SOMBRA DAS PLANTAS
+================================================== */
+
+.grassDecoration::after,
+.decorFlower::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 0;
+
+    width: 18px;
+    height: 5px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius: 50%;
+
+    background:
+        rgba(28,73,25,.18);
+
+    filter:
+        blur(2px);
+
+}
+
+
+/* ==================================================
+   MOVIMENTO SUAVE DO JARDIM
+================================================== */
+
+#garden {
+
+    animation:
+        gardenBreath
+        10s
+        ease-in-out
+        infinite;
+
+}
+
+
+@keyframes gardenBreath {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-1px);
+
+    }
+
+}
