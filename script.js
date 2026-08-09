@@ -1,6 +1,6 @@
 /* ==================================================
    JARDIM DAS LEMBRANÇAS — V9
-   SCRIPT.JS
+   SCRIPT.JS — CORRIGIDO
 ================================================== */
 
 
@@ -13,9 +13,6 @@ const sunflower =
 
 const memoryFlowers =
     document.getElementById("memoryFlowers");
-
-const petalLayer =
-    document.getElementById("petalLayer");
 
 const ladybug =
     document.getElementById("ladybug");
@@ -40,6 +37,9 @@ const memoryCaption =
 
 const memoryCounter =
     document.getElementById("memoryCounter");
+
+const petalLayer =
+    document.getElementById("petalLayer");
 
 
 /* ==================================================
@@ -76,112 +76,119 @@ let planting = false;
 
 
 /* ==================================================
-   CAMADAS DOS MORROS
+   CONFIGURAÇÃO DOS MORROS
 ================================================== */
 
-const terrainLayers = [
+/*
+   Cada morro possui sua própria área.
+
+   A vegetação agora é posicionada
+   relativamente à superfície daquele morro.
+*/
+
+const terrainConfig = [
 
     {
-        element:
-            document.getElementById(
-                "natureFar"
-            ),
+        id: "natureFar",
 
         grass: 5,
+        flowers: 3,
 
-        flowers: 4,
+        leftMin: 10,
+        leftMax: 90,
 
-        fieldFlowers: 4
+        bottomMin: 145,
+        bottomMax: 190,
+
+        grassSizeMin: 17,
+        grassSizeMax: 25,
+
+        flowerClass: "tiny"
     },
 
+
     {
-        element:
-            document.getElementById(
-                "natureBack"
-            ),
+        id: "natureBack",
 
         grass: 8,
+        flowers: 5,
 
-        flowers: 6,
+        leftMin: 7,
+        leftMax: 93,
 
-        fieldFlowers: 6
+        bottomMin: 90,
+        bottomMax: 145,
+
+        grassSizeMin: 21,
+        grassSizeMax: 29,
+
+        flowerClass: "small"
     },
 
+
     {
-        element:
-            document.getElementById(
-                "natureMiddle"
-            ),
+        id: "natureMiddle",
 
         grass: 11,
+        flowers: 7,
 
-        flowers: 8,
+        leftMin: 5,
+        leftMax: 95,
 
-        fieldFlowers: 8
+        bottomMin: 45,
+        bottomMax: 105,
+
+        grassSizeMin: 25,
+        grassSizeMax: 35,
+
+        flowerClass: "small"
     },
 
+
     {
-        element:
-            document.getElementById(
-                "natureFront"
-            ),
+        id: "natureFront",
 
         grass: 15,
+        flowers: 9,
 
-        flowers: 10,
+        leftMin: 4,
+        leftMax: 96,
 
-        fieldFlowers: 12
+        bottomMin: 15,
+        bottomMax: 80,
+
+        grassSizeMin: 29,
+        grassSizeMax: 40,
+
+        flowerClass: "medium"
     }
 
 ];
 
 
 /* ==================================================
-   POSIÇÕES DOS GIRASSÓIS
-================================================== */
-
-const memoryPositions = [
-
-    {
-        left: 18,
-        bottom: 82,
-        scale: 0.72
-    },
-
-    {
-        left: 50,
-        bottom: 112,
-        scale: 0.84
-    },
-
-    {
-        left: 82,
-        bottom: 82,
-        scale: 0.70
-    }
-
-];
-
-
-/* ==================================================
-   INICIAR
+   INICIALIZAÇÃO
 ================================================== */
 
 createNature();
 
-createFieldFlowers();
-
 
 /* ==================================================
-   VEGETAÇÃO
+   CRIAR VEGETAÇÃO
 ================================================== */
 
 function createNature() {
 
-    terrainLayers.forEach(
-        function(layer, layerIndex) {
+    terrainConfig.forEach(
+        function(config) {
 
-            if (!layer.element) {
+            const container =
+                document.getElementById(
+                    config.id
+                );
+
+
+            if (!container) {
                 return;
             }
 
@@ -192,69 +199,13 @@ function createNature() {
 
             for (
                 let i = 0;
-                i < layer.grass;
+                i < config.grass;
                 i++
             ) {
 
-                const grass =
-                    document.createElement(
-                        "img"
-                    );
-
-                grass.src =
-                    i % 2 === 0
-                        ? "imagem/grama1.png"
-                        : "imagem/grama2.png";
-
-                grass.className =
-                    "grassDecoration";
-
-
-                /* posição */
-
-                grass.style.left =
-                    random(5, 95) + "%";
-
-
-                grass.style.bottom =
-                    getGrassHeight(
-                        layerIndex
-                    ) + "px";
-
-
-                /* tamanho */
-
-                const size =
-                    getGrassSize(
-                        layerIndex
-                    );
-
-                grass.style.width =
-                    size + "px";
-
-
-                /* movimento */
-
-                grass.style.setProperty(
-                    "--grass-speed",
-                    (
-                        3.5 +
-                        Math.random() * 3
-                    ) + "s"
-                );
-
-
-                grass.style.setProperty(
-                    "--grass-rotation",
-                    (
-                        -4 +
-                        Math.random() * 8
-                    ) + "deg"
-                );
-
-
-                layer.element.appendChild(
-                    grass
+                createGrass(
+                    container,
+                    config
                 );
 
             }
@@ -266,87 +217,13 @@ function createNature() {
 
             for (
                 let i = 0;
-                i < layer.flowers;
+                i < config.flowers;
                 i++
             ) {
 
-                const flower =
-                    document.createElement(
-                        "img"
-                    );
-
-
-                flower.src =
-                    i % 2 === 0
-                        ? "imagem/margarida.png"
-                        : "imagem/tulipa.png";
-
-
-                flower.className =
-                    "decorFlower";
-
-
-                /* tamanho por distância */
-
-                if (
-                    layerIndex === 0
-                ) {
-
-                    flower.classList.add(
-                        "tiny"
-                    );
-
-                }
-
-                else if (
-                    layerIndex === 1
-                ) {
-
-                    flower.classList.add(
-                        "small"
-                    );
-
-                }
-
-                else {
-
-                    flower.classList.add(
-                        "medium"
-                    );
-
-                }
-
-
-                flower.style.left =
-                    random(5, 95) + "%";
-
-
-                flower.style.bottom =
-                    getFlowerHeight(
-                        layerIndex
-                    ) + "px";
-
-
-                flower.style.setProperty(
-                    "--flower-speed",
-                    (
-                        4 +
-                        Math.random() * 3
-                    ) + "s"
-                );
-
-
-                flower.style.setProperty(
-                    "--flower-rotation",
-                    (
-                        -4 +
-                        Math.random() * 8
-                    ) + "deg"
-                );
-
-
-                layer.element.appendChild(
-                    flower
+                createFlower(
+                    container,
+                    config
                 );
 
             }
@@ -358,235 +235,139 @@ function createNature() {
 
 
 /* ==================================================
-   FLORES PEQUENAS DE CAMPO
+   CRIAR GRAMA
 ================================================== */
 
-function createFieldFlowers() {
-
-    terrainLayers.forEach(
-        function(layer, layerIndex) {
-
-            if (!layer.element) {
-                return;
-            }
-
-
-            for (
-                let i = 0;
-                i < layer.fieldFlowers;
-                i++
-            ) {
-
-                const flower =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                flower.className =
-                    "fieldFlower";
-
-
-                flower.style.left =
-                    random(3, 97) + "%";
-
-
-                flower.style.bottom =
-                    getFieldHeight(
-                        layerIndex
-                    ) + "px";
-
-
-                const scale =
-                    getFieldScale(
-                        layerIndex
-                    );
-
-
-                flower.style.transform =
-                    `scale(${scale})`;
-
-
-                layer.element.appendChild(
-                    flower
-                );
-
-            }
-
-        }
-    );
-
-}
-
-
-/* ==================================================
-   ALTURA DA GRAMA
-================================================== */
-
-function getGrassHeight(
-    layerIndex
+function createGrass(
+    container,
+    config
 ) {
 
-    const heights = [
-
-        [120, 190],
-
-        [75, 150],
-
-        [35, 115],
-
-        [5, 85]
-
-    ];
+    const grass =
+        document.createElement("img");
 
 
-    const range =
-        heights[layerIndex];
+    grass.src =
+        Math.random() < .5
+            ? "imagem/grama1.png"
+            : "imagem/grama2.png";
 
 
-    return random(
-        range[0],
-        range[1]
+    grass.className =
+        "grassDecoration";
+
+
+    grass.style.left =
+        random(
+            config.leftMin,
+            config.leftMax
+        ) + "%";
+
+
+    grass.style.bottom =
+        random(
+            config.bottomMin,
+            config.bottomMax
+        ) + "px";
+
+
+    grass.style.width =
+        random(
+            config.grassSizeMin,
+            config.grassSizeMax
+        ) + "px";
+
+
+    grass.style.setProperty(
+        "--grass-speed",
+        (
+            3 +
+            Math.random() * 4
+        ) + "s"
+    );
+
+
+    grass.style.setProperty(
+        "--grass-rotation",
+        (
+            -5 +
+            Math.random() * 10
+        ) + "deg"
+    );
+
+
+    container.appendChild(
+        grass
     );
 
 }
 
 
 /* ==================================================
-   ALTURA DAS FLORES
+   CRIAR FLOR
 ================================================== */
 
-function getFlowerHeight(
-    layerIndex
+function createFlower(
+    container,
+    config
 ) {
 
-    const heights = [
-
-        [145, 205],
-
-        [90, 160],
-
-        [45, 125],
-
-        [15, 95]
-
-    ];
+    const flower =
+        document.createElement("img");
 
 
-    const range =
-        heights[layerIndex];
+    flower.src =
+        Math.random() < .5
+            ? "imagem/margarida.png"
+            : "imagem/tulipa.png";
 
 
-    return random(
-        range[0],
-        range[1]
+    flower.className =
+        "decorFlower " +
+        config.flowerClass;
+
+
+    flower.style.left =
+        random(
+            config.leftMin,
+            config.leftMax
+        ) + "%";
+
+
+    flower.style.bottom =
+        random(
+            config.bottomMin,
+            config.bottomMax
+        ) + "px";
+
+
+    flower.style.setProperty(
+        "--flower-speed",
+        (
+            4 +
+            Math.random() * 3
+        ) + "s"
+    );
+
+
+    flower.style.setProperty(
+        "--flower-rotation",
+        (
+            -5 +
+            Math.random() * 10
+        ) + "deg"
+    );
+
+
+    container.appendChild(
+        flower
     );
 
 }
 
 
 /* ==================================================
-   ALTURA DAS FLORES PEQUENAS
-================================================== */
-
-function getFieldHeight(
-    layerIndex
-) {
-
-    const heights = [
-
-        [125, 185],
-
-        [75, 145],
-
-        [30, 110],
-
-        [5, 75]
-
-    ];
-
-
-    const range =
-        heights[layerIndex];
-
-
-    return random(
-        range[0],
-        range[1]
-    );
-
-}
-
-
-/* ==================================================
-   TAMANHO DA VEGETAÇÃO
-================================================== */
-
-function getGrassSize(
-    layerIndex
-) {
-
-    const sizes = [
-
-        [16, 25],
-
-        [22, 32],
-
-        [27, 39],
-
-        [31, 45]
-
-    ];
-
-
-    const range =
-        sizes[layerIndex];
-
-
-    return random(
-        range[0],
-        range[1]
-    );
-
-}
-
-
-/* ==================================================
-   ESCALA DAS FLORES PEQUENAS
-================================================== */
-
-function getFieldScale(
-    layerIndex
-) {
-
-    const scales = [
-
-        [0.55, 0.75],
-
-        [0.7, 0.9],
-
-        [0.8, 1],
-
-        [0.9, 1.15]
-
-    ];
-
-
-    const range =
-        scales[layerIndex];
-
-
-    return (
-        range[0] +
-        Math.random() *
-        (range[1] - range[0])
-    );
-
-}
-
-
-/* ==================================================
-   ALEATÓRIO
+   RANDOM
 ================================================== */
 
 function random(
@@ -658,10 +439,9 @@ function handleSunflower() {
 
 
     const position =
-        memoryPositions[
-            currentMemory %
-            memoryPositions.length
-        ];
+        getMemoryPosition(
+            currentMemory
+        );
 
 
     plantMemoryFlower(
@@ -680,12 +460,50 @@ function handleSunflower() {
                 memory
             );
 
-
             planting = false;
 
         },
-        700
+        650
     );
+
+}
+
+
+/* ==================================================
+   POSIÇÕES DAS MEMÓRIAS
+================================================== */
+
+function getMemoryPosition(
+    index
+) {
+
+    const positions = [
+
+        {
+            left: 17,
+            bottom: 78,
+            size: 62
+        },
+
+        {
+            left: 50,
+            bottom: 108,
+            size: 72
+        },
+
+        {
+            left: 83,
+            bottom: 75,
+            size: 60
+        }
+
+    ];
+
+
+    return positions[
+        index %
+        positions.length
+    ];
 
 }
 
@@ -712,12 +530,12 @@ function animateSunflower() {
 
             {
                 transform:
-                    "scale(1.1) rotate(-5deg)"
+                    "scale(1.08) rotate(-5deg)"
             },
 
             {
                 transform:
-                    "scale(1.07) rotate(5deg)"
+                    "scale(1.08) rotate(5deg)"
             },
 
             {
@@ -742,7 +560,7 @@ function animateSunflower() {
 
 
 /* ==================================================
-   PLANTAR MEMÓRIA
+   CRIAR GIRASSOL DA MEMÓRIA
 ================================================== */
 
 function plantMemoryFlower(
@@ -756,9 +574,7 @@ function plantMemoryFlower(
 
 
     const flower =
-        document.createElement(
-            "img"
-        );
+        document.createElement("img");
 
 
     flower.src =
@@ -770,7 +586,7 @@ function plantMemoryFlower(
 
 
     flower.alt =
-        "Memória";
+        "Girassol de uma memória";
 
 
     flower.style.left =
@@ -782,14 +598,11 @@ function plantMemoryFlower(
 
 
     flower.style.width =
-        (
-            85 *
-            position.scale
-        ) + "px";
+        position.size + "px";
 
 
-    flower.style.pointerEvents =
-        "auto";
+    flower.style.zIndex =
+        "70";
 
 
     memoryFlowers.appendChild(
@@ -798,7 +611,7 @@ function plantMemoryFlower(
 
 
     /* ------------------------------
-       NASCIMENTO
+       ANIMAÇÃO
     ------------------------------ */
 
     flower.animate(
@@ -817,7 +630,7 @@ function plantMemoryFlower(
                 opacity: 1,
 
                 transform:
-                    "translateX(-50%) translateY(-7px) scale(1.08)"
+                    "translateX(-50%) translateY(-5px) scale(1.08)"
 
             },
 
@@ -844,20 +657,6 @@ function plantMemoryFlower(
 
     );
 
-
-    /* ------------------------------
-       BRILHO
-    ------------------------------ */
-
-    createSpark(
-        position.left,
-        position.bottom
-    );
-
-
-    /* ------------------------------
-       CLIQUE
-    ------------------------------ */
 
     flower.addEventListener(
         "click",
@@ -1003,7 +802,7 @@ if (ladybug) {
 
 
 /* ==================================================
-   ABRIR JOANINHA
+   ABRIR MODAL DA JOANINHA
 ================================================== */
 
 function openLadybug() {
@@ -1035,7 +834,7 @@ function openLadybug() {
 
 
 /* ==================================================
-   FECHAR JOANINHA
+   FECHAR MODAL DA JOANINHA
 ================================================== */
 
 function closeLadybugModal() {
@@ -1104,255 +903,6 @@ if (ladybugModal) {
 
 
 /* ==================================================
-   BRILHO DA FLOR
-================================================== */
-
-function createSpark(
-    left,
-    bottom
-) {
-
-    if (!memoryFlowers) {
-        return;
-    }
-
-
-    const spark =
-        document.createElement(
-            "div"
-        );
-
-
-    spark.style.position =
-        "absolute";
-
-
-    spark.style.left =
-        left + "%";
-
-
-    spark.style.bottom =
-        (
-            bottom + 75
-        ) + "px";
-
-
-    spark.style.width =
-        "9px";
-
-
-    spark.style.height =
-        "9px";
-
-
-    spark.style.borderRadius =
-        "50%";
-
-
-    spark.style.background =
-        "#fff7a8";
-
-
-    spark.style.boxShadow =
-        "0 0 18px #ffe66b";
-
-
-    spark.style.pointerEvents =
-        "none";
-
-
-    spark.style.zIndex =
-        "60";
-
-
-    memoryFlowers.appendChild(
-        spark
-    );
-
-
-    spark.animate(
-
-        [
-
-            {
-                opacity: 0,
-
-                transform:
-                    "scale(0)"
-
-            },
-
-            {
-                opacity: 1,
-
-                transform:
-                    "scale(1.3)"
-
-            },
-
-            {
-                opacity: 0,
-
-                transform:
-                    "scale(.2) translateY(-25px)"
-
-            }
-
-        ],
-
-        {
-
-            duration: 900,
-
-            easing:
-                "ease-out"
-
-        }
-
-    );
-
-
-    setTimeout(
-        function() {
-
-            spark.remove();
-
-        },
-        900
-    );
-
-}
-
-
-/* ==================================================
-   FINAL DO JARDIM
-================================================== */
-
-function completeGarden() {
-
-    animateSunflower();
-
-
-    for (
-        let i = 0;
-        i < 14;
-        i++
-    ) {
-
-        setTimeout(
-            createPetal,
-            i * 100
-        );
-
-    }
-
-
-    createFinalFlowers();
-
-}
-
-
-/* ==================================================
-   FLORES EXTRAS DO FINAL
-================================================== */
-
-function createFinalFlowers() {
-
-    const positions = [
-
-        [7, 75],
-        [12, 95],
-        [25, 68],
-        [33, 85],
-        [67, 82],
-        [76, 65],
-        [88, 95],
-        [94, 72]
-
-    ];
-
-
-    positions.forEach(
-        function(position, index) {
-
-            const flower =
-                document.createElement(
-                    "img"
-                );
-
-
-            flower.src =
-                index % 2 === 0
-                    ? "imagem/margarida.png"
-                    : "imagem/tulipa.png";
-
-
-            flower.className =
-                "decorFlower medium";
-
-
-            flower.style.left =
-                position[0] + "%";
-
-
-            flower.style.bottom =
-                position[1] + "px";
-
-
-            flower.style.opacity =
-                "0";
-
-
-            memoryFlowers.appendChild(
-                flower
-            );
-
-
-            setTimeout(
-                function() {
-
-                    flower.animate(
-
-                        [
-
-                            {
-                                opacity: 0,
-                                transform:
-                                    "translateX(-50%) scale(0)"
-                            },
-
-                            {
-                                opacity: 1,
-                                transform:
-                                    "translateX(-50%) scale(1)"
-                            }
-
-                        ],
-
-                        {
-
-                            duration: 700,
-
-                            easing:
-                                "ease-out",
-
-                            fill: "forwards"
-
-                        }
-
-                    );
-
-                },
-                index * 100
-            );
-
-        }
-    );
-
-}
-
-
-/* ==================================================
    PÉTALAS
 ================================================== */
 
@@ -1364,9 +914,7 @@ function createPetal() {
 
 
     const petal =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
 
     petal.className =
@@ -1379,7 +927,7 @@ function createPetal() {
 
     const size =
         5 +
-        Math.random() * 7;
+        Math.random() * 6;
 
 
     petal.style.width =
@@ -1387,9 +935,7 @@ function createPetal() {
 
 
     petal.style.height =
-        (
-            size * 1.35
-        ) + "px";
+        size * 1.4 + "px";
 
 
     petal.style.background =
@@ -1408,7 +954,7 @@ function createPetal() {
 
     const duration =
         5000 +
-        Math.random() * 5000;
+        Math.random() * 4000;
 
 
     const animation =
@@ -1428,7 +974,7 @@ function createPetal() {
                     transform:
                         `translate(${drift / 2}px, 45vh) rotate(180deg)`,
 
-                    opacity: .85
+                    opacity: .8
 
                 },
 
@@ -1474,7 +1020,7 @@ function createPetal() {
 
 
 /* ==================================================
-   COR DOS PÉTALAS
+   CORES DOS PÉTALAS
 ================================================== */
 
 function randomPetalColor() {
@@ -1515,12 +1061,37 @@ setInterval(
         }
 
     },
-    3500
+    4000
 );
 
 
 /* ==================================================
-   ESC
+   FINAL
+================================================== */
+
+function completeGarden() {
+
+    animateSunflower();
+
+
+    for (
+        let i = 0;
+        i < 12;
+        i++
+    ) {
+
+        setTimeout(
+            createPetal,
+            i * 100
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+   TECLA ESC
 ================================================== */
 
 document.addEventListener(
@@ -1542,7 +1113,7 @@ document.addEventListener(
 
 
 /* ==================================================
-   NÃO ARRASTAR IMAGENS
+   IMPEDIR ARRASTAR IMAGENS
 ================================================== */
 
 document.addEventListener(
@@ -1563,9 +1134,28 @@ document.addEventListener(
 
 
 /* ==================================================
-   LOG
+   VERIFICAÇÃO DA JOANINHA
+================================================== */
+
+if (ladybug) {
+
+    console.log(
+        "🐞 Joaninha encontrada e configurada."
+    );
+
+} else {
+
+    console.error(
+        "🐞 ERRO: elemento #ladybug não encontrado."
+    );
+
+}
+
+
+/* ==================================================
+   FINAL
 ================================================== */
 
 console.log(
-    "🌻 Jardim das Lembranças V9 carregado!"
+    "🌻 Jardim das Lembranças V9 — versão corrigida carregada."
 );
