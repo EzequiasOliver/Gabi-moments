@@ -1,7 +1,80 @@
 /* ==================================================
-   JARDIM DAS LEMBRANÇAS — V9
-   SCRIPT.JS — CORRIGIDO
+   GABI MOMENTS — V10
+   SCRIPT.JS
 ================================================== */
+
+
+/* ==================================================
+   CONFIGURAÇÕES
+================================================== */
+
+const CONFIG = {
+
+    /* quantidade de vegetação */
+    grassFar: 18,
+    grassBack: 24,
+    grassMiddle: 30,
+    grassFront: 38,
+
+    /* quantidade de flores */
+    flowersFar: 3,
+    flowersBack: 5,
+    flowersMiddle: 7,
+    flowersFront: 9,
+
+    /* quantidade de flores de memória */
+    memoryFlowers: 3,
+
+    /* pétalas */
+    petalInterval: 2200
+
+};
+
+
+/* ==================================================
+   IMAGENS
+================================================== */
+
+const ASSETS = {
+
+    grass: [
+        "imagem/grama1.png",
+        "imagem/grama2.png"
+    ],
+
+    flowers: [
+        "imagem/margarida.png",
+        "imagem/tulipa.png"
+    ]
+
+};
+
+
+/* ==================================================
+   MEMÓRIAS
+================================================== */
+
+const memories = [
+
+    {
+        image: "imagem/foto1.jpg",
+        caption:
+            "Uma lembrança que merece um cantinho especial no jardim. 🌻"
+    },
+
+    {
+        image: "imagem/foto2.jpg",
+        caption:
+            "Alguns momentos ficam guardados de um jeito diferente. ☀️"
+    },
+
+    {
+        image: "imagem/foto3.jpg",
+        caption:
+            "Porque certas lembranças merecem florescer. 🌼"
+    }
+
+];
 
 
 /* ==================================================
@@ -43,193 +116,120 @@ const petalLayer =
 
 
 /* ==================================================
-   MEMÓRIAS
+   CAMADAS DOS MORROS
 ================================================== */
 
-const memories = [
+const terrainLayers = [
 
     {
-        photo: "imagem/foto1.jpg",
-        text: "Uma imagem, várias memórias. 🌻"
+        element:
+            document.getElementById("natureFar"),
+
+        grass:
+            CONFIG.grassFar,
+
+        flowers:
+            CONFIG.flowersFar,
+
+        seed:
+            11
     },
 
     {
-        photo: "imagem/foto2.jpg",
-        text: "Aquele dia foi especial. ☀️"
+        element:
+            document.getElementById("natureBack"),
+
+        grass:
+            CONFIG.grassBack,
+
+        flowers:
+            CONFIG.flowersBack,
+
+        seed:
+            29
     },
 
     {
-        photo: "imagem/foto3.jpg",
-        text: "Ainda lembro dessa risada. 💛"
+        element:
+            document.getElementById("natureMiddle"),
+
+        grass:
+            CONFIG.grassMiddle,
+
+        flowers:
+            CONFIG.flowersMiddle,
+
+        seed:
+            47
+    },
+
+    {
+        element:
+            document.getElementById("natureFront"),
+
+        grass:
+            CONFIG.grassFront,
+
+        flowers:
+            CONFIG.flowersFront,
+
+        seed:
+            73
     }
 
 ];
 
 
 /* ==================================================
-   ESTADO
+   VERIFICAÇÃO DE ELEMENTOS
 ================================================== */
 
-let currentMemory = 0;
+function elementExists(element) {
 
-let planting = false;
+    return element !== null &&
+           element !== undefined;
+
+}
 
 
 /* ==================================================
-   CONFIGURAÇÃO DOS MORROS
+   NÚMERO ALEATÓRIO
 ================================================== */
 
-/*
-   Cada morro possui sua própria área.
+function random(min, max) {
 
-   A vegetação agora é posicionada
-   relativamente à superfície daquele morro.
-*/
+    return Math.random() *
+        (max - min) +
+        min;
 
-const terrainConfig = [
-
-    {
-        id: "natureFar",
-
-        grass: 5,
-        flowers: 3,
-
-        leftMin: 10,
-        leftMax: 90,
-
-        bottomMin: 145,
-        bottomMax: 190,
-
-        grassSizeMin: 17,
-        grassSizeMax: 25,
-
-        flowerClass: "tiny"
-    },
-
-
-    {
-        id: "natureBack",
-
-        grass: 8,
-        flowers: 5,
-
-        leftMin: 7,
-        leftMax: 93,
-
-        bottomMin: 90,
-        bottomMax: 145,
-
-        grassSizeMin: 21,
-        grassSizeMax: 29,
-
-        flowerClass: "small"
-    },
-
-
-    {
-        id: "natureMiddle",
-
-        grass: 11,
-        flowers: 7,
-
-        leftMin: 5,
-        leftMax: 95,
-
-        bottomMin: 45,
-        bottomMax: 105,
-
-        grassSizeMin: 25,
-        grassSizeMax: 35,
-
-        flowerClass: "small"
-    },
-
-
-    {
-        id: "natureFront",
-
-        grass: 15,
-        flowers: 9,
-
-        leftMin: 4,
-        leftMax: 96,
-
-        bottomMin: 15,
-        bottomMax: 80,
-
-        grassSizeMin: 29,
-        grassSizeMax: 40,
-
-        flowerClass: "medium"
-    }
-
-];
+}
 
 
 /* ==================================================
-   INICIALIZAÇÃO
+   INTEIRO ALEATÓRIO
 ================================================== */
 
-createNature();
+function randomInt(min, max) {
 
-
-/* ==================================================
-   CRIAR VEGETAÇÃO
-================================================== */
-
-function createNature() {
-
-    terrainConfig.forEach(
-        function(config) {
-
-            const container =
-                document.getElementById(
-                    config.id
-                );
-
-
-            if (!container) {
-                return;
-            }
-
-
-            /* ------------------------------
-               GRAMA
-            ------------------------------ */
-
-            for (
-                let i = 0;
-                i < config.grass;
-                i++
-            ) {
-
-                createGrass(
-                    container,
-                    config
-                );
-
-            }
-
-
-            /* ------------------------------
-               FLORES
-            ------------------------------ */
-
-            for (
-                let i = 0;
-                i < config.flowers;
-                i++
-            ) {
-
-                createFlower(
-                    container,
-                    config
-                );
-
-            }
-
-        }
+    return Math.floor(
+        random(min, max + 1)
     );
+
+}
+
+
+/* ==================================================
+   ESCOLHER ITEM ALEATÓRIO
+================================================== */
+
+function randomItem(array) {
+
+    return array[
+        Math.floor(
+            Math.random() *
+            array.length
+        )
+    ];
 
 }
 
@@ -238,67 +238,112 @@ function createNature() {
    CRIAR GRAMA
 ================================================== */
 
-function createGrass(
-    container,
-    config
-) {
+function createGrass(layer, index) {
 
-    const grass =
+    if (!elementExists(layer.element)) {
+        return;
+    }
+
+
+    const img =
         document.createElement("img");
 
 
-    grass.src =
-        Math.random() < .5
-            ? "imagem/grama1.png"
-            : "imagem/grama2.png";
-
-
-    grass.className =
+    img.className =
         "grassDecoration";
 
 
-    grass.style.left =
-        random(
-            config.leftMin,
-            config.leftMax
-        ) + "%";
+    img.src =
+        randomItem(ASSETS.grass);
 
 
-    grass.style.bottom =
-        random(
-            config.bottomMin,
-            config.bottomMax
-        ) + "px";
+    img.alt = "";
 
 
-    grass.style.width =
-        random(
-            config.grassSizeMin,
-            config.grassSizeMax
-        ) + "px";
+    img.draggable =
+        false;
 
 
-    grass.style.setProperty(
-        "--grass-speed",
-        (
-            3 +
-            Math.random() * 4
-        ) + "s"
-    );
+    /*
+       Evita que a grama fique
+       colada nas bordas.
+    */
+
+    const left =
+        random(4, 96);
 
 
-    grass.style.setProperty(
+    /*
+       Cada camada recebe uma
+       faixa vertical diferente.
+    */
+
+    let bottom;
+
+
+    if (
+        layer.element.id ===
+        "natureFar"
+    ) {
+
+        bottom =
+            random(45, 66);
+
+    }
+
+    else if (
+        layer.element.id ===
+        "natureBack"
+    ) {
+
+        bottom =
+            random(42, 62);
+
+    }
+
+    else if (
+        layer.element.id ===
+        "natureMiddle"
+    ) {
+
+        bottom =
+            random(38, 58);
+
+    }
+
+    else {
+
+        bottom =
+            random(30, 55);
+
+    }
+
+
+    img.style.left =
+        `${left}%`;
+
+
+    img.style.bottom =
+        `${bottom}%`;
+
+
+    img.style.setProperty(
         "--grass-rotation",
-        (
-            -5 +
-            Math.random() * 10
-        ) + "deg"
+        `${random(-8, 8)}deg`
     );
 
 
-    container.appendChild(
-        grass
+    img.style.setProperty(
+        "--grass-speed",
+        `${random(3.2, 5.5)}s`
     );
+
+
+    img.style.animationDelay =
+        `${random(-4, 0)}s`;
+
+
+    layer.element.appendChild(img);
 
 }
 
@@ -307,367 +352,285 @@ function createGrass(
    CRIAR FLOR
 ================================================== */
 
-function createFlower(
-    container,
-    config
-) {
-
-    const flower =
-        document.createElement("img");
-
-
-    flower.src =
-        Math.random() < .5
-            ? "imagem/margarida.png"
-            : "imagem/tulipa.png";
-
-
-    flower.className =
-        "decorFlower " +
-        config.flowerClass;
-
-
-    flower.style.left =
-        random(
-            config.leftMin,
-            config.leftMax
-        ) + "%";
-
-
-    flower.style.bottom =
-        random(
-            config.bottomMin,
-            config.bottomMax
-        ) + "px";
-
-
-    flower.style.setProperty(
-        "--flower-speed",
-        (
-            4 +
-            Math.random() * 3
-        ) + "s"
-    );
-
-
-    flower.style.setProperty(
-        "--flower-rotation",
-        (
-            -5 +
-            Math.random() * 10
-        ) + "deg"
-    );
-
-
-    container.appendChild(
-        flower
-    );
-
-}
-
-
-/* ==================================================
-   RANDOM
-================================================== */
-
-function random(
-    min,
-    max
-) {
-
-    return Math.floor(
-        Math.random() *
-        (max - min + 1)
-    ) + min;
-
-}
-
-
-/* ==================================================
-   GIRASSOL PRINCIPAL
-================================================== */
-
-if (sunflower) {
-
-    sunflower.addEventListener(
-        "click",
-        function(event) {
-
-            event.preventDefault();
-
-            event.stopPropagation();
-
-            handleSunflower();
-
-        }
-    );
-
-}
-
-
-/* ==================================================
-   CLIQUE NO GIRASSOL
-================================================== */
-
-function handleSunflower() {
-
-    if (planting) {
-        return;
-    }
-
-
-    animateSunflower();
-
-
-    if (
-        currentMemory >=
-        memories.length
-    ) {
-
-        completeGarden();
-
-        return;
-
-    }
-
-
-    planting = true;
-
-
-    const memory =
-        memories[currentMemory];
-
-
-    const position =
-        getMemoryPosition(
-            currentMemory
-        );
-
-
-    plantMemoryFlower(
-        memory,
-        position
-    );
-
-
-    currentMemory++;
-
-
-    setTimeout(
-        function() {
-
-            showMemory(
-                memory
-            );
-
-            planting = false;
-
-        },
-        650
-    );
-
-}
-
-
-/* ==================================================
-   POSIÇÕES DAS MEMÓRIAS
-================================================== */
-
-function getMemoryPosition(
+function createDecorativeFlower(
+    layer,
     index
 ) {
 
-    const positions = [
-
-        {
-            left: 17,
-            bottom: 78,
-            size: 62
-        },
-
-        {
-            left: 50,
-            bottom: 108,
-            size: 72
-        },
-
-        {
-            left: 83,
-            bottom: 75,
-            size: 60
-        }
-
-    ];
-
-
-    return positions[
-        index %
-        positions.length
-    ];
-
-}
-
-
-/* ==================================================
-   ANIMAÇÃO DO GIRASSOL
-================================================== */
-
-function animateSunflower() {
-
-    if (!sunflower) {
+    if (!elementExists(layer.element)) {
         return;
     }
 
 
-    sunflower.animate(
-
-        [
-
-            {
-                transform:
-                    "scale(1) rotate(0deg)"
-            },
-
-            {
-                transform:
-                    "scale(1.08) rotate(-5deg)"
-            },
-
-            {
-                transform:
-                    "scale(1.08) rotate(5deg)"
-            },
-
-            {
-                transform:
-                    "scale(1) rotate(0deg)"
-            }
-
-        ],
-
-        {
-
-            duration: 650,
-
-            easing:
-                "cubic-bezier(.2,.8,.2,1)"
-
-        }
-
-    );
-
-}
-
-
-/* ==================================================
-   CRIAR GIRASSOL DA MEMÓRIA
-================================================== */
-
-function plantMemoryFlower(
-    memory,
-    position
-) {
-
-    if (!memoryFlowers) {
-        return;
-    }
-
-
-    const flower =
+    const img =
         document.createElement("img");
 
 
-    flower.src =
-        "imagem/girassol.png";
+    img.className =
+        "decorFlower";
 
 
-    flower.className =
-        "memoryFlower";
+    img.src =
+        randomItem(ASSETS.flowers);
 
 
-    flower.alt =
-        "Girassol de uma memória";
+    img.alt = "";
 
 
-    flower.style.left =
-        position.left + "%";
+    img.draggable =
+        false;
 
 
-    flower.style.bottom =
-        position.bottom + "px";
+    const left =
+        random(5, 95);
 
 
-    flower.style.width =
-        position.size + "px";
+    let bottom;
 
 
-    flower.style.zIndex =
-        "70";
+    if (
+        layer.element.id ===
+        "natureFar"
+    ) {
+
+        bottom =
+            random(48, 69);
+
+    }
+
+    else if (
+        layer.element.id ===
+        "natureBack"
+    ) {
+
+        bottom =
+            random(45, 64);
+
+    }
+
+    else if (
+        layer.element.id ===
+        "natureMiddle"
+    ) {
+
+        bottom =
+            random(40, 59);
+
+    }
+
+    else {
+
+        bottom =
+            random(33, 56);
+
+    }
 
 
-    memoryFlowers.appendChild(
-        flower
+    img.style.left =
+        `${left}%`;
+
+
+    img.style.bottom =
+        `${bottom}%`;
+
+
+    img.style.setProperty(
+        "--flower-rotation",
+        `${random(-5, 5)}deg`
     );
 
 
-    /* ------------------------------
-       ANIMAÇÃO
-    ------------------------------ */
+    img.style.setProperty(
+        "--flower-speed",
+        `${random(4, 6)}s`
+    );
 
-    flower.animate(
 
-        [
+    img.style.animationDelay =
+        `${random(-5, 0)}s`;
 
-            {
-                opacity: 0,
 
-                transform:
-                    "translateX(-50%) translateY(35px) scale(0)"
+    layer.element.appendChild(img);
 
-            },
+}
 
-            {
-                opacity: 1,
 
-                transform:
-                    "translateX(-50%) translateY(-5px) scale(1.08)"
+/* ==================================================
+   GERAR VEGETAÇÃO
+================================================== */
 
-            },
+function generateTerrainVegetation() {
 
-            {
-                opacity: 1,
+    terrainLayers.forEach(
+        layer => {
 
-                transform:
-                    "translateX(-50%) translateY(0) scale(1)"
+            if (!elementExists(
+                layer.element
+            )) {
+                return;
+            }
+
+
+            /*
+               Limpa qualquer vegetação
+               antiga antes de criar.
+            */
+
+            layer.element.innerHTML = "";
+
+
+            /*
+               GRAMA
+            */
+
+            for (
+                let i = 0;
+                i < layer.grass;
+                i++
+            ) {
+
+                createGrass(
+                    layer,
+                    i
+                );
 
             }
 
-        ],
 
-        {
+            /*
+               FLORES
+            */
 
-            duration: 800,
+            for (
+                let i = 0;
+                i < layer.flowers;
+                i++
+            ) {
 
-            easing:
-                "cubic-bezier(.2,.8,.2,1)",
+                createDecorativeFlower(
+                    layer,
+                    i
+                );
 
-            fill: "forwards"
+            }
 
         }
-
     );
 
+}
 
-    flower.addEventListener(
-        "click",
-        function(event) {
 
-            event.preventDefault();
+/* ==================================================
+   CRIAR GIRASSÓIS DE MEMÓRIA
+================================================== */
 
-            event.stopPropagation();
+function createMemoryFlowers() {
 
-            showMemory(
-                memory
+    if (
+        !elementExists(memoryFlowers)
+    ) {
+        return;
+    }
+
+
+    memoryFlowers.innerHTML = "";
+
+
+    memories.forEach(
+        (memory, index) => {
+
+            const flower =
+                document.createElement("img");
+
+
+            flower.className =
+                "memoryFlower";
+
+
+            flower.src =
+                "imagem/girassol.png";
+
+
+            flower.alt =
+                `Lembrança ${index + 1}`;
+
+
+            flower.draggable =
+                false;
+
+
+            /*
+               Posições propositalmente
+               diferentes.
+
+               Elas ficam nos morros,
+               não em cima do girassol principal.
+            */
+
+            const positions = [
+
+                {
+                    left: 27,
+                    bottom: 205,
+                    size: 62
+                },
+
+                {
+                    left: 73,
+                    bottom: 175,
+                    size: 58
+                },
+
+                {
+                    left: 51,
+                    bottom: 245,
+                    size: 54
+                }
+
+            ];
+
+
+            const position =
+                positions[
+                    index %
+                    positions.length
+                ];
+
+
+            flower.style.left =
+                `${position.left}%`;
+
+
+            flower.style.bottom =
+                `${position.bottom}px`;
+
+
+            flower.style.width =
+                `${position.size}px`;
+
+
+            flower.style.animationDelay =
+                `${index * -1.4}s`;
+
+
+            flower.dataset.memory =
+                index;
+
+
+            flower.addEventListener(
+                "click",
+                event => {
+
+                    event.stopPropagation();
+
+                    openMemory(index);
+
+                }
+            );
+
+
+            memoryFlowers.appendChild(
+                flower
             );
 
         }
@@ -680,27 +643,49 @@ function plantMemoryFlower(
    ABRIR MEMÓRIA
 ================================================== */
 
-function showMemory(
-    memory
-) {
+function openMemory(index) {
 
-    if (!memoryModal) {
+    if (
+        !memories[index] ||
+        !elementExists(memoryModal)
+    ) {
         return;
     }
 
 
-    memoryImage.src =
-        memory.photo;
+    const memory =
+        memories[index];
 
 
-    memoryCaption.textContent =
-        memory.text;
+    if (
+        elementExists(memoryImage)
+    ) {
+
+        memoryImage.src =
+            memory.image;
+
+        memoryImage.alt =
+            `Foto da lembrança ${index + 1}`;
+
+    }
 
 
-    if (memoryCounter) {
+    if (
+        elementExists(memoryCaption)
+    ) {
+
+        memoryCaption.textContent =
+            memory.caption;
+
+    }
+
+
+    if (
+        elementExists(memoryCounter)
+    ) {
 
         memoryCounter.textContent =
-            `${currentMemory} / ${memories.length}`;
+            `${index + 1} / ${memories.length}`;
 
     }
 
@@ -715,6 +700,10 @@ function showMemory(
         "false"
     );
 
+
+    document.body.style.overflow =
+        "hidden";
+
 }
 
 
@@ -724,7 +713,9 @@ function showMemory(
 
 function closeMemoryModal() {
 
-    if (!memoryModal) {
+    if (
+        !elementExists(memoryModal)
+    ) {
         return;
     }
 
@@ -739,18 +730,127 @@ function closeMemoryModal() {
         "true"
     );
 
+
+    document.body.style.overflow =
+        "";
+
 }
 
 
-if (closeMemory) {
+/* ==================================================
+   ABRIR JOANINHA
+================================================== */
 
-    closeMemory.addEventListener(
+function openLadybug() {
+
+    if (
+        !elementExists(ladybugModal)
+    ) {
+        return;
+    }
+
+
+    ladybugModal.classList.add(
+        "show"
+    );
+
+
+    ladybugModal.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+/* ==================================================
+   FECHAR JOANINHA
+================================================== */
+
+function closeLadybugModal() {
+
+    if (
+        !elementExists(ladybugModal)
+    ) {
+        return;
+    }
+
+
+    ladybugModal.classList.remove(
+        "show"
+    );
+
+
+    ladybugModal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+/* ==================================================
+   EVENTO — GIRASSOL
+================================================== */
+
+if (
+    elementExists(sunflower)
+) {
+
+    sunflower.addEventListener(
         "click",
-        function(event) {
+        event => {
 
             event.stopPropagation();
 
-            closeMemoryModal();
+
+            /*
+               Pequeno efeito de clique.
+            */
+
+            sunflower.animate(
+
+                [
+                    {
+                        transform:
+                            "scale(1)"
+                    },
+
+                    {
+                        transform:
+                            "scale(.9)"
+                    },
+
+                    {
+                        transform:
+                            "scale(1.08)"
+                    },
+
+                    {
+                        transform:
+                            "scale(1)"
+                    }
+                ],
+
+                {
+                    duration: 500,
+
+                    easing:
+                        "cubic-bezier(.2,.8,.2,1)"
+                }
+
+            );
+
+
+            createPetalBurst();
 
         }
     );
@@ -758,11 +858,71 @@ if (closeMemory) {
 }
 
 
-if (memoryModal) {
+/* ==================================================
+   EVENTO — JOANINHA
+================================================== */
+
+if (
+    elementExists(ladybug)
+) {
+
+    ladybug.addEventListener(
+        "click",
+        event => {
+
+            event.stopPropagation();
+
+            openLadybug();
+
+        }
+    );
+
+}
+
+
+/* ==================================================
+   EVENTO — FECHAR MEMÓRIA
+================================================== */
+
+if (
+    elementExists(closeMemory)
+) {
+
+    closeMemory.addEventListener(
+        "click",
+        closeMemoryModal
+    );
+
+}
+
+
+/* ==================================================
+   EVENTO — FECHAR JOANINHA
+================================================== */
+
+if (
+    elementExists(closeLadybug)
+) {
+
+    closeLadybug.addEventListener(
+        "click",
+        closeLadybugModal
+    );
+
+}
+
+
+/* ==================================================
+   FECHAR CLICANDO FORA
+================================================== */
+
+if (
+    elementExists(memoryModal)
+) {
 
     memoryModal.addEventListener(
         "click",
-        function(event) {
+        event => {
 
             if (
                 event.target ===
@@ -779,113 +939,13 @@ if (memoryModal) {
 }
 
 
-/* ==================================================
-   JOANINHA
-================================================== */
-
-if (ladybug) {
-
-    ladybug.addEventListener(
-        "click",
-        function(event) {
-
-            event.preventDefault();
-
-            event.stopPropagation();
-
-            openLadybug();
-
-        }
-    );
-
-}
-
-
-/* ==================================================
-   ABRIR MODAL DA JOANINHA
-================================================== */
-
-function openLadybug() {
-
-    if (!ladybugModal) {
-        return;
-    }
-
-
-    ladybugModal.classList.add(
-        "show"
-    );
-
-
-    ladybugModal.setAttribute(
-        "aria-hidden",
-        "false"
-    );
-
-
-    if (ladybug) {
-
-        ladybug.style.animationPlayState =
-            "paused";
-
-    }
-
-}
-
-
-/* ==================================================
-   FECHAR MODAL DA JOANINHA
-================================================== */
-
-function closeLadybugModal() {
-
-    if (!ladybugModal) {
-        return;
-    }
-
-
-    ladybugModal.classList.remove(
-        "show"
-    );
-
-
-    ladybugModal.setAttribute(
-        "aria-hidden",
-        "true"
-    );
-
-
-    if (ladybug) {
-
-        ladybug.style.animationPlayState =
-            "running";
-
-    }
-
-}
-
-
-if (closeLadybug) {
-
-    closeLadybug.addEventListener(
-        "click",
-        function(event) {
-
-            event.stopPropagation();
-
-            closeLadybugModal();
-
-        }
-    );
-
-}
-
-
-if (ladybugModal) {
+if (
+    elementExists(ladybugModal)
+) {
 
     ladybugModal.addEventListener(
         "click",
-        function(event) {
+        event => {
 
             if (
                 event.target ===
@@ -903,203 +963,16 @@ if (ladybugModal) {
 
 
 /* ==================================================
-   PÉTALAS
-================================================== */
-
-function createPetal() {
-
-    if (!petalLayer) {
-        return;
-    }
-
-
-    const petal =
-        document.createElement("div");
-
-
-    petal.className =
-        "petal";
-
-
-    petal.style.left =
-        Math.random() * 100 + "%";
-
-
-    const size =
-        5 +
-        Math.random() * 6;
-
-
-    petal.style.width =
-        size + "px";
-
-
-    petal.style.height =
-        size * 1.4 + "px";
-
-
-    petal.style.background =
-        randomPetalColor();
-
-
-    petalLayer.appendChild(
-        petal
-    );
-
-
-    const drift =
-        -120 +
-        Math.random() * 240;
-
-
-    const duration =
-        5000 +
-        Math.random() * 4000;
-
-
-    const animation =
-        petal.animate(
-
-            [
-
-                {
-                    transform:
-                        "translateY(-20px) rotate(0deg)",
-
-                    opacity: 0
-
-                },
-
-                {
-                    transform:
-                        `translate(${drift / 2}px, 45vh) rotate(180deg)`,
-
-                    opacity: .8
-
-                },
-
-                {
-                    transform:
-                        `translate(${drift}px, 110vh) rotate(360deg)`,
-
-                    opacity: 0
-
-                }
-
-            ],
-
-            {
-
-                duration,
-
-                easing:
-                    "linear"
-
-            }
-
-        );
-
-
-    animation.finished
-        .then(
-            function() {
-
-                petal.remove();
-
-            }
-        )
-        .catch(
-            function() {
-
-                petal.remove();
-
-            }
-        );
-
-}
-
-
-/* ==================================================
-   CORES DOS PÉTALAS
-================================================== */
-
-function randomPetalColor() {
-
-    const colors = [
-
-        "#fff5a8",
-        "#ffe477",
-        "#ffd75c",
-        "#fffbd5"
-
-    ];
-
-
-    return colors[
-        Math.floor(
-            Math.random() *
-            colors.length
-        )
-    ];
-
-}
-
-
-/* ==================================================
-   PÉTALAS AUTOMÁTICAS
-================================================== */
-
-setInterval(
-    function() {
-
-        if (
-            !document.hidden
-        ) {
-
-            createPetal();
-
-        }
-
-    },
-    4000
-);
-
-
-/* ==================================================
-   FINAL
-================================================== */
-
-function completeGarden() {
-
-    animateSunflower();
-
-
-    for (
-        let i = 0;
-        i < 12;
-        i++
-    ) {
-
-        setTimeout(
-            createPetal,
-            i * 100
-        );
-
-    }
-
-}
-
-
-/* ==================================================
    TECLA ESC
 ================================================== */
 
 document.addEventListener(
     "keydown",
-    function(event) {
+    event => {
 
         if (
-            event.key === "Escape"
+            event.key ===
+            "Escape"
         ) {
 
             closeMemoryModal();
@@ -1113,49 +986,289 @@ document.addEventListener(
 
 
 /* ==================================================
-   IMPEDIR ARRASTAR IMAGENS
+   CRIAR PÉTALA
 ================================================== */
 
-document.addEventListener(
-    "dragstart",
-    function(event) {
+function createPetal() {
 
-        if (
-            event.target.tagName ===
-            "IMG"
-        ) {
+    if (
+        !elementExists(petalLayer)
+    ) {
+        return;
+    }
 
-            event.preventDefault();
 
+    const petal =
+        document.createElement("div");
+
+
+    petal.className =
+        "petal";
+
+
+    const size =
+        random(7, 14);
+
+
+    petal.style.width =
+        `${size}px`;
+
+
+    petal.style.height =
+        `${size * 1.35}px`;
+
+
+    petal.style.left =
+        `${random(0, 100)}vw`;
+
+
+    petal.style.background =
+        randomItem([
+
+            "#ffe477",
+
+            "#ffd45e",
+
+            "#ffcb4c",
+
+            "#fff0a0"
+
+        ]);
+
+
+    petal.style.opacity =
+        random(.45, .85);
+
+
+    const duration =
+        random(7, 13);
+
+
+    petal.animate(
+
+        [
+
+            {
+                transform:
+                    "translate3d(0, -20px, 0) rotate(0deg)",
+
+                opacity:
+                    0
+            },
+
+            {
+                transform:
+                    `translate3d(${random(-70,70)}px, 45vh, 0) rotate(${random(120,300)}deg)`,
+
+                opacity:
+                    random(.55,.9)
+            },
+
+            {
+                transform:
+                    `translate3d(${random(-120,120)}px, 110vh, 0) rotate(${random(300,720)}deg)`,
+
+                opacity:
+                    0
+            }
+
+        ],
+
+        {
+            duration:
+                duration * 1000,
+
+            easing:
+                "linear",
+
+            fill:
+                "forwards"
         }
 
-    }
-);
-
-
-/* ==================================================
-   VERIFICAÇÃO DA JOANINHA
-================================================== */
-
-if (ladybug) {
-
-    console.log(
-        "🐞 Joaninha encontrada e configurada."
     );
 
-} else {
 
-    console.error(
-        "🐞 ERRO: elemento #ladybug não encontrado."
+    petalLayer.appendChild(
+        petal
+    );
+
+
+    setTimeout(
+        () => {
+
+            petal.remove();
+
+        },
+        duration * 1000 + 300
     );
 
 }
 
 
 /* ==================================================
-   FINAL
+   EXPLOSÃO DE PÉTALAS
 ================================================== */
 
-console.log(
-    "🌻 Jardim das Lembranças V9 — versão corrigida carregada."
-);
+function createPetalBurst() {
+
+    for (
+        let i = 0;
+        i < 9;
+        i++
+    ) {
+
+        setTimeout(
+            createPetal,
+            i * 80
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+   PÉTALAS AUTOMÁTICAS
+================================================== */
+
+function startPetalEffect() {
+
+    setInterval(
+        () => {
+
+            /*
+               Pequena chance de criar
+               pétala automática.
+
+               Assim não fica exagerado.
+            */
+
+            if (
+                Math.random() < .55
+            ) {
+
+                createPetal();
+
+            }
+
+        },
+        CONFIG.petalInterval
+    );
+
+}
+
+
+/* ==================================================
+   ANIMAÇÃO EXTRA DO GIRASSOL
+================================================== */
+
+function sunflowerIdleAnimation() {
+
+    if (
+        !elementExists(sunflower)
+    ) {
+        return;
+    }
+
+
+    sunflower.animate(
+
+        [
+
+            {
+                transform:
+                    "rotate(-1deg)"
+            },
+
+            {
+                transform:
+                    "rotate(1.2deg)"
+            },
+
+            {
+                transform:
+                    "rotate(-1deg)"
+            }
+
+        ],
+
+        {
+
+            duration:
+                4200,
+
+            iterations:
+                Infinity,
+
+            easing:
+                "ease-in-out"
+
+        }
+
+    );
+
+}
+
+
+/* ==================================================
+   INICIALIZAÇÃO
+================================================== */
+
+function init() {
+
+    /*
+       Vegetação dos quatro morros.
+    */
+
+    generateTerrainVegetation();
+
+
+    /*
+       Girassóis das lembranças.
+    */
+
+    createMemoryFlowers();
+
+
+    /*
+       Animação do girassol principal.
+    */
+
+    sunflowerIdleAnimation();
+
+
+    /*
+       Pétalas.
+    */
+
+    startPetalEffect();
+
+}
+
+
+/* ==================================================
+   INICIAR QUANDO O DOM ESTIVER PRONTO
+================================================== */
+
+if (
+    document.readyState ===
+    "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        init
+    );
+
+}
+
+else {
+
+    init();
+
+}
+
+
+/* ==================================================
+   FIM DO SCRIPT V10
+================================================== */
