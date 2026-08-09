@@ -1190,3 +1190,537 @@ body {
     }
 
 }
+/* ==================================================
+   V10 — PARTE 3
+   GIRASSOL + MEMÓRIAS + JOANINHA
+================================================== */
+
+
+/* ==================================================
+   GIRASSOL PRINCIPAL
+================================================== */
+
+#mainFlowerContainer {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 42px;
+
+    width: 150px;
+    height: 250px;
+
+    z-index: 80;
+
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: center;
+
+    pointer-events: none;
+
+}
+
+
+/* ==================================================
+   IMAGEM DO GIRASSOL
+================================================== */
+
+#sunflower {
+
+    position: relative;
+
+    display: block;
+
+    width: clamp(
+        105px,
+        17vw,
+        155px
+    );
+
+    height: auto;
+
+    transform:
+        translateX(0);
+
+    transform-origin:
+        bottom center;
+
+    cursor: pointer;
+
+    pointer-events: auto;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+    filter:
+        drop-shadow(
+            0 7px 5px
+            rgba(45,82,36,.24)
+        );
+
+    transition:
+        filter .25s ease;
+
+}
+
+
+/* ==================================================
+   GIRASSOL — INTERAÇÃO
+================================================== */
+
+#sunflower:hover {
+
+    filter:
+        drop-shadow(
+            0 8px 8px
+            rgba(45,82,36,.28)
+        )
+        brightness(1.04);
+
+}
+
+
+#sunflower:active {
+
+    filter:
+        drop-shadow(
+            0 4px 4px
+            rgba(45,82,36,.22)
+        )
+        brightness(1.08);
+
+}
+
+
+/* ==================================================
+   FLORES DAS MEMÓRIAS
+================================================== */
+
+#memoryFlowers {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 70;
+
+    pointer-events: none;
+
+}
+
+
+/* ==================================================
+   CADA GIRASSOL DE MEMÓRIA
+================================================== */
+
+.memoryFlower {
+
+    position: absolute;
+
+    display: block;
+
+    transform:
+        translateX(-50%);
+
+    transform-origin:
+        bottom center;
+
+    cursor: pointer;
+
+    pointer-events: auto;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+    filter:
+        drop-shadow(
+            0 4px 4px
+            rgba(43,80,34,.2)
+        );
+
+    transition:
+        filter .25s ease;
+
+    animation:
+        memoryFlowerSway
+        5s
+        ease-in-out
+        infinite;
+
+}
+
+
+/* ==================================================
+   MOVIMENTO DOS GIRASSÓIS
+================================================== */
+
+@keyframes memoryFlowerSway {
+
+    0%,
+    100% {
+
+        rotate:
+            -1deg;
+
+    }
+
+    50% {
+
+        rotate:
+            1.5deg;
+
+    }
+
+}
+
+
+/* ==================================================
+   HOVER MEMÓRIA
+================================================== */
+
+.memoryFlower:hover {
+
+    filter:
+        drop-shadow(
+            0 6px 7px
+            rgba(43,80,34,.25)
+        )
+        brightness(1.05);
+
+}
+
+
+/* ==================================================
+   JOANINHA
+================================================== */
+
+#ladybug {
+
+    position: absolute;
+
+    left: 14%;
+
+    bottom: 115px;
+
+    width: 58px;
+    height: 58px;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    z-index: 150;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    pointer-events: auto;
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    touch-action: manipulation;
+
+    filter:
+        drop-shadow(
+            0 4px 3px
+            rgba(0,0,0,.2)
+        );
+
+    animation:
+        ladybugWalk
+        5s
+        ease-in-out
+        infinite;
+
+}
+
+
+/* ==================================================
+   IMAGEM DA JOANINHA
+================================================== */
+
+#ladybug img {
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+}
+
+
+/* ==================================================
+   MOVIMENTO DA JOANINHA
+================================================== */
+
+@keyframes ladybugWalk {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(-3deg);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-4px)
+            rotate(3deg);
+
+    }
+
+}
+
+
+/* ==================================================
+   JOANINHA — HOVER
+================================================== */
+
+#ladybug:hover {
+
+    filter:
+        drop-shadow(
+            0 5px 5px
+            rgba(0,0,0,.24)
+        )
+        brightness(1.08);
+
+}
+
+
+/* ==================================================
+   JOANINHA — CLIQUE
+================================================== */
+
+#ladybug:active {
+
+    transform:
+        scale(.92);
+
+}
+
+
+/* ==================================================
+   MENSAGEM
+================================================== */
+
+#touchMessage {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 13px;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 100;
+
+    width: max-content;
+
+    max-width: 90%;
+
+    padding:
+        7px 14px;
+
+    border-radius: 20px;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            .95
+        );
+
+    font-size:
+        clamp(
+            .78rem,
+            2.5vw,
+            .95rem
+        );
+
+    text-align: center;
+
+    text-shadow:
+        0 1px 3px
+        rgba(0,0,0,.3);
+
+    background:
+        rgba(
+            45,
+            94,
+            44,
+            .25
+        );
+
+    backdrop-filter:
+        blur(4px);
+
+    -webkit-backdrop-filter:
+        blur(4px);
+
+    pointer-events: none;
+
+    animation:
+        messageFloat
+        3s
+        ease-in-out
+        infinite;
+
+}
+
+
+/* ==================================================
+   ANIMAÇÃO DA MENSAGEM
+================================================== */
+
+@keyframes messageFloat {
+
+    0%,
+    100% {
+
+        opacity: .72;
+
+        transform:
+            translateX(-50%)
+            translateY(0);
+
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(-4px);
+
+    }
+
+}
+
+
+/* ==================================================
+   PÉTALAS
+================================================== */
+
+#petalLayer {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    z-index: 200;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+}
+
+
+/* ==================================================
+   PÉTALA INDIVIDUAL
+================================================== */
+
+.petal {
+
+    position: absolute;
+
+    top: -20px;
+
+    border-radius:
+        70% 30% 70% 30%;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    filter:
+        blur(.1px);
+
+}
+
+
+/* ==================================================
+   CELULAR
+================================================== */
+
+@media (
+    max-width: 600px
+) {
+
+    #mainFlowerContainer {
+
+        bottom: 37px;
+
+        width: 125px;
+        height: 220px;
+
+    }
+
+
+    #sunflower {
+
+        width: 115px;
+
+    }
+
+
+    #ladybug {
+
+        left: 9%;
+
+        bottom: 110px;
+
+        width: 48px;
+        height: 48px;
+
+    }
+
+
+    #touchMessage {
+
+        bottom: 9px;
+
+    }
+
+
+    .memoryFlower {
+
+        max-width: 75px;
+
+    }
+
+}
