@@ -1,38 +1,327 @@
-<div
-    id="ladybugModal"
-    class="modal"
-    aria-hidden="true"
-    role="dialog"
-    aria-modal="true"
->
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-    <div class="memory-card ladybug-card">
+<head>
 
-        <button
-            id="closeLadybug"
-            class="close-button"
-            type="button"
-            aria-label="Fechar joaninha"
-        >
-            ×
-        </button>
+    <meta charset="UTF-8">
 
-        <img
-            src="imagem/joaninha-engracada.jpg"
-            alt="Joaninha"
-            draggable="false"
-        >
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-        <p>
-            A joaninha resolveu posar para a câmera 😂🐞
-        </p>
+    <meta
+        name="theme-color"
+        content="#72c9ee"
+    >
+
+    <title>Para Gabi 🌻</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<div id="app">
+
+
+    <!-- ==================================================
+         CÉU
+    ================================================== -->
+
+    <div id="sky">
+
+        <div id="sunGlow"></div>
+
+        <div id="sun"></div>
+
+
+        <div class="cloud cloud-1"></div>
+
+        <div class="cloud cloud-2"></div>
+
+        <div class="cloud cloud-3"></div>
 
     </div>
+
+
+
+    <!-- ==================================================
+         CONTEÚDO
+    ================================================== -->
+
+    <main id="content">
+
+
+        <!-- ==================================================
+             TÍTULO
+        ================================================== -->
+
+        <section id="intro">
+
+            <h1>
+                Para Gabi ☀️
+            </h1>
+
+            <p id="subtitle">
+
+                Algumas pessoas deixam o mundo mais bonito
+                apenas por existirem.
+
+            </p>
+
+        </section>
+
+
+
+        <!-- ==================================================
+             JARDIM
+        ================================================== -->
+
+        <section id="garden">
+
+
+            <!-- ==================================================
+                 MORROS
+            ================================================== -->
+
+            <div id="terrain">
+
+                <div class="hill hill-far"></div>
+
+                <div class="hill hill-back"></div>
+
+                <div class="hill hill-middle"></div>
+
+                <div class="hill hill-front"></div>
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 VEGETAÇÃO — MORRO DISTANTE
+            ================================================== -->
+
+            <div
+                id="natureFar"
+                class="nature-layer terrain-far"
+            ></div>
+
+
+
+            <!-- ==================================================
+                 VEGETAÇÃO — MORRO TRASEIRO
+            ================================================== -->
+
+            <div
+                id="natureBack"
+                class="nature-layer terrain-back"
+            ></div>
+
+
+
+            <!-- ==================================================
+                 VEGETAÇÃO — MORRO DO MEIO
+            ================================================== -->
+
+            <div
+                id="natureMiddle"
+                class="nature-layer terrain-middle"
+            ></div>
+
+
+
+            <!-- ==================================================
+                 VEGETAÇÃO — MORRO DA FRENTE
+            ================================================== -->
+
+            <div
+                id="natureFront"
+                class="nature-layer terrain-front"
+            ></div>
+
+
+
+            <!-- ==================================================
+                 GIRASSÓIS DAS MEMÓRIAS
+            ================================================== -->
+
+            <div id="memoryFlowers"></div>
+
+
+
+            <!-- ==================================================
+                 GIRASSOL PRINCIPAL
+            ================================================== -->
+
+            <div id="mainFlowerContainer">
+
+                <img
+                    id="sunflower"
+                    src="imagem/girassol.png"
+                    alt="Girassol principal"
+                    draggable="false"
+                >
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 JOANINHA
+            ================================================== -->
+
+            <button
+                id="ladybug"
+                type="button"
+                aria-label="Abrir lembrança da joaninha"
+            >
+
+                <img
+                    src="imagem/joaninha.png"
+                    alt=""
+                    draggable="false"
+                >
+
+            </button>
+
+
+
+            <!-- ==================================================
+                 MENSAGEM
+            ================================================== -->
+
+            <div id="touchMessage">
+
+                Toque no girassol 🌻
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ==================================================
+         PÉTALAS
+    ================================================== -->
+
+    <div id="petalLayer"></div>
+
+
+
+    <!-- ==================================================
+         MODAL — MEMÓRIAS
+    ================================================== -->
+
+    <div
+        id="memoryModal"
+        class="modal"
+        aria-hidden="true"
+    >
+
+        <div class="memory-card">
+
+
+            <button
+                id="closeMemory"
+                class="close-button"
+                type="button"
+                aria-label="Fechar"
+            >
+                ×
+            </button>
+
+
+            <div class="memory-photo-container">
+
+                <img
+                    id="memoryImage"
+                    src=""
+                    alt="Foto da lembrança"
+                >
+
+            </div>
+
+
+            <p id="memoryCaption"></p>
+
+
+            <div
+                id="memoryCounter"
+                class="memory-counter"
+            ></div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         MODAL — JOANINHA
+    ================================================== -->
+
+    <div
+        id="ladybugModal"
+        class="modal"
+        aria-hidden="true"
+    >
+
+        <div class="memory-card ladybug-card">
+
+
+            <button
+                id="closeLadybug"
+                class="close-button"
+                type="button"
+                aria-label="Fechar"
+            >
+                ×
+            </button>
+
+
+            <img
+                src="imagem/joaninha-engracada.jpg"
+                alt="Joaninha engraçada"
+                draggable="false"
+            >
+
+
+            <p>
+
+                A joaninha resolveu posar para a câmera 😂🐞
+
+            </p>
+
+
+        </div>
+
+    </div>
+
+
 
 </div>
 
 
+<!-- ==================================================
+     JAVASCRIPT
+================================================== -->
+
 <script src="script.js"></script>
 
+
 </body>
+
 </html>
