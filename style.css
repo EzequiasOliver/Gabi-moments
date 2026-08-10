@@ -1,491 +1,28 @@
-/* ==================================================
-   JARDIM DAS LEMBRANÇAS — V10
-   STYLE.CSS
-   PARTE 1 — BASE + CÉU
-================================================== */
+/* =========================================================
+   GABI MOMENTS — V10
+   STYLE.CSS COMPLETO
+========================================================= */
 
 
-/* ==================================================
+/* =========================================================
    RESET
-================================================== */
+========================================================= */
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-/* ==================================================
-   V10 — PARTE 2
-   VEGETAÇÃO DOS MORROS
-================================================== */
-
-
-/* ==================================================
-   CAMADAS DE VEGETAÇÃO
-================================================== */
-
-.nature-layer {
-
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    overflow: hidden;
-
-    pointer-events: none;
-
-}
-
-
-/*
-   A vegetação fica acima do morro correspondente,
-   mas abaixo das flores principais.
-*/
-
-.terrain-far {
-    z-index: 40;
-}
-
-.terrain-back {
-    z-index: 41;
-}
-
-.terrain-middle {
-    z-index: 42;
-}
-
-.terrain-front {
-    z-index: 43;
-}
-
-
-/* ==================================================
-   GRAMA
-================================================== */
-
-.grassDecoration {
-
-    position: absolute;
-
-    display: block;
-
-    width: 30px;
-    height: auto;
-
-    transform:
-        translateX(-50%)
-        rotate(
-            var(--grass-rotation, 0deg)
-        );
-
-    transform-origin:
-        bottom center;
-
-    pointer-events: none;
-
-    user-select: none;
-
-    -webkit-user-drag: none;
-
-    filter:
-        drop-shadow(
-            0 2px 2px
-            rgba(0,0,0,.13)
-        );
-
-    animation:
-        grassWind
-        var(--grass-speed, 4s)
-        ease-in-out
-        infinite;
-
-}
-
-
-/* ==================================================
-   VENTO DA GRAMA
-================================================== */
-
-@keyframes grassWind {
-
-    0%,
-    100% {
-
-        transform:
-            translateX(-50%)
-            rotate(
-                var(--grass-rotation, 0deg)
-            );
-
-    }
-
-    50% {
-
-        transform:
-            translateX(-50%)
-            rotate(
-                calc(
-                    var(--grass-rotation, 0deg)
-                    + 4deg
-                )
-            );
-
-    }
-
-}
-
-
-/* ==================================================
-   FLORES DECORATIVAS
-================================================== */
-
-.decorFlower {
-
-    position: absolute;
-
-    display: block;
-
-    width: 28px;
-    height: auto;
-
-    transform:
-        translateX(-50%)
-        rotate(
-            var(--flower-rotation, 0deg)
-        );
-
-    transform-origin:
-        bottom center;
-
-    pointer-events: none;
-
-    user-select: none;
-
-    -webkit-user-drag: none;
-
-    filter:
-        drop-shadow(
-            0 2px 2px
-            rgba(0,0,0,.12)
-        );
-
-    animation:
-        flowerWind
-        var(--flower-speed, 5s)
-        ease-in-out
-        infinite;
-
-}
-
-
-/* ==================================================
-   VENTO DAS FLORES
-================================================== */
-
-@keyframes flowerWind {
-
-    0%,
-    100% {
-
-        transform:
-            translateX(-50%)
-            rotate(
-                var(--flower-rotation, 0deg)
-            );
-
-    }
-
-    50% {
-
-        transform:
-            translateX(-50%)
-            rotate(
-                calc(
-                    var(--flower-rotation, 0deg)
-                    + 3deg
-                )
-            );
-
-    }
-
-}
-
-
-/* ==================================================
-   TAMANHOS — DISTANTE
-================================================== */
-
-.terrain-far
-.grassDecoration {
-
-    width: 18px;
-
-    opacity: .58;
-
-}
-
-
-.terrain-far
-.decorFlower {
-
-    width: 17px;
-
-    opacity: .58;
-
-}
-
-
-/* ==================================================
-   TAMANHOS — TRASEIRO
-================================================== */
-
-.terrain-back
-.grassDecoration {
-
-    width: 23px;
-
-    opacity: .76;
-
-}
-
-
-.terrain-back
-.decorFlower {
-
-    width: 21px;
-
-    opacity: .76;
-
-}
-
-
-/* ==================================================
-   TAMANHOS — MEIO
-================================================== */
-
-.terrain-middle
-.grassDecoration {
-
-    width: 29px;
-
-    opacity: .9;
-
-}
-
-
-.terrain-middle
-.decorFlower {
-
-    width: 26px;
-
-    opacity: .9;
-
-}
-
-
-/* ==================================================
-   TAMANHOS — FRENTE
-================================================== */
-
-.terrain-front
-.grassDecoration {
-
-    width: 35px;
-
-    opacity: 1;
-
-}
-
-
-.terrain-front
-.decorFlower {
-
-    width: 31px;
-
-    opacity: 1;
-
-}
-
-
-/* ==================================================
-   PROFUNDIDADE DA VEGETAÇÃO
-================================================== */
-
-.terrain-far img {
-
-    filter:
-        saturate(.72)
-        brightness(1.04)
-        drop-shadow(
-            0 1px 1px
-            rgba(0,0,0,.08)
-        );
-
-}
-
-
-.terrain-back img {
-
-    filter:
-        saturate(.82)
-        drop-shadow(
-            0 1px 2px
-            rgba(0,0,0,.1)
-        );
-
-}
-
-
-.terrain-middle img {
-
-    filter:
-        saturate(.94)
-        drop-shadow(
-            0 2px 2px
-            rgba(0,0,0,.11)
-        );
-
-}
-
-
-.terrain-front img {
-
-    filter:
-        saturate(1)
-        drop-shadow(
-            0 2px 3px
-            rgba(0,0,0,.13)
-        );
-
-}
-
-
-/* ==================================================
-   PROTEÇÃO CONTRA ELEMENTOS ESTRANHOS
-================================================== */
-
-.fieldFlower {
-
-    display: none !important;
-
-}
-
-
-#decorations {
-
-    display: none !important;
-
-}
-
-
-#gardenField {
-
-    display: none !important;
-
-}
-
-
-/* ==================================================
-   NENHUMA VEGETAÇÃO PODE INTERCEPTAR CLIQUES
-================================================== */
-
-.nature-layer,
-.nature-layer * {
-
-    pointer-events: none;
-
-}
-
-
-/* ==================================================
-   RESPONSIVIDADE — CELULAR
-================================================== */
-
-@media (
-    max-width: 600px
-) {
-
-    .terrain-far
-    .grassDecoration {
-
-        width: 15px;
-
-    }
-
-
-    .terrain-far
-    .decorFlower {
-
-        width: 14px;
-
-    }
-
-
-    .terrain-back
-    .grassDecoration {
-
-        width: 20px;
-
-    }
-
-
-    .terrain-back
-    .decorFlower {
-
-        width: 18px;
-
-    }
-
-
-    .terrain-middle
-    .grassDecoration {
-
-        width: 25px;
-
-    }
-
-
-    .terrain-middle
-    .decorFlower {
-
-        width: 23px;
-
-    }
-
-
-    .terrain-front
-    .grassDecoration {
-
-        width: 30px;
-
-    }
-
-
-    .terrain-front
-    .decorFlower {
-
-        width: 27px;
-
-    }
-
-}
-
 
 html {
     width: 100%;
     min-height: 100%;
-
     scroll-behavior: smooth;
 }
-
 
 body {
     width: 100%;
     min-height: 100vh;
-
     overflow-x: hidden;
 
     font-family:
@@ -493,16 +30,15 @@ body {
         Arial,
         sans-serif;
 
-    background: #91d7f2;
+    background: #8fd5ef;
 
-    -webkit-tap-highlight-color:
-        transparent;
+    -webkit-tap-highlight-color: transparent;
 }
 
 
-/* ==================================================
+/* =========================================================
    APLICAÇÃO
-================================================== */
+========================================================= */
 
 #app {
     position: relative;
@@ -516,9 +52,9 @@ body {
 }
 
 
-/* ==================================================
+/* =========================================================
    CÉU
-================================================== */
+========================================================= */
 
 #sky {
     position: absolute;
@@ -528,132 +64,68 @@ body {
     width: 100%;
     height: 100%;
 
-    overflow: hidden;
-
     z-index: 1;
 
-    background:
-        linear-gradient(
-            to bottom,
-            #72c9ee 0%,
-            #9edff4 42%,
-            #d9f3f4 72%,
-            #eef7dd 100%
-        );
-}
-
-
-/* ==================================================
-   BRILHO GERAL DO CÉU
-================================================== */
-
-#sky::after {
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    pointer-events: none;
+    overflow: hidden;
 
     background:
         linear-gradient(
             to bottom,
-            rgba(255,255,255,.08),
-            rgba(255,255,255,0)
+            #70c8ec 0%,
+            #94d9f1 35%,
+            #c8ebef 65%,
+            #e8f3d8 100%
         );
 }
 
 
-/* ==================================================
+/* =========================================================
    SOL
-================================================== */
+========================================================= */
 
 #sun {
     position: absolute;
 
-    width: clamp(
-        75px,
-        13vw,
-        135px
-    );
+    top: clamp(35px, 7vh, 90px);
+    right: clamp(30px, 9vw, 140px);
 
-    height: clamp(
-        75px,
-        13vw,
-        135px
-    );
-
-    top: clamp(
-        35px,
-        7vh,
-        90px
-    );
-
-    right: clamp(
-        30px,
-        9vw,
-        140px
-    );
-
-    border-radius: 50%;
+    width: clamp(75px, 13vw, 135px);
+    height: clamp(75px, 13vw, 135px);
 
     z-index: 5;
 
+    border-radius: 50%;
+
     background:
         radial-gradient(
-            circle at 35% 32%,
-            #fffbd0 0%,
-            #fff09a 38%,
-            #ffd84f 72%,
-            #f6bd32 100%
+            circle at 35% 30%,
+            #fffbd1 0%,
+            #fff19a 38%,
+            #ffd94f 72%,
+            #f3b92f 100%
         );
 
     box-shadow:
-        0 0 25px
-        rgba(255,220,85,.8),
-
-        0 0 65px
-        rgba(255,214,65,.45);
+        0 0 25px rgba(255, 220, 90, .75),
+        0 0 70px rgba(255, 214, 70, .38);
 
     animation:
-        sunFloat
-        6s
-        ease-in-out
-        infinite;
+        sunFloat 6s ease-in-out infinite;
 }
 
 
-/* ==================================================
+/* =========================================================
    BRILHO DO SOL
-================================================== */
+========================================================= */
 
 #sunGlow {
     position: absolute;
 
-    width: clamp(
-        170px,
-        30vw,
-        330px
-    );
+    top: clamp(-20px, 1vh, 20px);
+    right: clamp(-40px, 2vw, 50px);
 
-    height: clamp(
-        170px,
-        30vw,
-        330px
-    );
-
-    top: clamp(
-        -15px,
-        2vh,
-        30px
-    );
-
-    right: clamp(
-        -30px,
-        3vw,
-        70px
-    );
+    width: clamp(170px, 30vw, 330px);
+    height: clamp(170px, 30vw, 330px);
 
     z-index: 3;
 
@@ -664,174 +136,105 @@ body {
     background:
         radial-gradient(
             circle,
-            rgba(255,230,100,.32)
-            0%,
-            rgba(255,230,100,.13)
-            35%,
-            rgba(255,230,100,0)
-            72%
+            rgba(255, 231, 110, .32) 0%,
+            rgba(255, 231, 110, .12) 38%,
+            rgba(255, 231, 110, 0) 72%
         );
 
     animation:
-        glowPulse
-        5s
-        ease-in-out
-        infinite;
+        glowPulse 5s ease-in-out infinite;
 }
 
-
-/* ==================================================
-   ANIMAÇÃO DO SOL
-================================================== */
 
 @keyframes sunFloat {
 
     0%,
     100% {
-        transform:
-            translateY(0)
-            scale(1);
+        transform: translateY(0);
     }
 
     50% {
-        transform:
-            translateY(-7px)
-            scale(1.025);
+        transform: translateY(-7px);
     }
 }
 
-
-/* ==================================================
-   ANIMAÇÃO DO BRILHO
-================================================== */
 
 @keyframes glowPulse {
 
     0%,
     100% {
-        opacity: .72;
-
-        transform:
-            scale(.96);
+        opacity: .7;
+        transform: scale(.96);
     }
 
     50% {
         opacity: 1;
-
-        transform:
-            scale(1.05);
+        transform: scale(1.05);
     }
 }
 
 
-/* ==================================================
+/* =========================================================
    NUVENS
-================================================== */
+========================================================= */
 
 .cloud {
     position: absolute;
 
-    z-index: 6;
-
     width: 150px;
     height: 45px;
 
+    z-index: 6;
+
     border-radius: 50px;
 
-    opacity: .76;
-
-    pointer-events: none;
-
     background:
-        rgba(
-            255,
-            255,
-            255,
-            .82
-        );
-
-    filter:
-        blur(.2px);
+        rgba(255, 255, 255, .82);
 
     box-shadow:
-        25px -18px 0 -5px
-        rgba(255,255,255,.82),
+        25px -18px 0 -5px rgba(255,255,255,.82),
+        65px -10px 0 -2px rgba(255,255,255,.82),
+        105px 2px 0 -8px rgba(255,255,255,.82);
 
-        65px -10px 0 -2px
-        rgba(255,255,255,.82),
+    opacity: .7;
 
-        105px 2px 0 -8px
-        rgba(255,255,255,.82);
+    pointer-events: none;
 }
-
-
-/* ==================================================
-   NUVEM 1
-================================================== */
 
 .cloud-1 {
     top: 14%;
+    left: -220px;
 
-    left: -190px;
-
-    transform:
-        scale(.8);
+    transform: scale(.8);
 
     animation:
-        cloudMove1
-        55s
-        linear
-        infinite;
+        cloudMove1 55s linear infinite;
 }
-
-
-/* ==================================================
-   NUVEM 2
-================================================== */
 
 .cloud-2 {
     top: 28%;
+    left: -280px;
 
-    left: -250px;
+    transform: scale(.58);
 
-    transform:
-        scale(.58);
-
-    opacity: .54;
+    opacity: .5;
 
     animation:
-        cloudMove2
-        78s
-        linear
-        infinite;
+        cloudMove2 78s linear infinite;
 }
-
-
-/* ==================================================
-   NUVEM 3
-================================================== */
 
 .cloud-3 {
     top: 9%;
+    left: -260px;
 
-    left: -230px;
+    transform: scale(.48);
 
-    transform:
-        scale(.48);
-
-    opacity: .48;
+    opacity: .45;
 
     animation:
-        cloudMove3
-        92s
-        linear
-        infinite;
+        cloudMove3 92s linear infinite;
 }
 
-
-/* ==================================================
-   MOVIMENTO DAS NUVENS
-================================================== */
 
 @keyframes cloudMove1 {
 
@@ -869,9 +272,9 @@ body {
 }
 
 
-/* ==================================================
+/* =========================================================
    CONTEÚDO
-================================================== */
+========================================================= */
 
 #content {
     position: relative;
@@ -884,32 +287,24 @@ body {
     display: flex;
 
     flex-direction: column;
-
     align-items: center;
 
     pointer-events: none;
 }
 
 
-/* ==================================================
-   INTRO
-================================================== */
+/* =========================================================
+   INTRODUÇÃO
+========================================================= */
 
 #intro {
     position: relative;
 
     z-index: 25;
 
-    width: min(
-        92%,
-        700px
-    );
+    width: min(92%, 700px);
 
-    margin-top: clamp(
-        35px,
-        7vh,
-        80px
-    );
+    margin-top: clamp(35px, 7vh, 80px);
 
     text-align: center;
 
@@ -920,69 +315,50 @@ body {
 #intro h1 {
     margin-bottom: 10px;
 
-    color: #fff;
+    color: #ffffff;
 
-    font-size: clamp(
-        2rem,
-        6vw,
-        4rem
-    );
+    font-size:
+        clamp(2rem, 6vw, 4rem);
 
     font-weight: 700;
 
     letter-spacing: .5px;
 
     text-shadow:
-        0 2px 4px
-        rgba(52,91,52,.35),
-
-        0 5px 20px
-        rgba(255,255,255,.22);
+        0 2px 4px rgba(52,91,52,.35),
+        0 5px 20px rgba(255,255,255,.2);
 }
 
 
 #subtitle {
     max-width: 620px;
 
-    margin:
-        0 auto;
+    margin: 0 auto;
 
     color:
-        rgba(
-            255,
-            255,
-            255,
-            .94
-        );
+        rgba(255,255,255,.94);
 
-    font-size: clamp(
-        .92rem,
-        2.7vw,
-        1.18rem
-    );
+    font-size:
+        clamp(.92rem, 2.7vw, 1.18rem);
 
     line-height: 1.6;
 
     text-shadow:
-        0 1px 3px
-        rgba(0,0,0,.25);
+        0 1px 3px rgba(0,0,0,.25);
 }
 
 
-/* ==================================================
+/* =========================================================
    JARDIM
-================================================== */
+========================================================= */
 
 #garden {
     position: relative;
 
     width: 100%;
 
-    height: clamp(
-        470px,
-        68vh,
-        720px
-    );
+    height:
+        clamp(470px, 68vh, 720px);
 
     margin-top: -5px;
 
@@ -990,9 +366,9 @@ body {
 }
 
 
-/* ==================================================
+/* =========================================================
    TERRENO
-================================================== */
+========================================================= */
 
 #terrain {
     position: absolute;
@@ -1008,9 +384,9 @@ body {
 }
 
 
-/* ==================================================
-   MORROS — BASE
-================================================== */
+/* =========================================================
+   MORROS
+========================================================= */
 
 .hill {
     position: absolute;
@@ -1027,10 +403,6 @@ body {
 }
 
 
-/* ==================================================
-   MORRO DISTANTE
-================================================== */
-
 .hill-far {
     bottom: 235px;
 
@@ -1041,17 +413,13 @@ body {
     background:
         linear-gradient(
             to bottom,
-            #acd982,
-            #94c76f
+            #b0d987,
+            #96c873
         );
 
     opacity: .72;
 }
 
-
-/* ==================================================
-   MORRO TRASEIRO
-================================================== */
 
 .hill-back {
     bottom: 170px;
@@ -1063,17 +431,13 @@ body {
     background:
         linear-gradient(
             to bottom,
-            #8fc86d,
+            #91c970,
             #75b75e
         );
 
     opacity: .86;
 }
 
-
-/* ==================================================
-   MORRO DO MEIO
-================================================== */
 
 .hill-middle {
     bottom: 100px;
@@ -1085,15 +449,11 @@ body {
     background:
         linear-gradient(
             to bottom,
-            #76b95e,
-            #5fa94e
+            #78ba60,
+            #5faa4f
         );
 }
 
-
-/* ==================================================
-   MORRO DA FRENTE
-================================================== */
 
 .hill-front {
     bottom: 0;
@@ -1105,8 +465,8 @@ body {
     background:
         linear-gradient(
             to bottom,
-            #68ae50,
-            #4f9947
+            #69ae51,
+            #4e9846
         );
 
     box-shadow:
@@ -1115,97 +475,290 @@ body {
 }
 
 
-/* ==================================================
-   ACABAMENTO DO TERRENO
-================================================== */
+/* =========================================================
+   VEGETAÇÃO DOS MORROS
+========================================================= */
 
-#garden::after {
-    content: "";
-
+.nature-layer {
     position: absolute;
 
-    left: 0;
-    right: 0;
+    inset: 0;
 
-    bottom: 0;
+    width: 100%;
+    height: 100%;
 
-    height: 65px;
+    overflow: hidden;
 
-    z-index: 35;
+    pointer-events: none;
+}
+
+
+.terrain-far {
+    z-index: 40;
+}
+
+
+.terrain-back {
+    z-index: 41;
+}
+
+
+.terrain-middle {
+    z-index: 42;
+}
+
+
+.terrain-front {
+    z-index: 43;
+}
+
+
+/* =========================================================
+   GRAMA
+========================================================= */
+
+.grassDecoration {
+    position: absolute;
+
+    display: block;
+
+    width: 30px;
+    height: auto;
+
+    transform:
+        translateX(-50%)
+        rotate(var(--grass-rotation, 0deg));
+
+    transform-origin:
+        bottom center;
 
     pointer-events: none;
 
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(62,125,55,0),
-            rgba(42,100,45,.2)
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+    filter:
+        drop-shadow(
+            0 2px 2px rgba(0,0,0,.13)
         );
+
+    animation:
+        grassWind
+        var(--grass-speed, 4s)
+        ease-in-out infinite;
 }
 
 
-/* ==================================================
-   RESPONSIVIDADE — TELAS PEQUENAS
-================================================== */
+@keyframes grassWind {
 
-@media (
-    max-width: 600px
-) {
-
-    #intro {
-        margin-top: 30px;
+    0%,
+    100% {
+        transform:
+            translateX(-50%)
+            rotate(var(--grass-rotation, 0deg));
     }
 
-
-    #garden {
-        height: 520px;
+    50% {
+        transform:
+            translateX(-50%)
+            rotate(
+                calc(
+                    var(--grass-rotation, 0deg) + 4deg
+                )
+            );
     }
-
-
-    .hill-far {
-        bottom: 245px;
-
-        height: 155px;
-    }
-
-
-    .hill-back {
-        bottom: 180px;
-
-        height: 175px;
-    }
-
-
-    .hill-middle {
-        bottom: 100px;
-
-        height: 190px;
-    }
-
-
-    .hill-front {
-        bottom: 0;
-
-        height: 180px;
-    }
-
 }
-/* ==================================================
-   V10 — PARTE 3
-   GIRASSOL + MEMÓRIAS + JOANINHA
-================================================== */
 
 
-/* ==================================================
+/* =========================================================
+   FLORES DECORATIVAS
+========================================================= */
+
+.decorFlower {
+    position: absolute;
+
+    display: block;
+
+    width: 28px;
+    height: auto;
+
+    transform:
+        translateX(-50%)
+        rotate(var(--flower-rotation, 0deg));
+
+    transform-origin:
+        bottom center;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+    filter:
+        drop-shadow(
+            0 2px 2px rgba(0,0,0,.12)
+        );
+
+    animation:
+        flowerWind
+        var(--flower-speed, 5s)
+        ease-in-out infinite;
+}
+
+
+@keyframes flowerWind {
+
+    0%,
+    100% {
+        transform:
+            translateX(-50%)
+            rotate(var(--flower-rotation, 0deg));
+    }
+
+    50% {
+        transform:
+            translateX(-50%)
+            rotate(
+                calc(
+                    var(--flower-rotation, 0deg) + 3deg
+                )
+            );
+    }
+}
+
+
+/* =========================================================
+   PROFUNDIDADE
+========================================================= */
+
+.terrain-far .grassDecoration {
+    width: 18px;
+    opacity: .58;
+}
+
+.terrain-far .decorFlower {
+    width: 17px;
+    opacity: .58;
+}
+
+
+.terrain-back .grassDecoration {
+    width: 23px;
+    opacity: .76;
+}
+
+.terrain-back .decorFlower {
+    width: 21px;
+    opacity: .76;
+}
+
+
+.terrain-middle .grassDecoration {
+    width: 29px;
+    opacity: .9;
+}
+
+.terrain-middle .decorFlower {
+    width: 26px;
+    opacity: .9;
+}
+
+
+.terrain-front .grassDecoration {
+    width: 35px;
+    opacity: 1;
+}
+
+.terrain-front .decorFlower {
+    width: 31px;
+    opacity: 1;
+}
+
+
+/* =========================================================
+   GIRASSÓIS DAS MEMÓRIAS
+========================================================= */
+
+#memoryFlowers {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 70;
+
+    pointer-events: none;
+}
+
+
+.memoryFlower {
+    position: absolute;
+
+    display: block;
+
+    transform:
+        translateX(-50%);
+
+    transform-origin:
+        bottom center;
+
+    cursor: pointer;
+
+    pointer-events: auto;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+    filter:
+        drop-shadow(
+            0 4px 4px rgba(43,80,34,.2)
+        );
+
+    transition:
+        filter .25s ease,
+        transform .25s ease;
+
+    animation:
+        memoryFlowerSway
+        5s ease-in-out infinite;
+}
+
+
+.memoryFlower:hover {
+    filter:
+        drop-shadow(
+            0 6px 7px rgba(43,80,34,.25)
+        )
+        brightness(1.06);
+}
+
+
+@keyframes memoryFlowerSway {
+
+    0%,
+    100% {
+        rotate: -1deg;
+    }
+
+    50% {
+        rotate: 1.5deg;
+    }
+}
+
+
+/* =========================================================
    GIRASSOL PRINCIPAL
-================================================== */
+========================================================= */
 
 #mainFlowerContainer {
-
     position: absolute;
 
     left: 50%;
-
     bottom: 42px;
 
     width: 150px;
@@ -1220,29 +773,20 @@ body {
 
     pointer-events: none;
 
+    transform:
+        translateX(-50%);
 }
 
 
-/* ==================================================
-   IMAGEM DO GIRASSOL
-================================================== */
-
 #sunflower {
-
     position: relative;
 
     display: block;
 
-    width: clamp(
-        105px,
-        17vw,
-        155px
-    );
+    width:
+        clamp(105px, 17vw, 155px);
 
     height: auto;
-
-    transform:
-        translateX(0);
 
     transform-origin:
         bottom center;
@@ -1257,156 +801,40 @@ body {
 
     filter:
         drop-shadow(
-            0 7px 5px
-            rgba(45,82,36,.24)
+            0 7px 5px rgba(45,82,36,.24)
         );
 
     transition:
         filter .25s ease;
-
 }
 
 
-/* ==================================================
-   GIRASSOL — INTERAÇÃO
-================================================== */
-
 #sunflower:hover {
-
     filter:
         drop-shadow(
-            0 8px 8px
-            rgba(45,82,36,.28)
+            0 8px 8px rgba(45,82,36,.28)
         )
         brightness(1.04);
-
 }
 
 
 #sunflower:active {
-
     filter:
         drop-shadow(
-            0 4px 4px
-            rgba(45,82,36,.22)
+            0 4px 4px rgba(45,82,36,.22)
         )
         brightness(1.08);
-
 }
 
 
-/* ==================================================
-   FLORES DAS MEMÓRIAS
-================================================== */
-
-#memoryFlowers {
-
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    z-index: 70;
-
-    pointer-events: none;
-
-}
-
-
-/* ==================================================
-   CADA GIRASSOL DE MEMÓRIA
-================================================== */
-
-.memoryFlower {
-
-    position: absolute;
-
-    display: block;
-
-    transform:
-        translateX(-50%);
-
-    transform-origin:
-        bottom center;
-
-    cursor: pointer;
-
-    pointer-events: auto;
-
-    user-select: none;
-
-    -webkit-user-drag: none;
-
-    filter:
-        drop-shadow(
-            0 4px 4px
-            rgba(43,80,34,.2)
-        );
-
-    transition:
-        filter .25s ease;
-
-    animation:
-        memoryFlowerSway
-        5s
-        ease-in-out
-        infinite;
-
-}
-
-
-/* ==================================================
-   MOVIMENTO DOS GIRASSÓIS
-================================================== */
-
-@keyframes memoryFlowerSway {
-
-    0%,
-    100% {
-
-        rotate:
-            -1deg;
-
-    }
-
-    50% {
-
-        rotate:
-            1.5deg;
-
-    }
-
-}
-
-
-/* ==================================================
-   HOVER MEMÓRIA
-================================================== */
-
-.memoryFlower:hover {
-
-    filter:
-        drop-shadow(
-            0 6px 7px
-            rgba(43,80,34,.25)
-        )
-        brightness(1.05);
-
-}
-
-
-/* ==================================================
+/* =========================================================
    JOANINHA
-================================================== */
+========================================================= */
 
 #ladybug {
-
     position: absolute;
 
     left: 14%;
-
     bottom: 115px;
 
     width: 58px;
@@ -1416,14 +844,14 @@ body {
 
     border: 0;
 
-    background: transparent;
-
     z-index: 150;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
+
+    background: transparent;
 
     cursor: pointer;
 
@@ -1437,25 +865,16 @@ body {
 
     filter:
         drop-shadow(
-            0 4px 3px
-            rgba(0,0,0,.2)
+            0 4px 3px rgba(0,0,0,.2)
         );
 
     animation:
-        ladybugWalk
-        5s
-        ease-in-out
-        infinite;
-
+        ladybugFloat
+        5s ease-in-out infinite;
 }
 
 
-/* ==================================================
-   IMAGEM DA JOANINHA
-================================================== */
-
 #ladybug img {
-
     display: block;
 
     width: 100%;
@@ -1468,74 +887,43 @@ body {
     user-select: none;
 
     -webkit-user-drag: none;
-
 }
 
 
-/* ==================================================
-   MOVIMENTO DA JOANINHA
-================================================== */
+#ladybug:hover {
+    filter:
+        drop-shadow(
+            0 5px 5px rgba(0,0,0,.24)
+        )
+        brightness(1.08);
+}
 
-@keyframes ladybugWalk {
+
+@keyframes ladybugFloat {
 
     0%,
     100% {
-
         transform:
             translateY(0)
             rotate(-3deg);
-
     }
 
     50% {
-
         transform:
             translateY(-4px)
             rotate(3deg);
-
     }
-
 }
 
 
-/* ==================================================
-   JOANINHA — HOVER
-================================================== */
-
-#ladybug:hover {
-
-    filter:
-        drop-shadow(
-            0 5px 5px
-            rgba(0,0,0,.24)
-        )
-        brightness(1.08);
-
-}
-
-
-/* ==================================================
-   JOANINHA — CLIQUE
-================================================== */
-
-#ladybug:active {
-
-    transform:
-        scale(.92);
-
-}
-
-
-/* ==================================================
+/* =========================================================
    MENSAGEM
-================================================== */
+========================================================= */
 
 #touchMessage {
-
     position: absolute;
 
     left: 50%;
-
     bottom: 13px;
 
     transform:
@@ -1544,7 +932,6 @@ body {
     z-index: 100;
 
     width: max-content;
-
     max-width: 90%;
 
     padding:
@@ -1553,33 +940,18 @@ body {
     border-radius: 20px;
 
     color:
-        rgba(
-            255,
-            255,
-            255,
-            .95
-        );
+        rgba(255,255,255,.95);
 
     font-size:
-        clamp(
-            .78rem,
-            2.5vw,
-            .95rem
-        );
+        clamp(.78rem, 2.5vw, .95rem);
 
     text-align: center;
 
     text-shadow:
-        0 1px 3px
-        rgba(0,0,0,.3);
+        0 1px 3px rgba(0,0,0,.3);
 
     background:
-        rgba(
-            45,
-            94,
-            44,
-            .25
-        );
+        rgba(45,94,44,.25);
 
     backdrop-filter:
         blur(4px);
@@ -1591,49 +963,36 @@ body {
 
     animation:
         messageFloat
-        3s
-        ease-in-out
-        infinite;
-
+        3s ease-in-out infinite;
 }
 
-
-/* ==================================================
-   ANIMAÇÃO DA MENSAGEM
-================================================== */
 
 @keyframes messageFloat {
 
     0%,
     100% {
-
         opacity: .72;
 
         transform:
             translateX(-50%)
             translateY(0);
-
     }
 
     50% {
-
         opacity: 1;
 
         transform:
             translateX(-50%)
             translateY(-4px);
-
     }
-
 }
 
 
-/* ==================================================
+/* =========================================================
    PÉTALAS
-================================================== */
+========================================================= */
 
 #petalLayer {
-
     position: fixed;
 
     inset: 0;
@@ -1646,16 +1005,10 @@ body {
     overflow: hidden;
 
     pointer-events: none;
-
 }
 
 
-/* ==================================================
-   PÉTALA INDIVIDUAL
-================================================== */
-
 .petal {
-
     position: absolute;
 
     top: -20px;
@@ -1663,79 +1016,17 @@ body {
     border-radius:
         70% 30% 70% 30%;
 
-    opacity: 0;
-
     pointer-events: none;
 
-    filter:
-        blur(.1px);
-
+    opacity: 0;
 }
 
 
-/* ==================================================
-   CELULAR
-================================================== */
-
-@media (
-    max-width: 600px
-) {
-
-    #mainFlowerContainer {
-
-        bottom: 37px;
-
-        width: 125px;
-        height: 220px;
-
-    }
-
-
-    #sunflower {
-
-        width: 115px;
-
-    }
-
-
-    #ladybug {
-
-        left: 9%;
-
-        bottom: 110px;
-
-        width: 48px;
-        height: 48px;
-
-    }
-
-
-    #touchMessage {
-
-        bottom: 9px;
-
-    }
-
-
-    .memoryFlower {
-
-        max-width: 75px;
-
-    }
-
-}
-/* ==================================================
-   V10 — PARTE 4
-   MODAIS + ACABAMENTO + RESPONSIVIDADE
-================================================== */
-
-
-/* ==================================================
+/* =========================================================
    MODAIS
-================================================== */
+========================================================= */
 
 .modal {
-
     position: fixed;
 
     inset: 0;
@@ -1753,12 +1044,7 @@ body {
     padding: 20px;
 
     background:
-        rgba(
-            20,
-            45,
-            28,
-            .58
-        );
+        rgba(20,45,28,.58);
 
     backdrop-filter:
         blur(8px);
@@ -1775,37 +1061,27 @@ body {
     transition:
         opacity .3s ease,
         visibility .3s ease;
-
 }
 
 
-/* ==================================================
-   MODAL ABERTO
-================================================== */
-
 .modal.show {
-
     opacity: 1;
 
     visibility: visible;
 
     pointer-events: auto;
-
 }
 
 
-/* ==================================================
-   CARTÃO
-================================================== */
+/* =========================================================
+   CARTÃO DO MODAL
+========================================================= */
 
 .memory-card {
-
     position: relative;
 
-    width: min(
-        92vw,
-        470px
-    );
+    width:
+        min(92vw, 470px);
 
     max-height: 90vh;
 
@@ -1823,11 +1099,8 @@ body {
         );
 
     box-shadow:
-        0 20px 60px
-        rgba(0,0,0,.3),
-
-        0 4px 15px
-        rgba(45,90,45,.15);
+        0 20px 60px rgba(0,0,0,.3),
+        0 4px 15px rgba(45,90,45,.15);
 
     transform:
         translateY(25px)
@@ -1836,30 +1109,21 @@ body {
     transition:
         transform .35s
         cubic-bezier(.2,.8,.2,1);
-
 }
 
 
-/* ==================================================
-   CARTÃO ABERTO
-================================================== */
-
-.modal.show
-.memory-card {
-
+.modal.show .memory-card {
     transform:
         translateY(0)
         scale(1);
-
 }
 
 
-/* ==================================================
-   BOTÃO FECHAR
-================================================== */
+/* =========================================================
+   FECHAR
+========================================================= */
 
 .close-button {
-
     position: absolute;
 
     top: 10px;
@@ -1888,54 +1152,37 @@ body {
     z-index: 20;
 
     background:
-        rgba(
-            45,
-            92,
-            45,
-            .75
-        );
+        rgba(45,92,45,.75);
 
     box-shadow:
-        0 3px 8px
-        rgba(0,0,0,.18);
+        0 3px 8px rgba(0,0,0,.18);
 
     transition:
         transform .2s ease,
         background .2s ease;
-
 }
 
 
 .close-button:hover {
-
     transform:
         scale(1.08);
 
     background:
-        rgba(
-            39,
-            80,
-            39,
-            .9
-        );
-
+        rgba(39,80,39,.9);
 }
 
 
 .close-button:active {
-
     transform:
         scale(.92);
-
 }
 
 
-/* ==================================================
-   FOTO DA MEMÓRIA
-================================================== */
+/* =========================================================
+   FOTOS
+========================================================= */
 
 .memory-photo-container {
-
     width: 100%;
 
     max-height: 65vh;
@@ -1944,14 +1191,11 @@ body {
 
     border-radius: 17px;
 
-    background:
-        #e9e5d5;
-
+    background: #e9e5d5;
 }
 
 
 #memoryImage {
-
     display: block;
 
     width: 100%;
@@ -1961,79 +1205,55 @@ body {
     object-fit: contain;
 
     border-radius: 17px;
-
 }
 
 
-/* ==================================================
+/* =========================================================
    LEGENDA
-================================================== */
+========================================================= */
 
 #memoryCaption {
-
     margin-top: 15px;
 
     padding:
         0 10px;
 
-    color:
-        #476347;
+    color: #476347;
 
     font-size:
-        clamp(
-            1rem,
-            3vw,
-            1.15rem
-        );
+        clamp(1rem, 3vw, 1.15rem);
 
     line-height: 1.55;
 
     text-align: center;
-
 }
 
 
-/* ==================================================
-   CONTADOR
-================================================== */
-
 .memory-counter {
-
     margin-top: 10px;
 
     color:
-        rgba(
-            65,
-            92,
-            65,
-            .65
-        );
+        rgba(65,92,65,.65);
 
     font-size: .82rem;
 
     text-align: center;
-
 }
 
 
-/* ==================================================
-   MODAL DA JOANINHA
-================================================== */
+/* =========================================================
+   JOANINHA — MODAL
+========================================================= */
 
 .ladybug-card {
-
-    width: min(
-        90vw,
-        400px
-    );
+    width:
+        min(90vw, 400px);
 
     text-align: center;
-
 }
 
 
 .ladybug-card > img {
-
     display: block;
 
     width: 100%;
@@ -2047,88 +1267,129 @@ body {
     user-select: none;
 
     -webkit-user-drag: none;
-
 }
 
 
 .ladybug-card p {
-
     margin-top: 15px;
 
     padding:
         0 8px;
 
-    color:
-        #4e654e;
+    color: #4e654e;
 
     font-size:
-        clamp(
-            1rem,
-            3vw,
-            1.12rem
-        );
+        clamp(1rem, 3vw, 1.12rem);
 
     line-height: 1.5;
-
 }
 
 
-/* ==================================================
-   FOCO DO BOTÃO
-================================================== */
+/* =========================================================
+   ELEMENTOS ANTIGOS — DESATIVADOS
+========================================================= */
+
+#decorations,
+#gardenField,
+.fieldFlower {
+    display: none !important;
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
 
 #sunflower:focus-visible,
 #ladybug:focus-visible,
 .close-button:focus-visible {
-
     outline:
         3px solid
-        rgba(
-            255,
-            235,
-            100,
-            .95
-        );
+        rgba(255,235,100,.95);
 
     outline-offset: 4px;
-
 }
 
 
-/* ==================================================
-   DESABILITAR SELEÇÃO DE ELEMENTOS DECORATIVOS
-================================================== */
-
-#sun,
-#sunGlow,
-.cloud,
-.hill,
-.nature-layer,
-#petalLayer {
-
-    user-select: none;
-
-}
-
-
-/* ==================================================
+/* =========================================================
    CELULAR
-================================================== */
+========================================================= */
 
-@media (
-    max-width: 600px
-) {
+@media (max-width: 600px) {
+
+    #intro {
+        margin-top: 30px;
+    }
+
+
+    #garden {
+        height: 520px;
+    }
+
+
+    .hill-far {
+        bottom: 245px;
+        height: 155px;
+    }
+
+
+    .hill-back {
+        bottom: 180px;
+        height: 175px;
+    }
+
+
+    .hill-middle {
+        bottom: 100px;
+        height: 190px;
+    }
+
+
+    .hill-front {
+        bottom: 0;
+        height: 180px;
+    }
+
+
+    #mainFlowerContainer {
+        bottom: 37px;
+
+        width: 125px;
+        height: 220px;
+    }
+
+
+    #sunflower {
+        width: 115px;
+    }
+
+
+    #ladybug {
+        left: 9%;
+
+        bottom: 110px;
+
+        width: 48px;
+        height: 48px;
+    }
+
+
+    #touchMessage {
+        bottom: 9px;
+    }
+
+
+    .memoryFlower {
+        max-width: 75px;
+    }
+
 
     .modal {
-
-        padding:
-            12px;
-
+        padding: 12px;
     }
 
 
     .memory-card {
-
         width: 94vw;
 
         max-height: 88vh;
@@ -2136,159 +1397,96 @@ body {
         padding: 13px;
 
         border-radius: 20px;
-
     }
 
 
     .close-button {
-
         width: 36px;
         height: 36px;
 
         top: 8px;
         right: 8px;
-
     }
 
 
-    .memory-photo-container {
-
-        border-radius: 14px;
-
-    }
-
-
-    #memoryImage {
-
-        max-height:
-            58vh;
-
-    }
-
-
+    #memoryImage,
     .ladybug-card > img {
-
-        max-height:
-            58vh;
-
+        max-height: 58vh;
     }
 
 
-    #memoryCaption {
-
-        margin-top: 12px;
-
-        font-size: .98rem;
-
-    }
-
-
+    #memoryCaption,
     .ladybug-card p {
-
         font-size: .98rem;
-
     }
 
 }
 
 
-/* ==================================================
+/* =========================================================
    TELAS MUITO PEQUENAS
-================================================== */
+========================================================= */
 
-@media (
-    max-width: 380px
-) {
+@media (max-width: 380px) {
 
     #intro h1 {
-
-        font-size:
-            1.8rem;
-
+        font-size: 1.8rem;
     }
 
 
     #subtitle {
-
-        font-size:
-            .84rem;
-
+        font-size: .84rem;
     }
 
 
     #garden {
-
-        height:
-            500px;
-
+        height: 500px;
     }
 
 
     #mainFlowerContainer {
-
-        bottom:
-            34px;
-
+        bottom: 34px;
     }
 
 
     #ladybug {
-
-        left:
-            7%;
-
-        bottom:
-            100px;
-
+        left: 7%;
+        bottom: 100px;
     }
 
 }
 
 
-/* ==================================================
+/* =========================================================
    TELAS GRANDES
-================================================== */
+========================================================= */
 
-@media (
-    min-width: 1000px
-) {
+@media (min-width: 1000px) {
 
     #garden {
+        max-width: 1400px;
 
-        max-width:
-            1400px;
-
-        margin-left:
-            auto;
-
-        margin-right:
-            auto;
-
+        margin-left: auto;
+        margin-right: auto;
     }
 
 
     #intro {
-
-        margin-top:
-            70px;
-
+        margin-top: 70px;
     }
 
 }
 
 
-/* ==================================================
-   REDUZIR ANIMAÇÕES QUANDO SOLICITADO
-================================================== */
+/* =========================================================
+   REDUZIR ANIMAÇÕES
+========================================================= */
 
-@media (
-    prefers-reduced-motion: reduce
-) {
+@media (prefers-reduced-motion: reduce) {
 
     *,
     *::before,
     *::after {
-
         animation-duration:
             .01ms !important;
 
@@ -2300,12 +1498,11 @@ body {
 
         transition-duration:
             .01ms !important;
-
     }
 
 }
 
 
-/* ==================================================
-   FIM DO STYLE.CSS — V10
-================================================== */
+/* =========================================================
+   FIM — V10
+========================================================= */
