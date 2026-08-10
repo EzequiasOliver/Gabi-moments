@@ -525,3 +525,534 @@ function createMemoryFlowers() {
 /* =========================================================
    FIM DA PARTE 1/3
 ========================================================= */
+/* =========================================================
+   GABI MOMENTS — V12
+   SCRIPT.JS — PARTE 2/3
+========================================================= */
+
+
+/* =========================================================
+   ELEMENTOS DOS MODAIS
+========================================================= */
+
+const memoryModal =
+    document.getElementById("memory-modal");
+
+const memoryImage =
+    document.getElementById("memory-image");
+
+const memoryCaption =
+    document.getElementById("memory-caption");
+
+const memoryCounter =
+    document.getElementById("memory-counter");
+
+const memoryClose =
+    document.getElementById("memory-close");
+
+
+const ladybugModal =
+    document.getElementById("ladybug-modal");
+
+const ladybugClose =
+    document.getElementById("ladybug-close");
+
+
+/* =========================================================
+   ABRIR MODAL
+========================================================= */
+
+function showModal(modal) {
+
+    if (!modal) {
+        return;
+    }
+
+
+    modal.classList.add("show");
+
+    modal.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+/* =========================================================
+   FECHAR MODAL
+========================================================= */
+
+function hideModal(modal) {
+
+    if (!modal) {
+        return;
+    }
+
+
+    modal.classList.remove("show");
+
+    modal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    const memoryOpen =
+        memoryModal &&
+        memoryModal.classList.contains("show");
+
+
+    const ladybugOpen =
+        ladybugModal &&
+        ladybugModal.classList.contains("show");
+
+
+    if (
+        !memoryOpen &&
+        !ladybugOpen
+    ) {
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+}
+
+
+/* =========================================================
+   ABRIR MEMÓRIA
+========================================================= */
+
+function openMemory(index) {
+
+    if (
+        !memoryModal ||
+        !memoryImage
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+     * Segurança contra índices inválidos.
+     */
+
+    if (
+        index < 0 ||
+        index >= CONFIG.photos.length
+    ) {
+
+        return;
+
+    }
+
+
+    memoryImage.src =
+        CONFIG.photos[index];
+
+
+    memoryImage.alt =
+        `Foto da lembrança ${index + 1}`;
+
+
+    if (memoryCaption) {
+
+        memoryCaption.textContent =
+            CONFIG.captions[index] ||
+            "";
+
+    }
+
+
+    if (memoryCounter) {
+
+        memoryCounter.textContent =
+            `${index + 1} / ${CONFIG.photos.length}`;
+
+    }
+
+
+    showModal(
+        memoryModal
+    );
+
+}
+
+
+/* =========================================================
+   FECHAR MEMÓRIA
+========================================================= */
+
+function closeMemory() {
+
+    hideModal(
+        memoryModal
+    );
+
+}
+
+
+/* =========================================================
+   ABRIR JOANINHA
+========================================================= */
+
+function openLadybugModal() {
+
+    showModal(
+        ladybugModal
+    );
+
+}
+
+
+/* =========================================================
+   FECHAR JOANINHA
+========================================================= */
+
+function closeLadybugModal() {
+
+    hideModal(
+        ladybugModal
+    );
+
+}
+
+
+/* =========================================================
+   EVENTOS DOS BOTÕES
+========================================================= */
+
+if (memoryClose) {
+
+    memoryClose.addEventListener(
+        "click",
+        closeMemory
+    );
+
+}
+
+
+if (ladybugClose) {
+
+    ladybugClose.addEventListener(
+        "click",
+        closeLadybugModal
+    );
+
+}
+
+
+/* =========================================================
+   CLICAR FORA DO CARTÃO
+========================================================= */
+
+if (memoryModal) {
+
+    memoryModal.addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target ===
+                memoryModal
+            ) {
+
+                closeMemory();
+
+            }
+
+        }
+    );
+
+}
+
+
+if (ladybugModal) {
+
+    ladybugModal.addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target ===
+                ladybugModal
+            ) {
+
+                closeLadybugModal();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   ESC FECHA QUALQUER MODAL
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key !==
+            "Escape"
+        ) {
+
+            return;
+
+        }
+
+
+        closeMemory();
+
+        closeLadybugModal();
+
+    }
+);
+
+
+/* =========================================================
+   PÉTALA INDIVIDUAL
+========================================================= */
+
+function createPetal() {
+
+    if (!petalLayer) {
+
+        return;
+
+    }
+
+
+    const petal =
+        document.createElement("div");
+
+
+    petal.className =
+        "petal";
+
+
+    const size =
+        random(7, 14);
+
+
+    petal.style.width =
+        `${size}px`;
+
+
+    petal.style.height =
+        `${size * 1.45}px`;
+
+
+    petal.style.left =
+        `${random(0, 100)}vw`;
+
+
+    petal.style.background =
+        pick([
+
+            "#fff7c7",
+            "#fff0a1",
+            "#ffe47a",
+            "#fffbe0"
+
+        ]);
+
+
+    petal.style.opacity =
+        random(.6, .95);
+
+
+    petalLayer.appendChild(
+        petal
+    );
+
+
+    const duration =
+        random(3.5, 6);
+
+
+    const drift =
+        random(-140, 140);
+
+
+    const rotation =
+        random(
+            260,
+            720
+        );
+
+
+    const animation =
+        petal.animate(
+
+            [
+
+                {
+                    transform:
+                        `
+                        translate3d(
+                            0,
+                            -30px,
+                            0
+                        )
+                        rotate(0deg)
+                        `,
+
+                    opacity:
+                        petal.style.opacity
+                },
+
+                {
+                    transform:
+                        `
+                        translate3d(
+                            ${drift}px,
+                            110vh,
+                            0
+                        )
+                        rotate(
+                            ${rotation}deg
+                        )
+                        `,
+
+                    opacity: 0
+                }
+
+            ],
+
+            {
+
+                duration:
+                    duration * 1000,
+
+                easing:
+                    "ease-in",
+
+                fill:
+                    "forwards"
+
+            }
+
+        );
+
+
+    animation.finished
+        .then(
+            () => {
+
+                petal.remove();
+
+            }
+        )
+        .catch(
+            () => {
+
+                petal.remove();
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   EXPLOSÃO DE PÉTALAS
+========================================================= */
+
+function flowerBurst() {
+
+    /*
+     * Pequena explosão inicial.
+     */
+
+    for (
+        let i = 0;
+        i < 18;
+        i++
+    ) {
+
+        setTimeout(
+            createPetal,
+            i * 45
+        );
+
+    }
+
+
+    /*
+     * Depois algumas pétalas continuam
+     * caindo por alguns segundos.
+     */
+
+    for (
+        let i = 0;
+        i < 8;
+        i++
+    ) {
+
+        setTimeout(
+            createPetal,
+            900 + i * 230
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   GIRASSOL PRINCIPAL
+========================================================= */
+
+if (mainFlower) {
+
+    mainFlower.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+
+            flowerBurst();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   BLOQUEAR ARRASTAR IMAGENS
+========================================================= */
+
+document.addEventListener(
+    "dragstart",
+    event => {
+
+        if (
+            event.target.tagName ===
+            "IMG"
+        ) {
+
+            event.preventDefault();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   FIM DA PARTE 2/3
+========================================================= */
