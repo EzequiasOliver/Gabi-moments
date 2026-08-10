@@ -586,3 +586,605 @@ body {
 /* =========================================================
    FIM DA PARTE 1/3
 ========================================================= */
+/* =========================================================
+   GABI MOMENTS — V12
+   STYLE.CSS — PARTE 2/3
+========================================================= */
+
+
+/* =========================================================
+   VEGETAÇÃO
+========================================================= */
+
+.grass,
+.flower {
+    position: absolute;
+
+    display: block;
+
+    height: auto;
+
+    transform:
+        translate(-50%, 50%)
+        rotate(var(--rotation, 0deg));
+
+    transform-origin:
+        bottom center;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+    pointer-events: none;
+
+    filter:
+        drop-shadow(
+            0 2px 2px rgba(30, 70, 30, .15)
+        );
+}
+
+
+/* =========================================================
+   GRAMA
+========================================================= */
+
+.grass {
+    width: var(--grass-size, 28px);
+
+    animation:
+        grass-sway
+        var(--wind-speed, 4.5s)
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes grass-sway {
+
+    0%,
+    100% {
+        transform:
+            translate(-50%, 50%)
+            rotate(var(--rotation, 0deg));
+    }
+
+    50% {
+        transform:
+            translate(-50%, 50%)
+            rotate(
+                calc(
+                    var(--rotation, 0deg) + 3deg
+                )
+            );
+    }
+}
+
+
+/* =========================================================
+   FLORES PEQUENAS
+========================================================= */
+
+.flower {
+    width: var(--flower-size, 28px);
+
+    animation:
+        flower-sway
+        var(--wind-speed, 5s)
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes flower-sway {
+
+    0%,
+    100% {
+        transform:
+            translate(-50%, 50%)
+            rotate(var(--rotation, 0deg));
+    }
+
+    50% {
+        transform:
+            translate(-50%, 50%)
+            rotate(
+                calc(
+                    var(--rotation, 0deg) + 2.5deg
+                )
+            );
+    }
+}
+
+
+/* =========================================================
+   PROFUNDIDADE DA VEGETAÇÃO
+========================================================= */
+
+/*
+   Quanto mais distante o morro,
+   menor e mais transparente fica
+   a vegetação.
+*/
+
+
+#hill-far .grass {
+    --grass-size: 18px;
+
+    opacity: .48;
+}
+
+
+#hill-far .flower {
+    --flower-size: 17px;
+
+    opacity: .48;
+}
+
+
+#hill-back .grass {
+    --grass-size: 23px;
+
+    opacity: .66;
+}
+
+
+#hill-back .flower {
+    --flower-size: 21px;
+
+    opacity: .68;
+}
+
+
+#hill-middle .grass {
+    --grass-size: 28px;
+
+    opacity: .84;
+}
+
+
+#hill-middle .flower {
+    --flower-size: 26px;
+
+    opacity: .86;
+}
+
+
+#hill-front .grass {
+    --grass-size: 34px;
+
+    opacity: .98;
+}
+
+
+#hill-front .flower {
+    --flower-size: 30px;
+
+    opacity: .98;
+}
+
+
+/* =========================================================
+   GIRASSÓIS DE MEMÓRIA
+========================================================= */
+
+.memory-flower {
+
+    position: absolute;
+
+    display: block;
+
+    width: var(--memory-size, 58px);
+
+    height: auto;
+
+    /*
+       A posição é relativa ao
+       próprio morro.
+    */
+
+    transform:
+        translate(-50%, 50%);
+
+    transform-origin:
+        bottom center;
+
+    cursor: pointer;
+
+    pointer-events: auto;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+    filter:
+        drop-shadow(
+            0 5px 5px rgba(35, 75, 30, .22)
+        );
+
+    animation:
+        memory-sway
+        5s
+        ease-in-out
+        infinite;
+
+    transition:
+        transform .2s ease,
+        filter .2s ease;
+}
+
+
+.memory-flower:hover {
+
+    transform:
+        translate(-50%, 50%)
+        scale(1.08);
+
+    filter:
+        drop-shadow(
+            0 7px 7px rgba(35, 75, 30, .28)
+        );
+}
+
+
+.memory-flower:active {
+
+    transform:
+        translate(-50%, 50%)
+        scale(.94);
+}
+
+
+@keyframes memory-sway {
+
+    0%,
+    100% {
+        rotate: -1deg;
+    }
+
+    50% {
+        rotate: 1.3deg;
+    }
+}
+
+
+/* =========================================================
+   POSIÇÕES DOS GIRASSÓIS DE MEMÓRIA
+========================================================= */
+
+/*
+   Cada girassol pertence a uma camada
+   específica de um morro.
+
+   Eles NÃO são posicionados na tela inteira.
+*/
+
+
+#memory-middle .memory-flower:nth-child(1) {
+
+    left: 23%;
+
+    bottom: 58px;
+
+    --memory-size: 58px;
+}
+
+
+#memory-middle .memory-flower:nth-child(2) {
+
+    left: 77%;
+
+    bottom: 53px;
+
+    --memory-size: 54px;
+}
+
+
+#memory-front .memory-flower:nth-child(1) {
+
+    left: 28%;
+
+    bottom: 54px;
+
+    --memory-size: 66px;
+}
+
+
+#memory-front .memory-flower:nth-child(2) {
+
+    left: 73%;
+
+    bottom: 47px;
+
+    --memory-size: 62px;
+}
+
+
+/* =========================================================
+   GIRASSOL PRINCIPAL
+========================================================= */
+
+#main-flower {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 24px;
+
+    z-index: 200;
+
+    width:
+        clamp(
+            110px,
+            18vw,
+            165px
+        );
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    pointer-events: auto;
+
+    transform:
+        translateX(-50%);
+
+    filter:
+        drop-shadow(
+            0 8px 7px rgba(34, 75, 30, .25)
+        );
+
+    transition:
+        transform .2s ease,
+        filter .2s ease;
+}
+
+
+#main-flower img {
+
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+}
+
+
+#main-flower:hover {
+
+    transform:
+        translateX(-50%)
+        scale(1.04);
+
+    filter:
+        drop-shadow(
+            0 10px 9px rgba(34, 75, 30, .30)
+        )
+        brightness(1.04);
+}
+
+
+#main-flower:active {
+
+    transform:
+        translateX(-50%)
+        scale(.96);
+
+    filter:
+        drop-shadow(
+            0 5px 5px rgba(34, 75, 30, .22)
+        );
+}
+
+
+/* =========================================================
+   DICA DO JARDIM
+========================================================= */
+
+#garden-hint {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 7px;
+
+    z-index: 210;
+
+    padding:
+        7px 14px;
+
+    border-radius: 20px;
+
+    color:
+        rgba(255, 255, 255, .95);
+
+    font-size:
+        clamp(
+            .74rem,
+            2.3vw,
+            .9rem
+        );
+
+    white-space: nowrap;
+
+    background:
+        rgba(43, 83, 42, .24);
+
+    backdrop-filter:
+        blur(4px);
+
+    -webkit-backdrop-filter:
+        blur(4px);
+
+    transform:
+        translateX(-50%);
+
+    pointer-events: none;
+
+    animation:
+        hint-float
+        3.2s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes hint-float {
+
+    0%,
+    100% {
+        opacity: .7;
+
+        transform:
+            translateX(-50%)
+            translateY(0);
+    }
+
+    50% {
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(-3px);
+    }
+}
+
+
+/* =========================================================
+   LIMITES PARA TELAS PEQUENAS
+========================================================= */
+
+@media (max-width: 700px) {
+
+    #main-flower {
+
+        width: 120px;
+
+        bottom: 24px;
+    }
+
+
+    #memory-middle .memory-flower:nth-child(1) {
+
+        left: 22%;
+
+        bottom: 48px;
+
+        --memory-size: 50px;
+    }
+
+
+    #memory-middle .memory-flower:nth-child(2) {
+
+        left: 78%;
+
+        bottom: 44px;
+
+        --memory-size: 47px;
+    }
+
+
+    #memory-front .memory-flower:nth-child(1) {
+
+        left: 27%;
+
+        bottom: 46px;
+
+        --memory-size: 55px;
+    }
+
+
+    #memory-front .memory-flower:nth-child(2) {
+
+        left: 73%;
+
+        bottom: 40px;
+
+        --memory-size: 53px;
+    }
+
+
+    #garden-hint {
+
+        bottom: 6px;
+    }
+
+}
+
+
+/* =========================================================
+   TELAS MUITO PEQUENAS
+========================================================= */
+
+@media (max-width: 380px) {
+
+    #main-flower {
+
+        width: 108px;
+
+        bottom: 23px;
+    }
+
+
+    #memory-middle .memory-flower:nth-child(1),
+    #memory-middle .memory-flower:nth-child(2) {
+
+        --memory-size: 44px;
+    }
+
+
+    #memory-front .memory-flower:nth-child(1),
+    #memory-front .memory-flower:nth-child(2) {
+
+        --memory-size: 48px;
+    }
+
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
+
+button:focus-visible {
+
+    outline:
+        3px solid #fff09b;
+
+    outline-offset: 4px;
+}
+
+
+/* =========================================================
+   REDUÇÃO DE MOVIMENTO
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .grass,
+    .flower,
+    .memory-flower,
+    #main-flower,
+    #garden-hint {
+
+        animation:
+            none !important;
+    }
+
+}
+
+
+/* =========================================================
+   FIM DA PARTE 2/3
+========================================================= */
