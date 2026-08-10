@@ -2,7 +2,6 @@
 <html lang="pt-BR">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -12,7 +11,7 @@
 
     <meta
         name="theme-color"
-        content="#72c9ee"
+        content="#83cfe9"
     >
 
     <title>Para Gabi 🌻</title>
@@ -21,208 +20,210 @@
         rel="stylesheet"
         href="style.css"
     >
-
 </head>
 
 
 <body>
 
-
 <div id="app">
 
 
-    <!-- ==================================================
+    <!-- ==============================
          CÉU
-    ================================================== -->
+    =============================== -->
 
     <div id="sky">
 
-        <div id="sunGlow"></div>
+        <div id="sun-glow"></div>
 
         <div id="sun"></div>
 
-
         <div class="cloud cloud-1"></div>
-
         <div class="cloud cloud-2"></div>
-
         <div class="cloud cloud-3"></div>
 
     </div>
 
 
 
-    <!-- ==================================================
-         CONTEÚDO
-    ================================================== -->
+    <!-- ==============================
+         CABEÇALHO
+    =============================== -->
 
-    <main id="content">
+    <header id="intro">
+
+        <h1>
+            Para Gabi ☀️
+        </h1>
+
+        <p>
+            Algumas pessoas deixam o mundo
+            mais bonito apenas por existirem.
+        </p>
+
+    </header>
 
 
-        <!-- ==================================================
-             TÍTULO
-        ================================================== -->
 
-        <section id="intro">
+    <!-- ==============================
+         JARDIM
+    =============================== -->
 
-            <h1>
-                Para Gabi ☀️
-            </h1>
+    <main id="garden">
 
-            <p id="subtitle">
 
-                Algumas pessoas deixam o mundo mais bonito
-                apenas por existirem.
+        <!-- ==============================
+             MORRO DISTANTE
+        =============================== -->
 
-            </p>
+        <section
+            class="hill hill-far"
+            id="hillFar"
+        >
+
+            <div
+                class="hill-decoration"
+                id="decorFar"
+            ></div>
 
         </section>
 
 
 
-        <!-- ==================================================
-             JARDIM
-        ================================================== -->
+        <!-- ==============================
+             MORRO TRASEIRO
+        =============================== -->
 
-        <section id="garden">
-
-
-            <!-- ==================================================
-                 MORROS
-            ================================================== -->
-
-            <div id="terrain">
-
-                <div class="hill hill-far"></div>
-
-                <div class="hill hill-back"></div>
-
-                <div class="hill hill-middle"></div>
-
-                <div class="hill hill-front"></div>
-
-            </div>
-
-
-
-            <!-- ==================================================
-                 VEGETAÇÃO — MORRO DISTANTE
-            ================================================== -->
+        <section
+            class="hill hill-back"
+            id="hillBack"
+        >
 
             <div
-                id="natureFar"
-                class="nature-layer terrain-far"
+                class="hill-decoration"
+                id="decorBack"
             ></div>
 
+        </section>
 
 
-            <!-- ==================================================
-                 VEGETAÇÃO — MORRO TRASEIRO
-            ================================================== -->
+
+        <!-- ==============================
+             MORRO CENTRAL
+        =============================== -->
+
+        <section
+            class="hill hill-middle"
+            id="hillMiddle"
+        >
 
             <div
-                id="natureBack"
-                class="nature-layer terrain-back"
+                class="hill-decoration"
+                id="decorMiddle"
             ></div>
 
+        </section>
 
 
-            <!-- ==================================================
-                 VEGETAÇÃO — MORRO DO MEIO
-            ================================================== -->
+
+        <!-- ==============================
+             MORRO DA FRENTE
+        =============================== -->
+
+        <section
+            class="hill hill-front"
+            id="hillFront"
+        >
 
             <div
-                id="natureMiddle"
-                class="nature-layer terrain-middle"
+                class="hill-decoration"
+                id="decorFront"
             ></div>
 
-
-
-            <!-- ==================================================
-                 VEGETAÇÃO — MORRO DA FRENTE
-            ================================================== -->
-
-            <div
-                id="natureFront"
-                class="nature-layer terrain-front"
-            ></div>
+        </section>
 
 
 
-            <!-- ==================================================
-                 GIRASSÓIS DAS MEMÓRIAS
-            ================================================== -->
+        <!-- ==============================
+             FLORES DE MEMÓRIA
+        =============================== -->
 
-            <div id="memoryFlowers"></div>
-
-
-
-            <!-- ==================================================
-                 GIRASSOL PRINCIPAL
-            ================================================== -->
-
-            <div id="mainFlowerContainer">
-
-                <img
-                    id="sunflower"
-                    src="imagem/girassol.png"
-                    alt="Girassol principal"
-                    draggable="false"
-                >
-
-            </div>
+        <div
+            id="memoryFlowers"
+            aria-label="Lembranças"
+        ></div>
 
 
 
-            <!-- ==================================================
-                 JOANINHA
-            ================================================== -->
+        <!-- ==============================
+             GIRASSOL PRINCIPAL
+        =============================== -->
 
-            <button
-                id="ladybug"
-                type="button"
-                aria-label="Abrir lembrança da joaninha"
+        <button
+            id="mainFlower"
+            type="button"
+            aria-label="Interagir com o girassol"
+        >
+
+            <img
+                src="imagem/girassol.png"
+                alt="Girassol"
+                draggable="false"
             >
 
-                <img
-                    src="imagem/joaninha.png"
-                    alt=""
-                    draggable="false"
-                >
-
-            </button>
+        </button>
 
 
 
-            <!-- ==================================================
-                 MENSAGEM
-            ================================================== -->
+        <!-- ==============================
+             JOANINHA
+        =============================== -->
 
-            <div id="touchMessage">
+        <button
+            id="ladybug"
+            type="button"
+            aria-label="Abrir lembrança da joaninha"
+        >
 
-                Toque no girassol 🌻
+            <img
+                src="imagem/joaninha.png"
+                alt=""
+                draggable="false"
+            >
 
-            </div>
+        </button>
 
 
-        </section>
+
+        <!-- ==============================
+             MENSAGEM
+        =============================== -->
+
+        <div id="gardenHint">
+
+            Toque nos girassóis 🌻
+
+        </div>
 
 
     </main>
 
 
 
-    <!-- ==================================================
+    <!-- ==============================
          PÉTALAS
-    ================================================== -->
+    =============================== -->
 
-    <div id="petalLayer"></div>
+    <div
+        id="petalLayer"
+        aria-hidden="true"
+    ></div>
 
 
 
-    <!-- ==================================================
-         MODAL — MEMÓRIAS
-    ================================================== -->
+    <!-- ==============================
+         MODAL DAS MEMÓRIAS
+    =============================== -->
 
     <div
         id="memoryModal"
@@ -230,8 +231,7 @@
         aria-hidden="true"
     >
 
-        <div class="memory-card">
-
+        <div class="modal-card">
 
             <button
                 id="closeMemory"
@@ -243,12 +243,12 @@
             </button>
 
 
-            <div class="memory-photo-container">
+            <div class="modal-image-wrapper">
 
                 <img
                     id="memoryImage"
                     src=""
-                    alt="Foto da lembrança"
+                    alt=""
                 >
 
             </div>
@@ -257,11 +257,7 @@
             <p id="memoryCaption"></p>
 
 
-            <div
-                id="memoryCounter"
-                class="memory-counter"
-            ></div>
-
+            <span id="memoryCounter"></span>
 
         </div>
 
@@ -269,9 +265,9 @@
 
 
 
-    <!-- ==================================================
-         MODAL — JOANINHA
-    ================================================== -->
+    <!-- ==============================
+         MODAL DA JOANINHA
+    =============================== -->
 
     <div
         id="ladybugModal"
@@ -279,8 +275,7 @@
         aria-hidden="true"
     >
 
-        <div class="memory-card ladybug-card">
-
+        <div class="modal-card ladybug-card">
 
             <button
                 id="closeLadybug"
@@ -300,27 +295,19 @@
 
 
             <p>
-
-                A joaninha resolveu posar para a câmera 😂🐞
-
+                Até a joaninha quis deixar
+                uma lembrança por aqui. 🐞😂
             </p>
-
 
         </div>
 
     </div>
 
 
-
 </div>
 
 
-<!-- ==================================================
-     JAVASCRIPT
-================================================== -->
-
 <script src="script.js"></script>
-
 
 </body>
 
