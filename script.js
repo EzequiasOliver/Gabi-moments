@@ -1,17 +1,20 @@
 /* =========================================================
-   GABI MOMENTS — NOVA MECÂNICA
+   GABI MOMENTS — VERSÃO CORRIGIDA
    SCRIPT.JS — PARTE 1/3
 
-   MECÂNICA PRINCIPAL:
+   MECÂNICA:
 
-   Girassol grande
-        ↓ clique
-   nasce um girassol
+   Girassol principal
         ↓
-   memória abre automaticamente
+   clique
+        ↓
+   nasce UM girassol
+        ↓
+   abre a memória correspondente
 
-   Os girassóis de memória NÃO existem
-   antes da interação.
+   IMPORTANTE:
+   Nenhum girassol de memória existe
+   antes do clique.
 ========================================================= */
 
 
@@ -33,12 +36,35 @@ const CONFIG = {
         "Mais uma memória bonita. ☀️"
     ],
 
-    decorationImages: [
+    /*
+       GRAMAS:
+       somente imagens de grama.
+
+       FLORES:
+       somente flores decorativas.
+
+       Assim uma grama nunca vira uma tulipa
+       por acidente.
+    */
+
+    grassImages: [
         "imagem/grama1.png",
-        "imagem/grama2.png",
+        "imagem/grama2.png"
+    ],
+
+    flowerImages: [
         "imagem/margarida.png",
         "imagem/tulipa.png"
-    ]
+    ],
+
+    sunflowerImage:
+        "imagem/girassol.png",
+
+    ladybugImage:
+        "imagem/joaninha.png",
+
+    funnyLadybugImage:
+        "imagem/joaninha-engracada.jpg"
 
 };
 
@@ -102,7 +128,10 @@ const hills = {
             document.getElementById("hill-far"),
 
         vegetation:
-            document.getElementById("vegetation-far")
+            document.getElementById("vegetation-far"),
+
+        memory:
+            null
     },
 
     back: {
@@ -110,7 +139,10 @@ const hills = {
             document.getElementById("hill-back"),
 
         vegetation:
-            document.getElementById("vegetation-back")
+            document.getElementById("vegetation-back"),
+
+        memory:
+            null
     },
 
     middle: {
@@ -118,7 +150,10 @@ const hills = {
             document.getElementById("hill-middle"),
 
         vegetation:
-            document.getElementById("vegetation-middle")
+            document.getElementById("vegetation-middle"),
+
+        memory:
+            document.getElementById("memory-middle")
     },
 
     front: {
@@ -126,7 +161,10 @@ const hills = {
             document.getElementById("hill-front"),
 
         vegetation:
-            document.getElementById("vegetation-front")
+            document.getElementById("vegetation-front"),
+
+        memory:
+            document.getElementById("memory-front")
     }
 
 };
@@ -139,22 +177,27 @@ const hills = {
 const gardenState = {
 
     /*
-       Quantas memórias já foram descobertas.
+       Quantas memórias foram descobertas.
     */
 
     memoriesFound: 0,
 
     /*
-       Evita dois cliques rápidos criarem
-       duas flores para a mesma memória.
+       Impede múltiplos cliques rápidos
+       de criarem várias flores.
     */
 
     creatingFlower: false,
 
     /*
-       Depois que as três memórias forem
-       descobertas, o jardim entra no estado
-       completo.
+       Guarda as flores já criadas.
+    */
+
+    memoryFlowers: [],
+
+    /*
+       Indica que todas as memórias foram
+       descobertas.
     */
 
     completed: false
@@ -163,121 +206,74 @@ const gardenState = {
 
 
 /* =========================================================
-   POSIÇÕES POSSÍVEIS DOS GIRASSÓIS
+   POSIÇÕES DOS GIRASSÓIS
 ========================================================= */
 
 /*
-   Os girassóis são distribuídos pelos
-   quatro morros.
+   Agora usamos SOMENTE os memory-layers.
 
-   Cada posição pertence a um morro.
+   Os dois morros que possuem memory-layer
+   são middle e front.
 
-   Não usamos posições fixas todas de uma vez.
-   O JavaScript escolhe uma delas somente
-   quando o jogador descobre uma memória.
+   Isso evita que o girassol seja enterrado
+   atrás da vegetação ou apareça no céu.
+
+   left = posição horizontal dentro do morro
+   bottom = posição vertical dentro do morro
+   size = tamanho do girassol
 */
 
 const flowerSpawnPositions = [
 
     {
-        hill:
-            "far",
+        layer: "middle",
 
-        left:
-            34,
+        left: 27,
 
-        bottom:
-            42,
+        bottom: 42,
 
-        size:
-            48
+        size: 62
     },
 
     {
-        hill:
-            "back",
+        layer: "middle",
 
-        left:
-            68,
+        left: 72,
 
-        bottom:
-            48,
+        bottom: 38,
 
-        size:
-            52
+        size: 58
     },
 
     {
-        hill:
-            "middle",
+        layer: "front",
 
-        left:
-            24,
+        left: 30,
 
-        bottom:
-            55,
+        bottom: 46,
 
-        size:
-            60
-    },
-
-    {
-        hill:
-            "middle",
-
-        left:
-            73,
-
-        bottom:
-            50,
-
-        size:
-            56
-    },
-
-    {
-        hill:
-            "front",
-
-        left:
-            28,
-
-        bottom:
-            54,
-
-        size:
-            66
-    },
-
-    {
-        hill:
-            "front",
-
-        left:
-            72,
-
-        bottom:
-            47,
-
-        size:
-            62
+        size: 68
     }
 
 ];
 
 
 /* =========================================================
-   POSIÇÕES JÁ UTILIZADAS
+   POSIÇÕES UTILIZADAS
 ========================================================= */
 
-const usedFlowerPositions = new Set();
+const usedFlowerPositions =
+    new Set();
 
 
 /* =========================================================
    FUNÇÕES AUXILIARES
 ========================================================= */
 
-function random(min, max) {
+function random(
+    min,
+    max
+) {
 
     return Math.random() *
         (max - min) +
@@ -286,16 +282,34 @@ function random(min, max) {
 }
 
 
-function randomInt(min, max) {
+function randomInt(
+    min,
+    max
+) {
 
     return Math.floor(
-        random(min, max + 1)
+        random(
+            min,
+            max + 1
+        )
     );
 
 }
 
 
-function choose(array) {
+function choose(
+    array
+) {
+
+    if (
+        !Array.isArray(array) ||
+        array.length === 0
+    ) {
+
+        return null;
+
+    }
+
 
     return array[
         Math.floor(
@@ -308,155 +322,209 @@ function choose(array) {
 
 
 /* =========================================================
-   ESCOLHER POSIÇÃO PARA NOVO GIRASSOL
+   ESCOLHER POSIÇÃO DO GIRASSOL
 ========================================================= */
 
 function chooseFlowerSpawn() {
 
     const available =
         flowerSpawnPositions.filter(
-            (_, index) =>
-                !usedFlowerPositions.has(index)
+            (_, index) => {
+
+                return !usedFlowerPositions
+                    .has(index);
+
+            }
         );
 
 
-    /*
-       Se ainda existem posições livres,
-       escolhemos uma delas.
-    */
+    if (
+        available.length === 0
+    ) {
 
-    if (available.length > 0) {
-
-        const selected =
-            choose(available);
-
-
-        const originalIndex =
-            flowerSpawnPositions.indexOf(
-                selected
-            );
-
-
-        usedFlowerPositions.add(
-            originalIndex
-        );
-
-
-        return selected;
+        return null;
 
     }
 
 
-    /*
-       Este caso praticamente nunca será
-       necessário porque temos seis posições
-       para apenas três memórias.
+    const selected =
+        choose(
+            available
+        );
 
-       Ainda assim, existe uma proteção.
-    */
 
-    return flowerSpawnPositions[
-        gardenState.memoriesFound %
-        flowerSpawnPositions.length
-    ];
+    const index =
+        flowerSpawnPositions.indexOf(
+            selected
+        );
+
+
+    usedFlowerPositions.add(
+        index
+    );
+
+
+    return selected;
 
 }
 
 
 /* =========================================================
-   CRIAR VEGETAÇÃO
+   QUANTIDADE DE VEGETAÇÃO
 ========================================================= */
 
 const vegetationAmount = {
 
-    far: 6,
+    far: 7,
 
     back: 9,
 
-    middle: 13,
+    middle: 12,
 
-    front: 17
+    front: 15
 
 };
 
 
 /* =========================================================
-   CRIAR PLANTA
+   CRIAR GRAMA
 ========================================================= */
 
-function createPlant(
-    container,
-    type
+function createGrass(
+    container
 ) {
 
     if (!container) {
+
         return;
+
     }
 
 
-    const plant =
+    const grass =
         document.createElement("img");
 
 
-    plant.className =
-        type === "flower"
-            ? "flower"
-            : "grass";
+    grass.className =
+        "grass";
 
 
-    plant.src =
+    grass.src =
         choose(
-            CONFIG.decorationImages
+            CONFIG.grassImages
         );
 
 
-    plant.alt =
+    grass.alt =
         "";
 
 
-    plant.draggable =
+    grass.draggable =
         false;
 
 
-    /*
-       A planta pertence exclusivamente
-       ao container do próprio morro.
-    */
-
-    plant.style.left =
+    grass.style.left =
         `${random(4, 96)}%`;
 
 
-    plant.style.bottom =
-        `${random(3, 44)}px`;
+    grass.style.bottom =
+        `${random(2, 40)}px`;
 
 
-    plant.style.setProperty(
+    grass.style.setProperty(
         "--rotation",
         `${random(-8, 8)}deg`
     );
 
 
-    plant.style.setProperty(
+    grass.style.setProperty(
         "--wind-speed",
         `${random(3.8, 6.5)}s`
     );
 
 
-    plant.style.animationDelay =
+    grass.style.animationDelay =
         `${random(-5, 0)}s`;
 
 
-    const scale =
+    grass.style.scale =
         random(.78, 1.08);
 
 
-    plant.style.scale =
-        scale;
+    container.appendChild(
+        grass
+    );
+
+}
+
+
+/* =========================================================
+   CRIAR FLOR DECORATIVA
+========================================================= */
+
+function createDecorativeFlower(
+    container
+) {
+
+    if (!container) {
+
+        return;
+
+    }
+
+
+    const flower =
+        document.createElement("img");
+
+
+    flower.className =
+        "flower";
+
+
+    flower.src =
+        choose(
+            CONFIG.flowerImages
+        );
+
+
+    flower.alt =
+        "";
+
+
+    flower.draggable =
+        false;
+
+
+    flower.style.left =
+        `${random(5, 95)}%`;
+
+
+    flower.style.bottom =
+        `${random(4, 44)}px`;
+
+
+    flower.style.setProperty(
+        "--rotation",
+        `${random(-7, 7)}deg`
+    );
+
+
+    flower.style.setProperty(
+        "--wind-speed",
+        `${random(4, 6.5)}s`
+    );
+
+
+    flower.style.animationDelay =
+        `${random(-5, 0)}s`;
+
+
+    flower.style.scale =
+        random(.75, 1.05);
 
 
     container.appendChild(
-        plant
+        flower
     );
 
 }
@@ -477,12 +545,14 @@ function populateHill(
     ) {
 
         return;
+
     }
 
 
     /*
-       Vegetação normal pode ser recriada
-       sem problemas.
+       Limpa somente a vegetação normal.
+
+       O memory-layer NÃO é tocado aqui.
     */
 
     hill.vegetation
@@ -495,16 +565,25 @@ function populateHill(
         i++
     ) {
 
-        const type =
-            Math.random() < .24
-                ? "flower"
-                : "grass";
+        /*
+           Maioria é grama.
+        */
 
+        if (
+            Math.random() < .78
+        ) {
 
-        createPlant(
-            hill.vegetation,
-            type
-        );
+            createGrass(
+                hill.vegetation
+            );
+
+        } else {
+
+            createDecorativeFlower(
+                hill.vegetation
+            );
+
+        }
 
     }
 
@@ -543,6 +622,53 @@ function populateAllHills() {
 }
 
 
+/* =========================================================
+   LIMPAR GIRASSÓIS DE MEMÓRIA
+========================================================= */
+
+function clearMemoryFlowers() {
+
+    [
+        hills.middle.memory,
+        hills.front.memory
+    ]
+    .forEach(
+        layer => {
+
+            if (layer) {
+
+                layer.replaceChildren();
+
+            }
+
+        }
+    );
+
+
+    gardenState.memoryFlowers =
+        [];
+
+
+    usedFlowerPositions.clear();
+
+
+    gardenState.memoriesFound =
+        0;
+
+
+    gardenState.creatingFlower =
+        false;
+
+
+    gardenState.completed =
+        false;
+
+}
+
+
+/* =========================================================
+   FIM DA PARTE 1/3
+========================================================= */
 /* =========================================================
    FIM DA PARTE 1/3
 ========================================================= */
