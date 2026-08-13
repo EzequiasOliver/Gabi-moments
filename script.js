@@ -546,3 +546,799 @@ function populateAllHills() {
 /* =========================================================
    FIM DA PARTE 1/3
 ========================================================= */
+/* =========================================================
+   GABI MOMENTS — NOVA MECÂNICA
+   SCRIPT.JS — PARTE 2/3
+
+   Nascimento dos girassóis
+   + abertura automática das memórias
+   + joaninha
+   + pétalas
+========================================================= */
+
+
+/* =========================================================
+   CRIAR GIRASSOL DE MEMÓRIA
+========================================================= */
+
+function createMemoryFlower(
+    memoryIndex,
+    spawn
+) {
+
+    /*
+       Descobre em qual morro o girassol
+       deve nascer.
+    */
+
+    const hill =
+        hills[spawn.hill];
+
+
+    if (
+        !hill ||
+        !hill.vegetation
+    ) {
+
+        return null;
+    }
+
+
+    /*
+       Criamos o girassol dentro do
+       container do morro.
+
+       Assim ele nunca fica solto no céu
+       ou em outro morro.
+    */
+
+    const flower =
+        document.createElement("img");
+
+
+    flower.className =
+        "memory-flower";
+
+
+    flower.src =
+        "imagem/girassol.png";
+
+
+    flower.alt =
+        `Girassol da lembrança ${memoryIndex + 1}`;
+
+
+    flower.draggable =
+        false;
+
+
+    flower.dataset.memoryIndex =
+        memoryIndex;
+
+
+    flower.style.left =
+        `${spawn.left}%`;
+
+
+    flower.style.bottom =
+        `${spawn.bottom}px`;
+
+
+    flower.style.setProperty(
+        "--memory-size",
+        `${spawn.size}px`
+    );
+
+
+    /*
+       Começa pequeno e invisível.
+       Depois fazemos a flor nascer.
+    */
+
+    flower.style.opacity =
+        "0";
+
+
+    flower.style.transform =
+        "translateX(-50%) scale(0)";
+
+
+    /*
+       O container de vegetação é usado
+       apenas para manter a flor dentro
+       do morro.
+    */
+
+    hill.vegetation.appendChild(
+        flower
+    );
+
+
+    /*
+       Animação de nascimento.
+    */
+
+    requestAnimationFrame(
+        () => {
+
+            flower.animate(
+
+                [
+                    {
+                        opacity: 0,
+
+                        transform:
+                            `
+                            translateX(-50%)
+                            scale(0)
+                            rotate(-8deg)
+                            `
+                    },
+
+                    {
+                        opacity: 1,
+
+                        transform:
+                            `
+                            translateX(-50%)
+                            scale(1.12)
+                            rotate(3deg)
+                            `
+                    },
+
+                    {
+                        opacity: 1,
+
+                        transform:
+                            `
+                            translateX(-50%)
+                            scale(1)
+                            rotate(0deg)
+                            `
+                    }
+
+                ],
+
+                {
+                    duration: 900,
+
+                    easing:
+                        "cubic-bezier(.2,.9,.2,1)",
+
+                    fill:
+                        "forwards"
+                }
+
+            );
+
+        }
+    );
+
+
+    /*
+       O clique no girassol que já nasceu
+       também abre a mesma memória.
+    */
+
+    flower.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+            openMemory(
+                memoryIndex
+            );
+
+        }
+    );
+
+
+    return flower;
+
+}
+
+
+/* =========================================================
+   DESCOBRIR PRÓXIMA MEMÓRIA
+========================================================= */
+
+function discoverNextMemory() {
+
+    /*
+       Não há mais memórias.
+    */
+
+    if (
+        gardenState.memoriesFound >=
+        CONFIG.photos.length
+    ) {
+
+        gardenState.completed =
+            true;
+
+        return;
+
+    }
+
+
+    /*
+       Evita dois girassóis nascerem
+       simultaneamente.
+    */
+
+    if (
+        gardenState.creatingFlower
+    ) {
+
+        return;
+
+    }
+
+
+    gardenState.creatingFlower =
+        true;
+
+
+    const memoryIndex =
+        gardenState.memoriesFound;
+
+
+    const spawn =
+        chooseFlowerSpawn();
+
+
+    const flower =
+        createMemoryFlower(
+            memoryIndex,
+            spawn
+        );
+
+
+    /*
+       Se houve algum problema na criação,
+       não avançamos o contador.
+    */
+
+    if (!flower) {
+
+        gardenState.creatingFlower =
+            false;
+
+        return;
+
+    }
+
+
+    /*
+       A memória foi descoberta.
+    */
+
+    gardenState.memoriesFound++;
+
+
+    /*
+       Pequena espera para o girassol
+       terminar de nascer antes da foto
+       aparecer.
+
+       Isso deixa a interação mais bonita.
+    */
+
+    setTimeout(
+        () => {
+
+            openMemory(
+                memoryIndex
+            );
+
+
+            gardenState.creatingFlower =
+                false;
+
+
+            /*
+               Depois da terceira memória,
+               marcamos o jardim como completo.
+            */
+
+            if (
+                gardenState.memoriesFound >=
+                CONFIG.photos.length
+            ) {
+
+                gardenState.completed =
+                    true;
+
+            }
+
+        },
+
+        700
+    );
+
+}
+
+
+/* =========================================================
+   MODAL DE MEMÓRIA
+========================================================= */
+
+function openMemory(index) {
+
+    const modal =
+        elements.memoryModal;
+
+
+    const image =
+        elements.memoryImage;
+
+
+    if (
+        !modal ||
+        !image
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        index < 0 ||
+        index >= CONFIG.photos.length
+    ) {
+
+        return;
+
+    }
+
+
+    image.src =
+        CONFIG.photos[index];
+
+
+    image.alt =
+        `Foto da lembrança ${index + 1}`;
+
+
+    if (
+        elements.memoryCaption
+    ) {
+
+        elements.memoryCaption.textContent =
+            CONFIG.captions[index] || "";
+
+    }
+
+
+    if (
+        elements.memoryCounter
+    ) {
+
+        elements.memoryCounter.textContent =
+            `${index + 1} / ${CONFIG.photos.length}`;
+
+    }
+
+
+    modal.classList.add(
+        "show"
+    );
+
+
+    modal.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+/* =========================================================
+   FECHAR MEMÓRIA
+========================================================= */
+
+function closeMemory() {
+
+    const modal =
+        elements.memoryModal;
+
+
+    if (!modal) {
+        return;
+    }
+
+
+    modal.classList.remove(
+        "show"
+    );
+
+
+    modal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    if (
+        !elements.ladybugModal ||
+        !elements.ladybugModal.classList.contains(
+            "show"
+        )
+    ) {
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+}
+
+
+/* =========================================================
+   MODAL DA JOANINHA
+========================================================= */
+
+function openLadybugModal() {
+
+    const modal =
+        elements.ladybugModal;
+
+
+    if (!modal) {
+        return;
+    }
+
+
+    modal.classList.add(
+        "show"
+    );
+
+
+    modal.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+function closeLadybugModal() {
+
+    const modal =
+        elements.ladybugModal;
+
+
+    if (!modal) {
+        return;
+    }
+
+
+    modal.classList.remove(
+        "show"
+    );
+
+
+    modal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    if (
+        !elements.memoryModal ||
+        !elements.memoryModal.classList.contains(
+            "show"
+        )
+    ) {
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+}
+
+
+/* =========================================================
+   BOTÃO DE FECHAR — MEMÓRIA
+========================================================= */
+
+if (
+    elements.memoryClose
+) {
+
+    elements.memoryClose.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+            closeMemory();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   BOTÃO DE FECHAR — JOANINHA
+========================================================= */
+
+if (
+    elements.ladybugClose
+) {
+
+    elements.ladybugClose.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+            closeLadybugModal();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   FECHAR CLICANDO NO FUNDO
+========================================================= */
+
+if (
+    elements.memoryModal
+) {
+
+    elements.memoryModal.addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target ===
+                elements.memoryModal
+            ) {
+
+                closeMemory();
+
+            }
+
+        }
+    );
+
+}
+
+
+if (
+    elements.ladybugModal
+) {
+
+    elements.ladybugModal.addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target ===
+                elements.ladybugModal
+            ) {
+
+                closeLadybugModal();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   ESC FECHA OS MODAIS
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key !== "Escape"
+        ) {
+
+            return;
+
+        }
+
+
+        closeMemory();
+
+        closeLadybugModal();
+
+    }
+);
+
+
+/* =========================================================
+   PÉTALAS
+========================================================= */
+
+function createPetal() {
+
+    const layer =
+        elements.petalLayer;
+
+
+    if (!layer) {
+        return;
+    }
+
+
+    const petal =
+        document.createElement("div");
+
+
+    petal.className =
+        "petal";
+
+
+    const size =
+        random(7, 14);
+
+
+    petal.style.width =
+        `${size}px`;
+
+
+    petal.style.height =
+        `${size * 1.45}px`;
+
+
+    petal.style.left =
+        `${random(0, 100)}vw`;
+
+
+    petal.style.background =
+        choose([
+            "#fff9d1",
+            "#fff0a4",
+            "#ffe680",
+            "#fffbe8"
+        ]);
+
+
+    petal.style.opacity =
+        random(.65, .95);
+
+
+    layer.appendChild(
+        petal
+    );
+
+
+    const drift =
+        random(-130, 130);
+
+
+    const rotation =
+        random(260, 720);
+
+
+    const duration =
+        random(3.8, 6.2);
+
+
+    const animation =
+        petal.animate(
+
+            [
+                {
+                    transform:
+                        `
+                        translate3d(
+                            0,
+                            -35px,
+                            0
+                        )
+                        rotate(0deg)
+                        `
+                },
+
+                {
+                    transform:
+                        `
+                        translate3d(
+                            ${drift}px,
+                            110vh,
+                            0
+                        )
+                        rotate(
+                            ${rotation}deg
+                        )
+                        `,
+
+                    opacity: 0
+                }
+
+            ],
+
+            {
+                duration:
+                    duration * 1000,
+
+                easing:
+                    "ease-in",
+
+                fill:
+                    "forwards"
+            }
+
+        );
+
+
+    animation.finished
+        .then(
+            () => {
+
+                petal.remove();
+
+            }
+        )
+        .catch(
+            () => {
+
+                petal.remove();
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   RAJADA DE PÉTALAS
+========================================================= */
+
+function createPetalBurst() {
+
+    const amount =
+        randomInt(
+            12,
+            18
+        );
+
+
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
+
+        setTimeout(
+            createPetal,
+            i * 45
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   FIM DA PARTE 2/3
+========================================================= */
