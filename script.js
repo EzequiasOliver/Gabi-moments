@@ -1342,3 +1342,714 @@ function createPetalBurst() {
 /* =========================================================
    FIM DA PARTE 2/3
 ========================================================= */
+/* =========================================================
+   GABI MOMENTS — NOVA MECÂNICA
+   SCRIPT.JS — PARTE 3/3
+
+   Girassol principal
+   + joaninha andando
+   + inicialização
+   + proteção contra duplicação
+========================================================= */
+
+
+/* =========================================================
+   GIRASSOL PRINCIPAL
+========================================================= */
+
+if (elements.mainFlower) {
+
+    elements.mainFlower.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            /*
+               A cada clique:
+
+               1. nasce um girassol;
+               2. a memória correspondente abre;
+               3. pétalas aparecem.
+
+               Depois da terceira memória,
+               não criamos uma quarta.
+            */
+
+            if (
+                gardenState.memoriesFound <
+                CONFIG.photos.length
+            ) {
+
+                discoverNextMemory();
+
+                createPetalBurst();
+
+                return;
+
+            }
+
+
+            /*
+               Todas as três memórias já foram
+               descobertas.
+
+               O girassol principal continua
+               interagindo, mas não cria flores
+               inexistentes.
+            */
+
+            createPetalBurst();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   ESTADO DA JOANINHA
+========================================================= */
+
+const ladybugState = {
+
+    x: 12,
+
+    direction: 1,
+
+    walking: true,
+
+    pauseUntil: 0,
+
+    nextPause: 0,
+
+    speed: 0.026
+
+};
+
+
+/* =========================================================
+   LIMITES DA JOANINHA
+========================================================= */
+
+const ladybugLimits = {
+
+    minX: 7,
+
+    maxX: 88
+
+};
+
+
+/* =========================================================
+   ATUALIZAR VISUAL DA JOANINHA
+========================================================= */
+
+function updateLadybugVisual() {
+
+    const bug =
+        elements.ladybug;
+
+
+    if (!bug) {
+        return;
+    }
+
+
+    bug.style.left =
+        `${ladybugState.x}%`;
+
+
+    /*
+       Vira horizontalmente conforme
+       muda de direção.
+    */
+
+    bug.style.transform =
+        `
+        scaleX(
+            ${ladybugState.direction}
+        )
+        `;
+
+}
+
+
+/* =========================================================
+   AGENDAR PAUSA
+========================================================= */
+
+function scheduleLadybugPause(
+    currentTime
+) {
+
+    ladybugState.nextPause =
+        currentTime +
+        random(
+            3500,
+            7000
+        );
+
+}
+
+
+/* =========================================================
+   PAUSAR JOANINHA
+========================================================= */
+
+function pauseLadybug(
+    currentTime
+) {
+
+    ladybugState.walking =
+        false;
+
+
+    ladybugState.pauseUntil =
+        currentTime +
+        random(
+            900,
+            2300
+        );
+
+}
+
+
+/* =========================================================
+   ATUALIZAR MOVIMENTO
+========================================================= */
+
+function updateLadybug(
+    currentTime
+) {
+
+    const bug =
+        elements.ladybug;
+
+
+    if (!bug) {
+        return;
+    }
+
+
+    /*
+       Quando está parada.
+    */
+
+    if (
+        !ladybugState.walking
+    ) {
+
+        if (
+            currentTime >=
+            ladybugState.pauseUntil
+        ) {
+
+            /*
+               Às vezes muda de direção
+               antes de continuar.
+            */
+
+            if (
+                Math.random() < .5
+            ) {
+
+                ladybugState.direction *=
+                    -1;
+
+            }
+
+
+            ladybugState.walking =
+                true;
+
+
+            scheduleLadybugPause(
+                currentTime
+            );
+
+        }
+
+
+        updateLadybugVisual();
+
+        return;
+
+    }
+
+
+    /*
+       Movimento.
+    */
+
+    ladybugState.x +=
+        ladybugState.speed *
+        ladybugState.direction;
+
+
+    /*
+       Chegou ao lado direito.
+    */
+
+    if (
+        ladybugState.x >=
+        ladybugLimits.maxX
+    ) {
+
+        ladybugState.x =
+            ladybugLimits.maxX;
+
+
+        ladybugState.direction =
+            -1;
+
+
+        pauseLadybug(
+            currentTime
+        );
+
+    }
+
+
+    /*
+       Chegou ao lado esquerdo.
+    */
+
+    if (
+        ladybugState.x <=
+        ladybugLimits.minX
+    ) {
+
+        ladybugState.x =
+            ladybugLimits.minX;
+
+
+        ladybugState.direction =
+            1;
+
+
+        pauseLadybug(
+            currentTime
+        );
+
+    }
+
+
+    /*
+       Pausa aleatória.
+    */
+
+    if (
+        currentTime >=
+        ladybugState.nextPause
+    ) {
+
+        pauseLadybug(
+            currentTime
+        );
+
+    }
+
+
+    updateLadybugVisual();
+
+}
+
+
+/* =========================================================
+   LOOP DA JOANINHA
+========================================================= */
+
+function ladybugAnimationLoop(
+    currentTime
+) {
+
+    updateLadybug(
+        currentTime
+    );
+
+
+    requestAnimationFrame(
+        ladybugAnimationLoop
+    );
+
+}
+
+
+/* =========================================================
+   CLIQUE DA JOANINHA
+========================================================= */
+
+if (
+    elements.ladybug
+) {
+
+    elements.ladybug.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            /*
+               Ela para enquanto a lembrança
+               está aberta.
+            */
+
+            ladybugState.walking =
+                false;
+
+
+            ladybugState.pauseUntil =
+                performance.now() +
+                3000;
+
+
+            openLadybugModal();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   INICIAR JOANINHA
+========================================================= */
+
+function startLadybug() {
+
+    if (
+        !elements.ladybug
+    ) {
+
+        return;
+    }
+
+
+    const now =
+        performance.now();
+
+
+    scheduleLadybugPause(
+        now
+    );
+
+
+    updateLadybugVisual();
+
+
+    requestAnimationFrame(
+        ladybugAnimationLoop
+    );
+
+}
+
+
+/* =========================================================
+   PRÉ-CARREGAR IMAGENS
+========================================================= */
+
+function preloadImages() {
+
+    const sources = [
+
+        ...CONFIG.photos,
+
+        ...CONFIG.decorationImages,
+
+        "imagem/girassol.png",
+
+        "imagem/joaninha.png",
+
+        "imagem/joaninha-engracada.jpg"
+
+    ];
+
+
+    sources.forEach(
+        source => {
+
+            const image =
+                new Image();
+
+            image.src =
+                source;
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   VERIFICAR ESTRUTURA
+========================================================= */
+
+function verifyPageStructure() {
+
+    const required = [
+
+        "garden",
+
+        "mainFlower",
+
+        "ladybug",
+
+        "petalLayer",
+
+        "memoryMiddle",
+
+        "memoryFront",
+
+        "memoryModal",
+
+        "memoryImage",
+
+        "memoryCaption",
+
+        "memoryCounter",
+
+        "ladybugModal"
+
+    ];
+
+
+    const missing = [];
+
+
+    required.forEach(
+        name => {
+
+            if (
+                !elements[name]
+            ) {
+
+                missing.push(
+                    name
+                );
+
+            }
+
+        }
+    );
+
+
+    if (
+        missing.length > 0
+    ) {
+
+        console.warn(
+            "Gabi Moments — elementos ausentes:",
+            missing
+        );
+
+    }
+
+
+    return (
+        missing.length === 0
+    );
+
+}
+
+
+/* =========================================================
+   LIMPEZA INICIAL
+========================================================= */
+
+function cleanDynamicElements() {
+
+    /*
+       Remove qualquer elemento dinâmico
+       que eventualmente tenha sobrado.
+
+       IMPORTANTE:
+
+       Não removemos o girassol principal.
+       Não removemos a joaninha.
+
+       Apenas a vegetação e memórias
+       que são controladas pelo JavaScript.
+    */
+
+    const vegetationContainers = [
+
+        hills.far.vegetation,
+
+        hills.back.vegetation,
+
+        hills.middle.vegetation,
+
+        hills.front.vegetation
+
+    ];
+
+
+    vegetationContainers.forEach(
+        container => {
+
+            if (
+                container
+            ) {
+
+                container.replaceChildren();
+
+            }
+
+        }
+    );
+
+
+    /*
+       Também limpamos as camadas de memória
+       caso exista alguma estrutura antiga.
+    */
+
+    if (
+        elements.memoryMiddle
+    ) {
+
+        elements.memoryMiddle
+            .replaceChildren();
+
+    }
+
+
+    if (
+        elements.memoryFront
+    ) {
+
+        elements.memoryFront
+            .replaceChildren();
+
+    }
+
+
+    /*
+       Nenhuma memória foi descoberta
+       no carregamento.
+    */
+
+    gardenState.memoriesFound =
+        0;
+
+
+    gardenState.creatingFlower =
+        false;
+
+
+    gardenState.completed =
+        false;
+
+
+    usedFlowerPositions.clear();
+
+}
+
+
+/* =========================================================
+   INICIALIZAR JARDIM
+========================================================= */
+
+function initializeGarden() {
+
+    /*
+       Primeiro verificamos o HTML.
+    */
+
+    verifyPageStructure();
+
+
+    /*
+       Depois limpamos qualquer elemento
+       dinâmico antigo.
+    */
+
+    cleanDynamicElements();
+
+
+    /*
+       Pré-carregamos as imagens.
+    */
+
+    preloadImages();
+
+
+    /*
+       Criamos somente a vegetação normal.
+    */
+
+    populateAllHills();
+
+
+    /*
+       NÃO criamos girassóis de memória aqui.
+
+       Eles só nascerão quando o usuário
+       clicar no girassol principal.
+    */
+
+
+    /*
+       Iniciamos a joaninha.
+    */
+
+    startLadybug();
+
+}
+
+
+/* =========================================================
+   EVITAR ARRASTAR IMAGENS
+========================================================= */
+
+document.addEventListener(
+    "dragstart",
+    event => {
+
+        if (
+            event.target instanceof
+            HTMLImageElement
+        ) {
+
+            event.preventDefault();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INICIALIZAÇÃO SEGURA
+========================================================= */
+
+if (
+    document.readyState ===
+    "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initializeGarden,
+        {
+            once: true
+        }
+    );
+
+} else {
+
+    initializeGarden();
+
+}
+
+
+/* =========================================================
+   FIM DO SCRIPT.JS
+========================================================= */
