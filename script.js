@@ -1195,3 +1195,553 @@ document.addEventListener(
 /* =========================================================
    FIM DA PARTE 2/3
 ========================================================= */
+/* =========================================================
+   GABI MOMENTS — NOVA VERSÃO
+   SCRIPT.JS — PARTE 3/3
+   Joaninha + inicialização + segurança
+========================================================= */
+
+
+/* =========================================================
+   ESTADO DA JOANINHA
+========================================================= */
+
+const ladybugState = {
+
+    x: 12,
+
+    direction: 1,
+
+    walking: true,
+
+    pauseUntil: 0,
+
+    nextPause: 0,
+
+    speed: 0.028
+
+};
+
+
+/* =========================================================
+   LIMITES DA JOANINHA
+========================================================= */
+
+const ladybugLimits = {
+
+    minX: 7,
+
+    maxX: 88
+
+};
+
+
+/* =========================================================
+   POSIÇÃO DA JOANINHA
+========================================================= */
+
+function updateLadybugVisual() {
+
+    const bug =
+        elements.ladybug;
+
+
+    if (!bug) {
+        return;
+    }
+
+
+    bug.style.left =
+        `${ladybugState.x}%`;
+
+
+    /*
+       A joaninha fica no terreno frontal.
+       O CSS controla a altura dela.
+    */
+
+    bug.style.transform =
+        `
+        scaleX(
+            ${ladybugState.direction}
+        )
+        `;
+
+}
+
+
+/* =========================================================
+   AGENDAR PAUSA
+========================================================= */
+
+function scheduleLadybugPause(
+    currentTime
+) {
+
+    ladybugState.nextPause =
+        currentTime +
+        random(
+            3000,
+            6500
+        );
+
+}
+
+
+/* =========================================================
+   FAZER JOANINHA PARAR
+========================================================= */
+
+function pauseLadybug(
+    currentTime
+) {
+
+    ladybugState.walking =
+        false;
+
+
+    ladybugState.pauseUntil =
+        currentTime +
+        random(
+            900,
+            2200
+        );
+
+}
+
+
+/* =========================================================
+   ATUALIZAR JOANINHA
+========================================================= */
+
+function updateLadybug(
+    currentTime
+) {
+
+    const bug =
+        elements.ladybug;
+
+
+    if (!bug) {
+        return;
+    }
+
+
+    /*
+       Quando está parada,
+       aguardamos o fim da pausa.
+    */
+
+    if (
+        !ladybugState.walking
+    ) {
+
+        if (
+            currentTime >=
+            ladybugState.pauseUntil
+        ) {
+
+            /*
+               Existe uma pequena chance
+               de ela mudar de direção.
+            */
+
+            if (
+                Math.random() < .45
+            ) {
+
+                ladybugState.direction *=
+                    -1;
+
+            }
+
+
+            ladybugState.walking =
+                true;
+
+
+            scheduleLadybugPause(
+                currentTime
+            );
+
+        }
+
+
+        updateLadybugVisual();
+
+        return;
+
+    }
+
+
+    /*
+       Movimento normal.
+    */
+
+    ladybugState.x +=
+        ladybugState.speed *
+        ladybugState.direction;
+
+
+    /*
+       Limite direito.
+    */
+
+    if (
+        ladybugState.x >=
+        ladybugLimits.maxX
+    ) {
+
+        ladybugState.x =
+            ladybugLimits.maxX;
+
+
+        ladybugState.direction =
+            -1;
+
+
+        pauseLadybug(
+            currentTime
+        );
+
+    }
+
+
+    /*
+       Limite esquerdo.
+    */
+
+    if (
+        ladybugState.x <=
+        ladybugLimits.minX
+    ) {
+
+        ladybugState.x =
+            ladybugLimits.minX;
+
+
+        ladybugState.direction =
+            1;
+
+
+        pauseLadybug(
+            currentTime
+        );
+
+    }
+
+
+    /*
+       Pausa espontânea no caminho.
+    */
+
+    if (
+        currentTime >=
+        ladybugState.nextPause
+    ) {
+
+        pauseLadybug(
+            currentTime
+        );
+
+    }
+
+
+    updateLadybugVisual();
+
+}
+
+
+/* =========================================================
+   LOOP DA JOANINHA
+========================================================= */
+
+function ladybugAnimationLoop(
+    currentTime
+) {
+
+    updateLadybug(
+        currentTime
+    );
+
+
+    requestAnimationFrame(
+        ladybugAnimationLoop
+    );
+
+}
+
+
+/* =========================================================
+   CLIQUE NA JOANINHA
+========================================================= */
+
+if (elements.ladybug) {
+
+    elements.ladybug.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            /*
+               Para a joaninha durante
+               a abertura da lembrança.
+            */
+
+            ladybugState.walking =
+                false;
+
+
+            ladybugState.pauseUntil =
+                performance.now() +
+                2800;
+
+
+            openLadybugModal();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   INICIAR JOANINHA
+========================================================= */
+
+function startLadybug() {
+
+    if (
+        !elements.ladybug
+    ) {
+
+        return;
+    }
+
+
+    const now =
+        performance.now();
+
+
+    scheduleLadybugPause(
+        now
+    );
+
+
+    updateLadybugVisual();
+
+
+    requestAnimationFrame(
+        ladybugAnimationLoop
+    );
+
+}
+
+
+/* =========================================================
+   VERIFICAÇÃO DOS ELEMENTOS
+========================================================= */
+
+function verifyPageStructure() {
+
+    const requiredElements = [
+
+        "garden",
+
+        "mainFlower",
+
+        "ladybug",
+
+        "petalLayer",
+
+        "memoryMiddle",
+
+        "memoryFront",
+
+        "memoryModal",
+
+        "memoryImage",
+
+        "ladybugModal"
+
+    ];
+
+
+    const missing = [];
+
+
+    requiredElements.forEach(
+        name => {
+
+            if (
+                !elements[name]
+            ) {
+
+                missing.push(
+                    name
+                );
+
+            }
+
+        }
+    );
+
+
+    if (
+        missing.length > 0
+    ) {
+
+        console.warn(
+            "Gabi Moments: elementos ausentes:",
+            missing
+        );
+
+    }
+
+
+    return (
+        missing.length === 0
+    );
+
+}
+
+
+/* =========================================================
+   LIMPEZA INICIAL
+========================================================= */
+
+function cleanDynamicElements() {
+
+    /*
+       Isso evita duplicação caso o script
+       seja executado novamente.
+    */
+
+    const containers = [
+
+        hills.far.vegetation,
+
+        hills.back.vegetation,
+
+        hills.middle.vegetation,
+
+        hills.front.vegetation,
+
+        elements.memoryMiddle,
+
+        elements.memoryFront
+
+    ];
+
+
+    containers.forEach(
+        container => {
+
+            if (container) {
+
+                container.replaceChildren();
+
+            }
+
+        }
+    );
+
+
+    /*
+       Remove pétalas antigas.
+    */
+
+    if (
+        elements.petalLayer
+    ) {
+
+        elements.petalLayer
+            .replaceChildren();
+
+    }
+
+}
+
+
+/* =========================================================
+   INICIALIZAR JARDIM
+========================================================= */
+
+function initializeGarden() {
+
+    /*
+       Verificação primeiro.
+    */
+
+    verifyPageStructure();
+
+
+    /*
+       Limpa elementos dinâmicos.
+    */
+
+    cleanDynamicElements();
+
+
+    /*
+       Carrega imagens antes de
+       criar o cenário.
+    */
+
+    preloadImages();
+
+
+    /*
+       Cria a vegetação.
+    */
+
+    populateAllHills();
+
+
+    /*
+       Cria os três girassóis.
+    */
+
+    createMemoryFlowers();
+
+
+    /*
+       Inicia a joaninha por último.
+    */
+
+    startLadybug();
+
+}
+
+
+/* =========================================================
+   INICIAR QUANDO O HTML ESTIVER PRONTO
+========================================================= */
+
+if (
+    document.readyState ===
+    "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initializeGarden,
+        {
+            once: true
+        }
+    );
+
+} else {
+
+    initializeGarden();
+
+}
+
+
+/* =========================================================
+   FIM DO SCRIPT.JS — NOVA VERSÃO
+========================================================= */
