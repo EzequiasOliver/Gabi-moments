@@ -1400,3 +1400,519 @@ button {
 /* =========================================================
    FIM DA PARTE 2/3
 ========================================================= */
+/* =========================================================
+   GABI MOMENTS — NOVA VERSÃO
+   STYLE.CSS — PARTE 3/3
+   Animações + responsividade + acessibilidade
+========================================================= */
+
+
+/* =========================================================
+   ANIMAÇÃO DO SOL
+========================================================= */
+
+@keyframes sunGlow {
+
+    from {
+        opacity: .78;
+        transform: scale(.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.04);
+    }
+
+}
+
+
+@keyframes sunFloat {
+
+    0% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-7px);
+    }
+
+    100% {
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   MOVIMENTO DAS NUVENS
+========================================================= */
+
+@keyframes cloudMoveOne {
+
+    from {
+        transform:
+            translateX(0)
+            scale(.85);
+    }
+
+    to {
+        transform:
+            translateX(
+                calc(100vw + 300px)
+            )
+            scale(.85);
+    }
+
+}
+
+
+@keyframes cloudMoveTwo {
+
+    from {
+        transform:
+            translateX(0)
+            scale(.62);
+    }
+
+    to {
+        transform:
+            translateX(
+                calc(100vw + 360px)
+            )
+            scale(.62);
+    }
+
+}
+
+
+@keyframes cloudMoveThree {
+
+    from {
+        transform:
+            translateX(0)
+            scale(.48);
+    }
+
+    to {
+        transform:
+            translateX(
+                calc(100vw + 390px)
+            )
+            scale(.48);
+    }
+
+}
+
+
+/* =========================================================
+   VENTO NA VEGETAÇÃO
+========================================================= */
+
+@keyframes grassSway {
+
+    0% {
+        transform:
+            translateX(-50%)
+            rotate(
+                var(--rotation, 0deg)
+            );
+    }
+
+    100% {
+        transform:
+            translateX(-50%)
+            rotate(
+                calc(
+                    var(--rotation, 0deg)
+                    + 3deg
+                )
+            );
+    }
+
+}
+
+
+@keyframes memoryFlowerSway {
+
+    0% {
+        transform:
+            translateX(-50%)
+            rotate(-1deg);
+    }
+
+    100% {
+        transform:
+            translateX(-50%)
+            rotate(2deg);
+    }
+
+}
+
+
+/* =========================================================
+   DICA FLUTUANTE
+========================================================= */
+
+@keyframes hintFloat {
+
+    0% {
+        transform:
+            translateX(-50%)
+            translateY(0);
+
+        opacity: .78;
+    }
+
+    50% {
+        transform:
+            translateX(-50%)
+            translateY(-4px);
+
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translateX(-50%)
+            translateY(0);
+
+        opacity: .78;
+    }
+
+}
+
+
+/* =========================================================
+   FOCO DO TECLADO
+========================================================= */
+
+button:focus-visible {
+
+    outline:
+        3px solid
+        rgba(
+            255,
+            239,
+            116,
+            .95
+        );
+
+    outline-offset: 4px;
+
+}
+
+
+/* =========================================================
+   TELAS PEQUENAS
+========================================================= */
+
+@media (max-width: 600px) {
+
+    #sky {
+        height: 68vh;
+
+        min-height: 410px;
+    }
+
+
+    #intro {
+        padding-top: 32px;
+    }
+
+
+    #intro p {
+        margin-top: 11px;
+    }
+
+
+    #garden {
+
+        height:
+            680px;
+
+        min-height:
+            680px;
+
+        margin-top:
+            34px;
+    }
+
+
+    /*
+       Ajustamos os morros para que
+       todos continuem visíveis no celular.
+    */
+
+    #hill-far {
+
+        left: -38%;
+
+        bottom: 37%;
+
+        width: 105%;
+
+        height: 40%;
+    }
+
+
+    #hill-back {
+
+        right: -38%;
+
+        bottom: 31%;
+
+        width: 110%;
+
+        height: 44%;
+    }
+
+
+    #hill-middle {
+
+        left: -30%;
+
+        bottom: 15%;
+
+        width: 125%;
+
+        height: 50%;
+    }
+
+
+    #hill-front {
+
+        right: -30%;
+
+        bottom: -7%;
+
+        width: 130%;
+
+        height: 55%;
+    }
+
+
+    #main-flower {
+
+        width:
+            clamp(
+                115px,
+                31vw,
+                170px
+            );
+
+        bottom: 9%;
+    }
+
+
+    #ladybug {
+
+        width:
+            clamp(
+                38px,
+                9vw,
+                52px
+            );
+
+        bottom: 8%;
+    }
+
+
+    #garden-hint {
+
+        bottom: 2%;
+
+        padding:
+            7px 13px;
+    }
+
+
+    .modal {
+
+        padding: 10px;
+    }
+
+
+    .modal-card {
+
+        width: 94vw;
+
+        max-height: 91vh;
+
+        padding: 11px;
+
+        border-radius: 19px;
+    }
+
+
+    #memory-image {
+
+        max-height: 62vh;
+    }
+
+
+    .ladybug-card > img {
+
+        max-height: 63vh;
+    }
+
+}
+
+
+/* =========================================================
+   TELAS MUITO PEQUENAS
+========================================================= */
+
+@media (max-width: 380px) {
+
+    #garden {
+
+        height:
+            650px;
+
+        min-height:
+            650px;
+    }
+
+
+    #intro h1 {
+
+        font-size:
+            2rem;
+    }
+
+
+    #intro p {
+
+        font-size:
+            .9rem;
+    }
+
+
+    #main-flower {
+
+        width:
+            112px;
+    }
+
+
+    #ladybug {
+
+        width:
+            38px;
+    }
+
+
+    .memory-flower {
+
+        width:
+            var(--memory-size, 48px);
+    }
+
+
+    .flower {
+
+        height:
+            52px;
+    }
+
+
+    .grass {
+
+        height:
+            40px;
+    }
+
+}
+
+
+/* =========================================================
+   TELAS GRANDES
+========================================================= */
+
+@media (min-width: 1000px) {
+
+    #garden {
+
+        max-width:
+            1400px;
+
+        margin-left:
+            auto;
+
+        margin-right:
+            auto;
+    }
+
+
+    #main-flower {
+
+        width:
+            205px;
+    }
+
+
+    #ladybug {
+
+        width:
+            55px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUÇÃO DE MOVIMENTO
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        scroll-behavior:
+            auto !important;
+
+        transition-duration:
+            .01ms !important;
+    }
+
+}
+
+
+/* =========================================================
+   SEGURANÇA CONTRA SELEÇÃO ACIDENTAL
+========================================================= */
+
+img {
+
+    user-select: none;
+
+    -webkit-user-select: none;
+
+}
+
+
+#main-flower,
+#ladybug,
+.memory-flower {
+
+    user-select: none;
+
+    -webkit-user-select: none;
+
+}
+
+
+/* =========================================================
+   FIM DO STYLE.CSS
+========================================================= */
