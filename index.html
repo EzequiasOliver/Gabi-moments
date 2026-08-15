@@ -10,7 +10,7 @@
 
     <meta
         name="theme-color"
-        content="#83cde8"
+        content="#82cde9"
     >
 
     <title>Para Gabi 🌻</title>
@@ -25,26 +25,25 @@
 
 <div id="app">
 
-    <!-- =====================================================
+    <!-- =========================
          CÉU
-    ====================================================== -->
+    ========================== -->
 
-    <div id="sky">
+    <section id="sky" aria-hidden="true">
 
         <div id="sun-glow"></div>
-
         <div id="sun"></div>
 
-        <div class="cloud cloud-one"></div>
-        <div class="cloud cloud-two"></div>
-        <div class="cloud cloud-three"></div>
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
 
-    </div>
+    </section>
 
 
-    <!-- =====================================================
-         CABEÇALHO
-    ====================================================== -->
+    <!-- =========================
+         INTRODUÇÃO
+    ========================== -->
 
     <header id="intro">
 
@@ -58,100 +57,72 @@
     </header>
 
 
-    <!-- =====================================================
+    <!-- =========================
          JARDIM
-    ====================================================== -->
+    ========================== -->
 
     <main id="garden">
 
-
-        <!-- =================================================
-             MORRO 1 — DISTANTE
-        ================================================== -->
+        <!-- Morro distante -->
 
         <div
             class="hill hill-far"
             id="hill-far"
         >
-
             <div
                 class="vegetation"
                 id="vegetation-far"
             ></div>
-
         </div>
 
 
-        <!-- =================================================
-             MORRO 2 — TRASEIRO
-        ================================================== -->
+        <!-- Morro traseiro -->
 
         <div
             class="hill hill-back"
             id="hill-back"
         >
-
             <div
                 class="vegetation"
                 id="vegetation-back"
             ></div>
-
         </div>
 
 
-        <!-- =================================================
-             MORRO 3 — CENTRAL
-        ================================================== -->
+        <!-- Morro central -->
 
         <div
             class="hill hill-middle"
             id="hill-middle"
         >
-
             <div
                 class="vegetation"
                 id="vegetation-middle"
             ></div>
-
-            <div
-                class="memory-layer"
-                id="memory-middle"
-            ></div>
-
         </div>
 
 
-        <!-- =================================================
-             MORRO 4 — FRENTE
-        ================================================== -->
+        <!-- Morro frontal -->
 
         <div
             class="hill hill-front"
             id="hill-front"
         >
-
             <div
                 class="vegetation"
                 id="vegetation-front"
             ></div>
-
-            <div
-                class="memory-layer"
-                id="memory-front"
-            ></div>
-
         </div>
 
 
-        <!-- =================================================
+        <!-- =========================
              GIRASSOL PRINCIPAL
-        ================================================== -->
+        ========================== -->
 
         <button
             id="main-flower"
-            class="main-flower"
             type="button"
-            aria-label="Interagir com o girassol"
+            aria-label="Descobrir uma memória"
         >
 
             <img
@@ -163,14 +134,14 @@
         </button>
 
 
-        <!-- =================================================
+        <!-- =========================
              JOANINHA
-        ================================================== -->
+        ========================== -->
 
         <button
             id="ladybug"
             type="button"
-            aria-label="Abrir a lembrança da joaninha"
+            aria-label="Ver lembrança da joaninha"
         >
 
             <img
@@ -182,20 +153,20 @@
         </button>
 
 
-        <!-- =================================================
+        <!-- =========================
              DICA
-        ================================================== -->
+        ========================== -->
 
         <div id="garden-hint">
-            Toque nos girassóis 🌻
+            Toque no girassol 🌻
         </div>
 
     </main>
 
 
-    <!-- =====================================================
+    <!-- =========================
          PÉTALAS
-    ====================================================== -->
+    ========================== -->
 
     <div
         id="petal-layer"
@@ -203,9 +174,9 @@
     ></div>
 
 
-    <!-- =====================================================
-         MODAL DAS MEMÓRIAS
-    ====================================================== -->
+    <!-- =========================
+         MODAL DE MEMÓRIA
+    ========================== -->
 
     <div
         id="memory-modal"
@@ -213,24 +184,30 @@
         aria-hidden="true"
     >
 
-        <div class="modal-card">
+        <div
+            class="modal-card"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Memória"
+        >
 
             <button
                 id="memory-close"
                 class="close-button"
                 type="button"
-                aria-label="Fechar"
+                aria-label="Fechar memória"
             >
                 ×
             </button>
 
 
-            <div class="modal-image-box">
+            <div class="memory-photo">
 
                 <img
                     id="memory-image"
                     src=""
                     alt=""
+                    draggable="false"
                 >
 
             </div>
@@ -245,9 +222,9 @@
     </div>
 
 
-    <!-- =====================================================
+    <!-- =========================
          MODAL DA JOANINHA
-    ====================================================== -->
+    ========================== -->
 
     <div
         id="ladybug-modal"
@@ -255,13 +232,18 @@
         aria-hidden="true"
     >
 
-        <div class="modal-card ladybug-card">
+        <div
+            class="modal-card ladybug-card"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Lembrança da joaninha"
+        >
 
             <button
                 id="ladybug-close"
                 class="close-button"
                 type="button"
-                aria-label="Fechar"
+                aria-label="Fechar lembrança"
             >
                 ×
             </button>
