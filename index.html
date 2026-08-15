@@ -13,22 +13,31 @@
         content="#83cde8"
     >
 
+    <meta
+        name="description"
+        content="Um pequeno jardim de lembranças para Gabi."
+    >
+
     <title>Para Gabi 🌻</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 </head>
 
 <body>
 
 <div id="app">
 
-    <!-- ==================================================
+    <!-- =====================================================
          CÉU
-    =================================================== -->
+    ====================================================== -->
 
     <section id="sky" aria-hidden="true">
 
         <div id="sun-glow"></div>
+
         <div id="sun"></div>
 
         <div class="cloud cloud-one"></div>
@@ -38,9 +47,9 @@
     </section>
 
 
-    <!-- ==================================================
+    <!-- =====================================================
          INTRODUÇÃO
-    =================================================== -->
+    ====================================================== -->
 
     <header id="intro">
 
@@ -54,103 +63,132 @@
     </header>
 
 
-    <!-- ==================================================
+    <!-- =====================================================
          JARDIM
-    =================================================== -->
+    ====================================================== -->
 
     <main id="garden">
 
-        <!-- Morro distante -->
+        <!-- =================================================
+             MORRO DISTANTE
+        ================================================== -->
+
         <div
-            class="hill hill-far"
             id="hill-far"
+            class="hill hill-far"
+            aria-hidden="true"
         >
+
             <div
-                class="vegetation"
                 id="vegetation-far"
+                class="vegetation"
             ></div>
+
         </div>
 
 
-        <!-- Morro traseiro -->
+        <!-- =================================================
+             MORRO TRASEIRO
+        ================================================== -->
+
         <div
-            class="hill hill-back"
             id="hill-back"
+            class="hill hill-back"
+            aria-hidden="true"
         >
+
             <div
-                class="vegetation"
                 id="vegetation-back"
+                class="vegetation"
             ></div>
+
         </div>
 
 
-        <!-- Morro central -->
+        <!-- =================================================
+             MORRO CENTRAL
+        ================================================== -->
+
         <div
-            class="hill hill-middle"
             id="hill-middle"
+            class="hill hill-middle"
+            aria-hidden="true"
         >
+
             <div
-                class="vegetation"
                 id="vegetation-middle"
+                class="vegetation"
             ></div>
 
             <!--
-                As flores de memória serão criadas
-                pelo JavaScript somente depois
-                dos cliques.
+                As flores de memória serão colocadas
+                aqui pelo JavaScript quando descobertas.
             -->
+
             <div
-                class="memory-layer"
                 id="memory-middle"
-            ></div>
-        </div>
-
-
-        <!-- Morro frontal -->
-        <div
-            class="hill hill-front"
-            id="hill-front"
-        >
-            <div
-                class="vegetation"
-                id="vegetation-front"
-            ></div>
-
-            <div
                 class="memory-layer"
-                id="memory-front"
             ></div>
+
         </div>
 
 
-        <!-- ==================================================
+        <!-- =================================================
+             MORRO FRONTAL
+        ================================================== -->
+
+        <div
+            id="hill-front"
+            class="hill hill-front"
+            aria-hidden="true"
+        >
+
+            <div
+                id="vegetation-front"
+                class="vegetation"
+            ></div>
+
+            <!--
+                As flores de memória serão colocadas
+                aqui pelo JavaScript quando descobertas.
+            -->
+
+            <div
+                id="memory-front"
+                class="memory-layer"
+            ></div>
+
+        </div>
+
+
+        <!-- =================================================
              GIRASSOL PRINCIPAL
-        =================================================== -->
+        ================================================== -->
 
         <button
             id="main-flower"
             class="main-flower"
             type="button"
-            aria-label="Descobrir uma lembrança"
+            aria-label="Clique no girassol para descobrir uma lembrança"
         >
 
             <img
                 src="imagem/girassol.png"
-                alt="Girassol"
+                alt=""
                 draggable="false"
             >
 
         </button>
 
 
-        <!-- ==================================================
+        <!-- =================================================
              JOANINHA
-        =================================================== -->
+        ================================================== -->
 
         <button
             id="ladybug"
             type="button"
-            aria-label="Abrir lembrança da joaninha"
+            aria-label="Abrir a lembrança da joaninha"
         >
 
             <img
@@ -162,20 +200,23 @@
         </button>
 
 
-        <!-- ==================================================
-             DICA
-        =================================================== -->
+        <!-- =================================================
+             INSTRUÇÃO
+        ================================================== -->
 
-        <div id="garden-hint">
+        <div
+            id="garden-hint"
+            aria-hidden="true"
+        >
             Toque no girassol 🌻
         </div>
 
     </main>
 
 
-    <!-- ==================================================
-         PÉTALAS
-    =================================================== -->
+    <!-- =====================================================
+         CAMADA DAS PÉTALAS
+    ====================================================== -->
 
     <div
         id="petal-layer"
@@ -183,22 +224,20 @@
     ></div>
 
 
-    <!-- ==================================================
-         MODAL DAS MEMÓRIAS
-    =================================================== -->
+    <!-- =====================================================
+         MODAL — MEMÓRIA
+    ====================================================== -->
 
     <div
         id="memory-modal"
         class="modal"
         aria-hidden="true"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="memory-caption"
     >
 
-        <div
-            class="modal-card"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="memory-caption"
-        >
+        <div class="modal-card">
 
             <button
                 id="memory-close"
@@ -231,21 +270,20 @@
     </div>
 
 
-    <!-- ==================================================
-         MODAL DA JOANINHA
-    =================================================== -->
+    <!-- =====================================================
+         MODAL — JOANINHA
+    ====================================================== -->
 
     <div
         id="ladybug-modal"
         class="modal"
         aria-hidden="true"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="ladybug-caption"
     >
 
-        <div
-            class="modal-card ladybug-card"
-            role="dialog"
-            aria-modal="true"
-        >
+        <div class="modal-card ladybug-card">
 
             <button
                 id="ladybug-close"
@@ -257,14 +295,18 @@
             </button>
 
 
-            <img
-                src="imagem/joaninha-engracada.jpg"
-                alt="Joaninha engraçada"
-                draggable="false"
-            >
+            <div class="ladybug-image-box">
+
+                <img
+                    src="imagem/joaninha-engracada.jpg"
+                    alt="Lembrança engraçada da joaninha"
+                    draggable="false"
+                >
+
+            </div>
 
 
-            <p>
+            <p id="ladybug-caption">
                 Até a joaninha deixou uma
                 lembrança por aqui. 🐞😂
             </p>
@@ -276,11 +318,14 @@
 </div>
 
 
-<!-- ==================================================
+<!-- =========================================================
      JAVASCRIPT
-=================================================== -->
+========================================================= -->
 
-<script src="script.js"></script>
+<script
+    src="script.js"
+    defer
+></script>
 
 </body>
 </html>
