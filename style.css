@@ -47,12 +47,6 @@ img {
     -webkit-tap-highlight-color: transparent;
 }
 
-img {
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-user-drag: none;
-}
-
 
 /* =========================================================
    APLICAÇÃO
@@ -171,8 +165,7 @@ img {
 
     border-radius: 50px;
 
-    background:
-        rgba(255, 255, 255, .72);
+    background: rgba(255, 255, 255, .72);
 
     opacity: .75;
 }
@@ -187,8 +180,7 @@ img {
 
     border-radius: 50%;
 
-    background:
-        rgba(255, 255, 255, .72);
+    background: rgba(255, 255, 255, .72);
 }
 
 .cloud::before {
@@ -346,7 +338,7 @@ img {
 
 
 /* =========================================================
-   MORROS
+   MORROS — BASE
 ========================================================= */
 
 .hill {
@@ -402,8 +394,7 @@ img {
 
     z-index: 10;
 
-    transform:
-        rotate(-1.5deg);
+    transform: rotate(-1.5deg);
 }
 
 #hill-far::before {
@@ -439,8 +430,7 @@ img {
 
     z-index: 20;
 
-    transform:
-        rotate(1.4deg);
+    transform: rotate(1.4deg);
 }
 
 #hill-back::before {
@@ -474,8 +464,7 @@ img {
 
     z-index: 30;
 
-    transform:
-        rotate(-.8deg);
+    transform: rotate(-.8deg);
 }
 
 #hill-middle::before {
@@ -509,8 +498,7 @@ img {
 
     z-index: 40;
 
-    transform:
-        rotate(1deg);
+    transform: rotate(1deg);
 }
 
 #hill-front::before {
@@ -524,7 +512,7 @@ img {
 
 
 /* =========================================================
-   VEGETAÇÃO
+   VEGETAÇÃO NORMAL
 ========================================================= */
 
 .vegetation {
@@ -538,11 +526,6 @@ img {
 
     pointer-events: none;
 }
-
-
-/* =========================================================
-   PLANTAS DECORATIVAS
-========================================================= */
 
 .grass,
 .flower {
@@ -610,15 +593,25 @@ img {
 
 
 /* =========================================================
-   CAMADAS DAS MEMÓRIAS
+   CAMADAS DAS FLORES DE MEMÓRIA
 ========================================================= */
+
+/*
+   IMPORTANTE:
+
+   Estas camadas são diferentes da vegetação.
+   O JavaScript colocará os novos girassóis
+   SOMENTE aqui.
+
+   Elas começam vazias.
+*/
 
 .memory-layer {
     position: absolute;
 
     inset: 0;
 
-    z-index: 20;
+    z-index: 30;
 
     overflow: hidden;
 
@@ -626,19 +619,8 @@ img {
 }
 
 
-/*
-   IMPORTANTE:
-
-   Nenhum girassol é colocado aqui
-   no carregamento.
-
-   O JavaScript cria cada um somente
-   depois de um clique.
-*/
-
-
 /* =========================================================
-   GIRASSOL DE MEMÓRIA
+   GIRASSÓIS DE MEMÓRIA
 ========================================================= */
 
 .memory-flower {
@@ -646,10 +628,11 @@ img {
 
     display: block;
 
-    width:
-        var(--memory-size, 60px);
-
+    width: var(--memory-size, 58px);
     height: auto;
+
+    margin: 0;
+    padding: 0;
 
     transform:
         translateX(-50%);
@@ -659,13 +642,13 @@ img {
 
     user-select: none;
 
-    -webkit-user-select: none;
-
     -webkit-user-drag: none;
+
+    cursor: pointer;
 
     pointer-events: auto;
 
-    cursor: pointer;
+    touch-action: manipulation;
 
     filter:
         drop-shadow(
@@ -678,6 +661,21 @@ img {
         4.8s
         ease-in-out
         infinite alternate;
+}
+
+.memory-flower:hover {
+    filter:
+        drop-shadow(
+            0 5px 6px
+            rgba(0,0,0,.25)
+        )
+        brightness(1.06);
+}
+
+.memory-flower:active {
+    transform:
+        translateX(-50%)
+        scale(.94);
 }
 
 
@@ -700,6 +698,7 @@ img {
             220px
         );
 
+    margin: 0;
     padding: 0;
 
     border: 0;
@@ -732,6 +731,13 @@ img {
 
     width: 100%;
     height: auto;
+
+    margin: 0;
+    padding: 0;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
 
     pointer-events: none;
 }
@@ -774,6 +780,7 @@ img {
             58px
         );
 
+    margin: 0;
     padding: 0;
 
     border: 0;
@@ -805,6 +812,10 @@ img {
 
     width: 100%;
     height: auto;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
 
     pointer-events: none;
 }
@@ -964,7 +975,6 @@ img {
         blur(8px);
 
     opacity: 0;
-
     visibility: hidden;
 
     pointer-events: none;
@@ -976,7 +986,6 @@ img {
 
 .modal.show {
     opacity: 1;
-
     visibility: visible;
 
     pointer-events: auto;
@@ -984,7 +993,7 @@ img {
 
 
 /* =========================================================
-   CARTÃO
+   CARTÃO DO MODAL
 ========================================================= */
 
 .modal-card {
@@ -1046,7 +1055,7 @@ img {
 
 
 /* =========================================================
-   FECHAR
+   BOTÃO FECHAR
 ========================================================= */
 
 .close-button {
@@ -1092,9 +1101,16 @@ img {
     box-shadow:
         0 3px 9px
         rgba(0,0,0,.20);
+
+    transition:
+        transform .18s ease,
+        background .18s ease;
 }
 
 .close-button:hover {
+    transform:
+        scale(1.07);
+
     background:
         rgba(
             39,
@@ -1111,7 +1127,7 @@ img {
 
 
 /* =========================================================
-   FOTO DA MEMÓRIA
+   IMAGEM DA MEMÓRIA
 ========================================================= */
 
 .modal-image-box {
@@ -1138,6 +1154,10 @@ img {
     object-fit: contain;
 
     border-radius: 16px;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
 }
 
 
@@ -1184,14 +1204,24 @@ img {
 
 
 /* =========================================================
-   JOANINHA — MODAL
+   MODAL DA JOANINHA
 ========================================================= */
 
 .ladybug-card {
     text-align: center;
 }
 
-.ladybug-card > img {
+.ladybug-image-box {
+    width: 100%;
+
+    overflow: hidden;
+
+    border-radius: 16px;
+
+    background: #ece5d0;
+}
+
+.ladybug-card > .ladybug-image-box > img {
     display: block;
 
     width: 100%;
@@ -1204,6 +1234,10 @@ img {
     object-fit: contain;
 
     border-radius: 16px;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
 }
 
 .ladybug-card p {
@@ -1262,6 +1296,7 @@ img {
 ========================================================= */
 
 @keyframes sunGlow {
+
     from {
         opacity: .78;
         transform: scale(.97);
@@ -1271,9 +1306,11 @@ img {
         opacity: 1;
         transform: scale(1.04);
     }
+
 }
 
 @keyframes sunFloat {
+
     0% {
         transform: translateY(0);
     }
@@ -1285,9 +1322,11 @@ img {
     100% {
         transform: translateY(0);
     }
+
 }
 
 @keyframes cloudMoveOne {
+
     from {
         transform:
             translateX(0)
@@ -1301,9 +1340,11 @@ img {
             )
             scale(.85);
     }
+
 }
 
 @keyframes cloudMoveTwo {
+
     from {
         transform:
             translateX(0)
@@ -1317,9 +1358,11 @@ img {
             )
             scale(.62);
     }
+
 }
 
 @keyframes cloudMoveThree {
+
     from {
         transform:
             translateX(0)
@@ -1333,9 +1376,11 @@ img {
             )
             scale(.48);
     }
+
 }
 
 @keyframes grassSway {
+
     0% {
         transform:
             translateX(-50%)
@@ -1354,9 +1399,11 @@ img {
                 )
             );
     }
+
 }
 
 @keyframes memorySway {
+
     0% {
         transform:
             translateX(-50%)
@@ -1368,9 +1415,11 @@ img {
             translateX(-50%)
             rotate(2deg);
     }
+
 }
 
 @keyframes hintFloat {
+
     0% {
         transform:
             translateX(-50%)
@@ -1394,11 +1443,12 @@ img {
 
         opacity: .78;
     }
+
 }
 
 
 /* =========================================================
-   FOCO
+   FOCO DO TECLADO
 ========================================================= */
 
 button:focus-visible {
@@ -1437,11 +1487,13 @@ button:focus-visible {
     #garden {
         height: 680px;
         min-height: 680px;
+
         margin-top: 34px;
     }
 
     #hill-far {
         left: -38%;
+
         bottom: 37%;
 
         width: 105%;
@@ -1450,6 +1502,7 @@ button:focus-visible {
 
     #hill-back {
         right: -38%;
+
         bottom: 31%;
 
         width: 110%;
@@ -1458,6 +1511,7 @@ button:focus-visible {
 
     #hill-middle {
         left: -30%;
+
         bottom: 15%;
 
         width: 125%;
@@ -1466,6 +1520,7 @@ button:focus-visible {
 
     #hill-front {
         right: -30%;
+
         bottom: -7%;
 
         width: 130%;
@@ -1497,8 +1552,7 @@ button:focus-visible {
     #garden-hint {
         bottom: 2%;
 
-        padding:
-            7px 13px;
+        padding: 7px 13px;
     }
 
     .modal {
@@ -1519,9 +1573,10 @@ button:focus-visible {
         max-height: 62vh;
     }
 
-    .ladybug-card > img {
+    .ladybug-card > .ladybug-image-box > img {
         max-height: 63vh;
     }
+
 }
 
 
@@ -1554,7 +1609,10 @@ button:focus-visible {
 
     .memory-flower {
         width:
-            var(--memory-size, 48px);
+            var(
+                --memory-size,
+                48px
+            );
     }
 
     .flower {
@@ -1564,11 +1622,12 @@ button:focus-visible {
     .grass {
         height: 40px;
     }
+
 }
 
 
 /* =========================================================
-   DESKTOP
+   TELAS GRANDES
 ========================================================= */
 
 @media (min-width: 1000px) {
@@ -1587,6 +1646,7 @@ button:focus-visible {
     #ladybug {
         width: 55px;
     }
+
 }
 
 
@@ -1612,4 +1672,21 @@ button:focus-visible {
         transition-duration:
             .01ms !important;
     }
+
 }
+
+
+/* =========================================================
+   IMAGENS
+========================================================= */
+
+img {
+    user-select: none;
+
+    -webkit-user-select: none;
+}
+
+
+/* =========================================================
+   FIM
+========================================================= */
