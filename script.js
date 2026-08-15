@@ -1,18 +1,19 @@
 /* =========================================================
-   GABI MOMENTS 🌻
-   SCRIPT.JS — VERSÃO NOVA E ESTÁVEL
-   PARTE 1/3
+   GABI MOMENTS
+   SCRIPT.JS — VERSÃO FINAL
 
    MECÂNICA:
 
-   1. O girassol grande começa sozinho.
-   2. Ao clicar nele:
-      - nasce UM novo girassol no jardim;
-      - a memória correspondente abre automaticamente.
-   3. O girassol criado permanece no jardim.
-   4. Clicar nele novamente abre a mesma memória.
-   5. Depois da última memória, o girassol grande
-      não cria flores extras.
+   GIRASSOL GRANDE
+        ↓
+   clique
+        ↓
+   nasce um girassol no jardim
+        ↓
+   memória correspondente abre automaticamente
+
+   Os girassóis de memória NÃO existem
+   antes da interação.
 ========================================================= */
 
 
@@ -22,34 +23,17 @@
 
 const CONFIG = {
 
-    /* -----------------------------------------------------
-       FOTOS DAS MEMÓRIAS
-       -----------------------------------------------------
-
-       A ordem precisa corresponder às legendas.
-    */
-
     photos: [
         "imagem/foto1.jpg",
         "imagem/foto2.jpg",
         "imagem/foto3.jpg"
     ],
 
-
-    /* -----------------------------------------------------
-       LEGENDAS
-    ----------------------------------------------------- */
-
     captions: [
         "Uma lembrança especial. 🌻",
         "Um momento que merece ficar guardado. 💛",
         "Mais uma memória bonita. ☀️"
     ],
-
-
-    /* -----------------------------------------------------
-       IMAGENS DECORATIVAS DO JARDIM
-    ----------------------------------------------------- */
 
     decorationImages: [
         "imagem/grama1.png",
@@ -58,25 +42,20 @@ const CONFIG = {
         "imagem/tulipa.png"
     ],
 
-
-    /* -----------------------------------------------------
-       IMAGENS PRINCIPAIS
-    ----------------------------------------------------- */
-
-    sunflower:
+    sunflowerImage:
         "imagem/girassol.png",
 
-    ladybug:
+    ladybugImage:
         "imagem/joaninha.png",
 
-    funnyLadybug:
+    ladybugMemoryImage:
         "imagem/joaninha-engracada.jpg"
 
 };
 
 
 /* =========================================================
-   REFERÊNCIAS DOS ELEMENTOS HTML
+   REFERÊNCIAS DO HTML
 ========================================================= */
 
 const elements = {
@@ -93,52 +72,6 @@ const elements = {
     petalLayer:
         document.getElementById("petal-layer"),
 
-
-    /* -----------------------------------------------------
-       MORROS
-    ----------------------------------------------------- */
-
-    hillFar:
-        document.getElementById("hill-far"),
-
-    hillBack:
-        document.getElementById("hill-back"),
-
-    hillMiddle:
-        document.getElementById("hill-middle"),
-
-    hillFront:
-        document.getElementById("hill-front"),
-
-
-    vegetationFar:
-        document.getElementById("vegetation-far"),
-
-    vegetationBack:
-        document.getElementById("vegetation-back"),
-
-    vegetationMiddle:
-        document.getElementById("vegetation-middle"),
-
-    vegetationFront:
-        document.getElementById("vegetation-front"),
-
-
-    /* -----------------------------------------------------
-       CAMADAS DE MEMÓRIA
-    ----------------------------------------------------- */
-
-    memoryMiddle:
-        document.getElementById("memory-middle"),
-
-    memoryFront:
-        document.getElementById("memory-front"),
-
-
-    /* -----------------------------------------------------
-       MODAL DE MEMÓRIA
-    ----------------------------------------------------- */
-
     memoryModal:
         document.getElementById("memory-modal"),
 
@@ -154,11 +87,6 @@ const elements = {
     memoryClose:
         document.getElementById("memory-close"),
 
-
-    /* -----------------------------------------------------
-       MODAL DA JOANINHA
-    ----------------------------------------------------- */
-
     ladybugModal:
         document.getElementById("ladybug-modal"),
 
@@ -169,154 +97,133 @@ const elements = {
 
 
 /* =========================================================
-   ESTADO DO JARDIM
-========================================================= */
-
-const gardenState = {
-
-    /*
-       Quantas memórias já foram descobertas.
-    */
-
-    memoriesFound: 0,
-
-
-    /*
-       Impede cliques extremamente rápidos
-       de criarem duas flores para a mesma memória.
-    */
-
-    creatingFlower: false,
-
-
-    /*
-       Indica que todas as memórias já foram
-       descobertas.
-    */
-
-    completed: false,
-
-
-    /*
-       Guarda as flores já criadas.
-
-       Exemplo:
-
-       [
-           {
-               element: HTMLImageElement,
-               memoryIndex: 0
-           },
-           {
-               element: HTMLImageElement,
-               memoryIndex: 1
-           }
-       ]
-    */
-
-    memoryFlowers: []
-
-};
-
-
-/* =========================================================
-   CONFIGURAÇÃO DOS MORROS
+   REFERÊNCIAS DOS MORROS
 ========================================================= */
 
 const hills = {
 
     far: {
         element:
-            elements.hillFar,
+            document.getElementById("hill-far"),
 
         vegetation:
-            elements.vegetationFar
+            document.getElementById("vegetation-far"),
+
+        memory:
+            document.getElementById("memory-middle")
     },
 
     back: {
         element:
-            elements.hillBack,
+            document.getElementById("hill-back"),
 
         vegetation:
-            elements.vegetationBack
+            document.getElementById("vegetation-back"),
+
+        memory:
+            document.getElementById("memory-middle")
     },
 
     middle: {
         element:
-            elements.hillMiddle,
+            document.getElementById("hill-middle"),
 
         vegetation:
-            elements.vegetationMiddle
+            document.getElementById("vegetation-middle"),
+
+        memory:
+            document.getElementById("memory-middle")
     },
 
     front: {
         element:
-            elements.hillFront,
+            document.getElementById("hill-front"),
 
         vegetation:
-            elements.vegetationFront
+            document.getElementById("vegetation-front"),
+
+        memory:
+            document.getElementById("memory-front")
     }
 
 };
 
 
 /* =========================================================
-   POSIÇÕES POSSÍVEIS PARA OS GIRASSÓIS
+   ESTADO DO JARDIM
+========================================================= */
+
+const gardenState = {
+
+    memoriesFound: 0,
+
+    creatingFlower: false,
+
+    completed: false
+
+};
+
+
+/* =========================================================
+   POSIÇÕES DOS GIRASSÓIS
 ========================================================= */
 
 /*
-   IMPORTANTE:
+   Cada girassol possui:
 
-   Essas posições NÃO são criadas no carregamento.
+   hill   = morro onde nasce
+   left   = posição horizontal
+   bottom = altura dentro do morro
+   size   = tamanho
 
-   Elas são apenas lugares possíveis.
+   As posições NÃO são criadas no carregamento.
 
-   Uma posição só é utilizada quando o usuário
-   descobre uma memória.
+   Só são utilizadas quando uma memória
+   é descoberta.
 */
 
 const flowerSpawnPositions = [
 
     {
         hill: "far",
-        left: 34,
-        bottom: 42,
+        left: 32,
+        bottom: 38,
         size: 48
     },
 
     {
         hill: "back",
         left: 68,
-        bottom: 48,
+        bottom: 44,
         size: 52
     },
 
     {
         hill: "middle",
-        left: 24,
-        bottom: 55,
-        size: 60
+        left: 25,
+        bottom: 48,
+        size: 58
     },
 
     {
         hill: "middle",
         left: 73,
-        bottom: 50,
+        bottom: 44,
         size: 56
     },
 
     {
         hill: "front",
-        left: 28,
-        bottom: 54,
-        size: 66
+        left: 29,
+        bottom: 48,
+        size: 64
     },
 
     {
         hill: "front",
         left: 72,
-        bottom: 47,
-        size: 62
+        bottom: 42,
+        size: 61
     }
 
 ];
@@ -354,15 +261,11 @@ function randomInt(min, max) {
 
 function choose(array) {
 
-    if (
-        !Array.isArray(array) ||
-        array.length === 0
-    ) {
+    if (!array || array.length === 0) {
 
         return null;
 
     }
-
 
     return array[
         Math.floor(
@@ -374,70 +277,45 @@ function choose(array) {
 
 
 /* =========================================================
-   ESCOLHER POSIÇÃO DE NOVO GIRASSOL
+   ESCOLHER POSIÇÃO DO GIRASSOL
 ========================================================= */
 
 function chooseFlowerSpawn() {
 
     const available =
         flowerSpawnPositions.filter(
-            (_, index) => {
-
-                return !usedFlowerPositions
-                    .has(index);
-
-            }
+            (_, index) =>
+                !usedFlowerPositions.has(index)
         );
 
 
-    /*
-       Normalmente teremos várias posições
-       disponíveis.
-    */
+    if (available.length === 0) {
 
-    if (
-        available.length > 0
-    ) {
-
-        const selected =
-            choose(available);
-
-
-        const index =
-            flowerSpawnPositions.indexOf(
-                selected
-            );
-
-
-        usedFlowerPositions.add(
-            index
-        );
-
-
-        return selected;
+        return null;
 
     }
 
 
-    /*
-       Proteção caso alguém adicione mais
-       memórias do que posições disponíveis.
-    */
-
-    const fallbackIndex =
-        gardenState.memoriesFound %
-        flowerSpawnPositions.length;
+    const selected =
+        choose(available);
 
 
-    return flowerSpawnPositions[
-        fallbackIndex
-    ];
+    const index =
+        flowerSpawnPositions.indexOf(
+            selected
+        );
+
+
+    usedFlowerPositions.add(index);
+
+
+    return selected;
 
 }
 
 
 /* =========================================================
-   CRIAR VEGETAÇÃO NORMAL
+   VEGETAÇÃO
 ========================================================= */
 
 const vegetationAmount = {
@@ -454,7 +332,7 @@ const vegetationAmount = {
 
 
 /* =========================================================
-   CRIAR UMA PLANTA DECORATIVA
+   CRIAR PLANTA DECORATIVA
 ========================================================= */
 
 function createPlant(
@@ -464,7 +342,7 @@ function createPlant(
 
     if (!container) {
 
-        return null;
+        return;
 
     }
 
@@ -473,19 +351,11 @@ function createPlant(
         document.createElement("img");
 
 
-    /*
-       Define a classe visual.
-    */
-
     plant.className =
         type === "flower"
             ? "flower"
             : "grass";
 
-
-    /*
-       Escolhe uma imagem decorativa.
-    */
 
     const source =
         choose(
@@ -495,7 +365,7 @@ function createPlant(
 
     if (!source) {
 
-        return null;
+        return;
 
     }
 
@@ -511,10 +381,6 @@ function createPlant(
     plant.draggable =
         false;
 
-
-    /*
-       Posicionamento aleatório.
-    */
 
     plant.style.left =
         `${random(4, 96)}%`;
@@ -540,22 +406,23 @@ function createPlant(
         `${random(-5, 0)}s`;
 
 
-    plant.style.scale =
+    const scale =
         random(.78, 1.08);
+
+
+    plant.style.scale =
+        scale;
 
 
     container.appendChild(
         plant
     );
 
-
-    return plant;
-
 }
 
 
 /* =========================================================
-   POPULAR UM MORRO
+   POPULAR MORRO
 ========================================================= */
 
 function populateHill(
@@ -572,11 +439,6 @@ function populateHill(
 
     }
 
-
-    /*
-       A vegetação decorativa é criada
-       somente durante a inicialização.
-    */
 
     hill.vegetation
         .replaceChildren();
@@ -637,5 +499,1399 @@ function populateAllHills() {
 
 
 /* =========================================================
-   FIM DA PARTE 1/3
+   CRIAR GIRASSOL DE MEMÓRIA
+========================================================= */
+
+function createMemoryFlower(
+    memoryIndex,
+    spawn
+) {
+
+    if (!spawn) {
+
+        return null;
+
+    }
+
+
+    /*
+       IMPORTANTE:
+
+       O girassol de memória deve ficar
+       dentro da camada de memória,
+       NÃO dentro da vegetação.
+
+       Assim a vegetação normal nunca
+       apaga os girassóis descobertos.
+    */
+
+    let memoryContainer;
+
+
+    if (
+        spawn.hill === "front"
+    ) {
+
+        memoryContainer =
+            document.getElementById(
+                "memory-front"
+            );
+
+    } else {
+
+        memoryContainer =
+            document.getElementById(
+                "memory-middle"
+            );
+
+    }
+
+
+    if (!memoryContainer) {
+
+        console.error(
+            "Camada de memória não encontrada."
+        );
+
+        return null;
+
+    }
+
+
+    const flower =
+        document.createElement("img");
+
+
+    flower.className =
+        "memory-flower";
+
+
+    flower.src =
+        CONFIG.sunflowerImage;
+
+
+    flower.alt =
+        `Girassol da lembrança ${memoryIndex + 1}`;
+
+
+    flower.draggable =
+        false;
+
+
+    flower.dataset.memoryIndex =
+        memoryIndex;
+
+
+    flower.style.left =
+        `${spawn.left}%`;
+
+
+    flower.style.bottom =
+        `${spawn.bottom}px`;
+
+
+    flower.style.setProperty(
+        "--memory-size",
+        `${spawn.size}px`
+    );
+
+
+    /*
+       Estado inicial.
+    */
+
+    flower.style.opacity =
+        "0";
+
+
+    flower.style.transform =
+        "translateX(-50%) scale(0)";
+
+
+    memoryContainer.appendChild(
+        flower
+    );
+
+
+    /*
+       Força o navegador a reconhecer
+       o estado inicial antes da animação.
+    */
+
+    requestAnimationFrame(
+        () => {
+
+            flower.animate(
+
+                [
+                    {
+                        opacity: 0,
+
+                        transform:
+                            "translateX(-50%) scale(0) rotate(-12deg)"
+                    },
+
+                    {
+                        opacity: 1,
+
+                        transform:
+                            "translateX(-50%) scale(1.15) rotate(5deg)"
+                    },
+
+                    {
+                        opacity: 1,
+
+                        transform:
+                            "translateX(-50%) scale(1) rotate(0deg)"
+                    }
+                ],
+
+                {
+                    duration: 900,
+
+                    easing:
+                        "cubic-bezier(.2,.9,.2,1)",
+
+                    fill:
+                        "forwards"
+                }
+
+            );
+
+        }
+    );
+
+
+    /*
+       Clicar posteriormente na flor
+       abre novamente a mesma memória.
+    */
+
+    flower.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            const index =
+                Number(
+                    flower.dataset.memoryIndex
+                );
+
+
+            openMemory(index);
+
+        }
+    );
+
+
+    return flower;
+
+}
+
+
+/* =========================================================
+   DESCOBRIR PRÓXIMA MEMÓRIA
+========================================================= */
+
+function discoverNextMemory() {
+
+    /*
+       Não existe memória para criar.
+    */
+
+    if (
+        gardenState.memoriesFound >=
+        CONFIG.photos.length
+    ) {
+
+        gardenState.completed =
+            true;
+
+        return;
+
+    }
+
+
+    /*
+       Evita duplo clique.
+    */
+
+    if (
+        gardenState.creatingFlower
+    ) {
+
+        return;
+
+    }
+
+
+    gardenState.creatingFlower =
+        true;
+
+
+    const memoryIndex =
+        gardenState.memoriesFound;
+
+
+    const spawn =
+        chooseFlowerSpawn();
+
+
+    if (!spawn) {
+
+        console.error(
+            "Não existem posições disponíveis para o girassol."
+        );
+
+
+        gardenState.creatingFlower =
+            false;
+
+        return;
+
+    }
+
+
+    const flower =
+        createMemoryFlower(
+            memoryIndex,
+            spawn
+        );
+
+
+    if (!flower) {
+
+        gardenState.creatingFlower =
+            false;
+
+        return;
+
+    }
+
+
+    /*
+       Agora a memória realmente foi
+       descoberta.
+    */
+
+    gardenState.memoriesFound++;
+
+
+    /*
+       Abre a memória depois que a flor
+       terminou de nascer.
+    */
+
+    setTimeout(
+        () => {
+
+            openMemory(
+                memoryIndex
+            );
+
+
+            gardenState.creatingFlower =
+                false;
+
+
+            if (
+                gardenState.memoriesFound >=
+                CONFIG.photos.length
+            ) {
+
+                gardenState.completed =
+                    true;
+
+            }
+
+        },
+
+        850
+    );
+
+}
+
+
+/* =========================================================
+   ABRIR MEMÓRIA
+========================================================= */
+
+function openMemory(index) {
+
+    if (
+        !elements.memoryModal ||
+        !elements.memoryImage
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        index < 0 ||
+        index >= CONFIG.photos.length
+    ) {
+
+        console.error(
+            "Índice de memória inválido:",
+            index
+        );
+
+        return;
+
+    }
+
+
+    const image =
+        elements.memoryImage;
+
+
+    image.src =
+        CONFIG.photos[index];
+
+
+    image.alt =
+        `Foto da lembrança ${index + 1}`;
+
+
+    if (
+        elements.memoryCaption
+    ) {
+
+        elements.memoryCaption.textContent =
+            CONFIG.captions[index] || "";
+
+    }
+
+
+    if (
+        elements.memoryCounter
+    ) {
+
+        elements.memoryCounter.textContent =
+            `${index + 1} / ${CONFIG.photos.length}`;
+
+    }
+
+
+    elements.memoryModal.classList.add(
+        "show"
+    );
+
+
+    elements.memoryModal.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+/* =========================================================
+   FECHAR MEMÓRIA
+========================================================= */
+
+function closeMemory() {
+
+    if (
+        !elements.memoryModal
+    ) {
+
+        return;
+
+    }
+
+
+    elements.memoryModal.classList.remove(
+        "show"
+    );
+
+
+    elements.memoryModal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    if (
+        !elements.ladybugModal ||
+        !elements.ladybugModal.classList.contains(
+            "show"
+        )
+    ) {
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+}
+
+
+/* =========================================================
+   ABRIR JOANINHA
+========================================================= */
+
+function openLadybugModal() {
+
+    if (
+        !elements.ladybugModal
+    ) {
+
+        return;
+
+    }
+
+
+    elements.ladybugModal.classList.add(
+        "show"
+    );
+
+
+    elements.ladybugModal.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+/* =========================================================
+   FECHAR JOANINHA
+========================================================= */
+
+function closeLadybugModal() {
+
+    if (
+        !elements.ladybugModal
+    ) {
+
+        return;
+
+    }
+
+
+    elements.ladybugModal.classList.remove(
+        "show"
+    );
+
+
+    elements.ladybugModal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    if (
+        !elements.memoryModal ||
+        !elements.memoryModal.classList.contains(
+            "show"
+        )
+    ) {
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+}
+
+
+/* =========================================================
+   BOTÃO FECHAR MEMÓRIA
+========================================================= */
+
+if (
+    elements.memoryClose
+) {
+
+    elements.memoryClose.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+            closeMemory();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   BOTÃO FECHAR JOANINHA
+========================================================= */
+
+if (
+    elements.ladybugClose
+) {
+
+    elements.ladybugClose.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+            closeLadybugModal();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   CLICAR FORA DO CARTÃO
+========================================================= */
+
+if (
+    elements.memoryModal
+) {
+
+    elements.memoryModal.addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target ===
+                elements.memoryModal
+            ) {
+
+                closeMemory();
+
+            }
+
+        }
+    );
+
+}
+
+
+if (
+    elements.ladybugModal
+) {
+
+    elements.ladybugModal.addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target ===
+                elements.ladybugModal
+            ) {
+
+                closeLadybugModal();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   ESC
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key !== "Escape"
+        ) {
+
+            return;
+
+        }
+
+
+        closeMemory();
+
+        closeLadybugModal();
+
+    }
+);
+
+
+/* =========================================================
+   PÉTALAS
+========================================================= */
+
+function createPetal() {
+
+    if (
+        !elements.petalLayer
+    ) {
+
+        return;
+
+    }
+
+
+    const petal =
+        document.createElement("div");
+
+
+    petal.className =
+        "petal";
+
+
+    const size =
+        random(7, 14);
+
+
+    petal.style.width =
+        `${size}px`;
+
+
+    petal.style.height =
+        `${size * 1.45}px`;
+
+
+    petal.style.left =
+        `${random(0, 100)}vw`;
+
+
+    petal.style.background =
+        choose([
+            "#fff9d1",
+            "#fff0a4",
+            "#ffe680",
+            "#fffbe8"
+        ]);
+
+
+    petal.style.opacity =
+        random(.65, .95);
+
+
+    elements.petalLayer.appendChild(
+        petal
+    );
+
+
+    const drift =
+        random(-130, 130);
+
+
+    const rotation =
+        random(260, 720);
+
+
+    const duration =
+        random(3.8, 6.2);
+
+
+    const animation =
+        petal.animate(
+
+            [
+                {
+                    transform:
+                        "translate3d(0,-35px,0) rotate(0deg)"
+                },
+
+                {
+                    transform:
+                        `
+                        translate3d(
+                            ${drift}px,
+                            110vh,
+                            0
+                        )
+                        rotate(
+                            ${rotation}deg
+                        )
+                        `,
+
+                    opacity: 0
+                }
+            ],
+
+            {
+                duration:
+                    duration * 1000,
+
+                easing:
+                    "ease-in",
+
+                fill:
+                    "forwards"
+            }
+
+        );
+
+
+    animation.finished
+        .then(
+            () => petal.remove()
+        )
+        .catch(
+            () => petal.remove()
+        );
+
+}
+
+
+/* =========================================================
+   RAJADA DE PÉTALAS
+========================================================= */
+
+function createPetalBurst() {
+
+    const amount =
+        randomInt(12, 18);
+
+
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
+
+        setTimeout(
+            createPetal,
+            i * 45
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   CLIQUE DO GIRASSOL PRINCIPAL
+========================================================= */
+
+if (
+    elements.mainFlower
+) {
+
+    elements.mainFlower.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            /*
+               Ainda existem memórias?
+            */
+
+            if (
+                gardenState.memoriesFound <
+                CONFIG.photos.length
+            ) {
+
+                discoverNextMemory();
+
+                createPetalBurst();
+
+                return;
+
+            }
+
+
+            /*
+               As três memórias já foram
+               descobertas.
+
+               Não nasce uma quarta flor.
+               Apenas fazemos o efeito das pétalas.
+            */
+
+            createPetalBurst();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   JOANINHA
+========================================================= */
+
+const ladybugState = {
+
+    x: 12,
+
+    direction: 1,
+
+    walking: true,
+
+    pauseUntil: 0,
+
+    nextPause: 0,
+
+    speed: 0.026
+
+};
+
+
+const ladybugLimits = {
+
+    minX: 7,
+
+    maxX: 88
+
+};
+
+
+/* =========================================================
+   VISUAL DA JOANINHA
+========================================================= */
+
+function updateLadybugVisual() {
+
+    if (
+        !elements.ladybug
+    ) {
+
+        return;
+
+    }
+
+
+    elements.ladybug.style.left =
+        `${ladybugState.x}%`;
+
+
+    elements.ladybug.style.transform =
+        `
+        scaleX(
+            ${ladybugState.direction}
+        )
+        `;
+
+}
+
+
+/* =========================================================
+   AGENDAR PAUSA
+========================================================= */
+
+function scheduleLadybugPause(
+    currentTime
+) {
+
+    ladybugState.nextPause =
+        currentTime +
+        random(
+            3500,
+            7000
+        );
+
+}
+
+
+/* =========================================================
+   PAUSAR JOANINHA
+========================================================= */
+
+function pauseLadybug(
+    currentTime
+) {
+
+    ladybugState.walking =
+        false;
+
+
+    ladybugState.pauseUntil =
+        currentTime +
+        random(
+            900,
+            2300
+        );
+
+}
+
+
+/* =========================================================
+   ATUALIZAR JOANINHA
+========================================================= */
+
+function updateLadybug(
+    currentTime
+) {
+
+    if (
+        !elements.ladybug
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        !ladybugState.walking
+    ) {
+
+        if (
+            currentTime >=
+            ladybugState.pauseUntil
+        ) {
+
+            if (
+                Math.random() < .5
+            ) {
+
+                ladybugState.direction *=
+                    -1;
+
+            }
+
+
+            ladybugState.walking =
+                true;
+
+
+            scheduleLadybugPause(
+                currentTime
+            );
+
+        }
+
+
+        updateLadybugVisual();
+
+        return;
+
+    }
+
+
+    ladybugState.x +=
+        ladybugState.speed *
+        ladybugState.direction;
+
+
+    if (
+        ladybugState.x >=
+        ladybugLimits.maxX
+    ) {
+
+        ladybugState.x =
+            ladybugLimits.maxX;
+
+
+        ladybugState.direction =
+            -1;
+
+
+        pauseLadybug(
+            currentTime
+        );
+
+    }
+
+
+    if (
+        ladybugState.x <=
+        ladybugLimits.minX
+    ) {
+
+        ladybugState.x =
+            ladybugLimits.minX;
+
+
+        ladybugState.direction =
+            1;
+
+
+        pauseLadybug(
+            currentTime
+        );
+
+    }
+
+
+    if (
+        currentTime >=
+        ladybugState.nextPause
+    ) {
+
+        pauseLadybug(
+            currentTime
+        );
+
+    }
+
+
+    updateLadybugVisual();
+
+}
+
+
+/* =========================================================
+   LOOP DA JOANINHA
+========================================================= */
+
+function ladybugAnimationLoop(
+    currentTime
+) {
+
+    updateLadybug(
+        currentTime
+    );
+
+
+    requestAnimationFrame(
+        ladybugAnimationLoop
+    );
+
+}
+
+
+/* =========================================================
+   CLIQUE DA JOANINHA
+========================================================= */
+
+if (
+    elements.ladybug
+) {
+
+    elements.ladybug.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            ladybugState.walking =
+                false;
+
+
+            ladybugState.pauseUntil =
+                performance.now() +
+                3000;
+
+
+            openLadybugModal();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   INICIAR JOANINHA
+========================================================= */
+
+function startLadybug() {
+
+    if (
+        !elements.ladybug
+    ) {
+
+        return;
+
+    }
+
+
+    const now =
+        performance.now();
+
+
+    scheduleLadybugPause(
+        now
+    );
+
+
+    updateLadybugVisual();
+
+
+    requestAnimationFrame(
+        ladybugAnimationLoop
+    );
+
+}
+
+
+/* =========================================================
+   PRÉ-CARREGAR IMAGENS
+========================================================= */
+
+function preloadImages() {
+
+    const sources = [
+
+        ...CONFIG.photos,
+
+        ...CONFIG.decorationImages,
+
+        CONFIG.sunflowerImage,
+
+        CONFIG.ladybugImage,
+
+        CONFIG.ladybugMemoryImage
+
+    ];
+
+
+    sources.forEach(
+        source => {
+
+            const image =
+                new Image();
+
+
+            image.src =
+                source;
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   VERIFICAR HTML
+========================================================= */
+
+function verifyPageStructure() {
+
+    const required = [
+
+        "garden",
+
+        "mainFlower",
+
+        "ladybug",
+
+        "petalLayer",
+
+        "memoryModal",
+
+        "memoryImage",
+
+        "memoryCaption",
+
+        "memoryCounter",
+
+        "memoryClose",
+
+        "ladybugModal",
+
+        "ladybugClose"
+
+    ];
+
+
+    const missing = [];
+
+
+    required.forEach(
+        name => {
+
+            if (
+                !elements[name]
+            ) {
+
+                missing.push(
+                    name
+                );
+
+            }
+
+        }
+    );
+
+
+    if (
+        missing.length > 0
+    ) {
+
+        console.error(
+            "Gabi Moments — elementos ausentes:",
+            missing
+        );
+
+    }
+
+
+    return (
+        missing.length === 0
+    );
+
+}
+
+
+/* =========================================================
+   LIMPAR SOMENTE ELEMENTOS DINÂMICOS
+========================================================= */
+
+function cleanDynamicElements() {
+
+    /*
+       NÃO usamos replaceChildren()
+       nos containers de vegetação.
+
+       Isso poderia apagar elementos
+       que deveriam permanecer.
+
+       Em vez disso, removemos somente:
+
+       .memory-flower
+       .petal
+    */
+
+    document
+        .querySelectorAll(
+            ".memory-flower"
+        )
+        .forEach(
+            flower => flower.remove()
+        );
+
+
+    if (
+        elements.petalLayer
+    ) {
+
+        elements.petalLayer
+            .replaceChildren();
+
+    }
+
+
+    gardenState.memoriesFound =
+        0;
+
+
+    gardenState.creatingFlower =
+        false;
+
+
+    gardenState.completed =
+        false;
+
+
+    usedFlowerPositions.clear();
+
+}
+
+
+/* =========================================================
+   INICIALIZAR JARDIM
+========================================================= */
+
+function initializeGarden() {
+
+    /*
+       Verifica estrutura.
+    */
+
+    verifyPageStructure();
+
+
+    /*
+       Limpa apenas elementos realmente
+       dinâmicos.
+    */
+
+    cleanDynamicElements();
+
+
+    /*
+       Pré-carrega imagens.
+    */
+
+    preloadImages();
+
+
+    /*
+       Cria a vegetação.
+    */
+
+    populateAllHills();
+
+
+    /*
+       MUITO IMPORTANTE:
+
+       Nenhum girassol de memória
+       é criado aqui.
+
+       Eles só aparecem após o clique
+       no girassol principal.
+    */
+
+    startLadybug();
+
+}
+
+
+/* =========================================================
+   IMPEDIR ARRASTAR IMAGENS
+========================================================= */
+
+document.addEventListener(
+    "dragstart",
+    event => {
+
+        if (
+            event.target instanceof
+            HTMLImageElement
+        ) {
+
+            event.preventDefault();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INICIALIZAÇÃO SEGURA
+========================================================= */
+
+if (
+    document.readyState ===
+    "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initializeGarden,
+        {
+            once: true
+        }
+    );
+
+} else {
+
+    initializeGarden();
+
+}
+
+
+/* =========================================================
+   FIM DO SCRIPT.JS
 ========================================================= */
