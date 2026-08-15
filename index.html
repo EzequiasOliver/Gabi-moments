@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
 
@@ -10,7 +11,7 @@
 
     <meta
         name="theme-color"
-        content="#82cde9"
+        content="#83cde8"
     >
 
     <title>Para Gabi 🌻</title>
@@ -21,6 +22,7 @@
     >
 </head>
 
+
 <body>
 
 <div id="app">
@@ -29,9 +31,10 @@
          CÉU
     ========================== -->
 
-    <section id="sky" aria-hidden="true">
+    <section id="sky">
 
         <div id="sun-glow"></div>
+
         <div id="sun"></div>
 
         <div class="cloud cloud-1"></div>
@@ -47,7 +50,9 @@
 
     <header id="intro">
 
-        <h1>Para Gabi ☀️</h1>
+        <h1>
+            Para Gabi ☀️
+        </h1>
 
         <p>
             Algumas pessoas deixam o mundo
@@ -63,7 +68,8 @@
 
     <main id="garden">
 
-        <!-- Morro distante -->
+
+        <!-- MORRO DISTANTE -->
 
         <div
             class="hill hill-far"
@@ -73,10 +79,15 @@
                 class="vegetation"
                 id="vegetation-far"
             ></div>
+
+            <div
+                class="memory-container"
+                id="memory-far"
+            ></div>
         </div>
 
 
-        <!-- Morro traseiro -->
+        <!-- MORRO TRASEIRO -->
 
         <div
             class="hill hill-back"
@@ -86,10 +97,15 @@
                 class="vegetation"
                 id="vegetation-back"
             ></div>
+
+            <div
+                class="memory-container"
+                id="memory-back"
+            ></div>
         </div>
 
 
-        <!-- Morro central -->
+        <!-- MORRO CENTRAL -->
 
         <div
             class="hill hill-middle"
@@ -99,10 +115,15 @@
                 class="vegetation"
                 id="vegetation-middle"
             ></div>
+
+            <div
+                class="memory-container"
+                id="memory-middle"
+            ></div>
         </div>
 
 
-        <!-- Morro frontal -->
+        <!-- MORRO FRONTAL -->
 
         <div
             class="hill hill-front"
@@ -111,6 +132,11 @@
             <div
                 class="vegetation"
                 id="vegetation-front"
+            ></div>
+
+            <div
+                class="memory-container"
+                id="memory-front"
             ></div>
         </div>
 
@@ -122,7 +148,7 @@
         <button
             id="main-flower"
             type="button"
-            aria-label="Descobrir uma memória"
+            aria-label="Fazer nascer uma nova memória"
         >
 
             <img
@@ -141,12 +167,12 @@
         <button
             id="ladybug"
             type="button"
-            aria-label="Ver lembrança da joaninha"
+            aria-label="Abrir lembrança da joaninha"
         >
 
             <img
                 src="imagem/joaninha.png"
-                alt=""
+                alt="Joaninha"
                 draggable="false"
             >
 
@@ -175,7 +201,7 @@
 
 
     <!-- =========================
-         MODAL DE MEMÓRIA
+         MODAL DAS MEMÓRIAS
     ========================== -->
 
     <div
@@ -201,7 +227,7 @@
             </button>
 
 
-            <div class="memory-photo">
+            <div class="memory-image-wrapper">
 
                 <img
                     id="memory-image"
@@ -243,7 +269,7 @@
                 id="ladybug-close"
                 class="close-button"
                 type="button"
-                aria-label="Fechar lembrança"
+                aria-label="Fechar"
             >
                 ×
             </button>
@@ -271,4 +297,5 @@
 <script src="script.js"></script>
 
 </body>
+
 </html>
